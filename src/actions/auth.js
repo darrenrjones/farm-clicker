@@ -45,7 +45,7 @@ const storeAuthInfo = (authToken, dispatch) => {
 export const login = (username, password) => dispatch => {
     dispatch(authRequest());
     return (
-        fetch(`${API_BASE_URL}/api/auth/login`, {
+        fetch(`${API_BASE_URL}/api/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -61,6 +61,8 @@ export const login = (username, password) => dispatch => {
             .then(res => res.json())
             .then(({authToken}) => storeAuthInfo(authToken, dispatch))
             .catch(err => {
+                console.log(err.message);
+                
                 const {code} = err;
                 const message =
                     code === 401
@@ -81,7 +83,7 @@ export const login = (username, password) => dispatch => {
 export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());
     const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/api/auth/refresh`, {
+    return fetch(`${API_BASE_URL}/api/refresh`, {
         method: 'POST',
         headers: {
             // Provide our existing token as credentials to get a new one
