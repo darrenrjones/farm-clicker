@@ -7,7 +7,6 @@ import RegistrationPage from './Registration-page';
 import Playscreen from './Playscreen';
 import {refreshAuthToken} from '../actions/auth';
 
-import '../App.css';
 
 class App extends React.Component {
   componentDidUpdate(prevProps) {
