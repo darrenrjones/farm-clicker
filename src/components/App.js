@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import {Route, withRouter} from 'react-router-dom';
 
 import LandingPage from './LandingPage';
-import RegistrationPage from './Registration-page';
-import Playscreen from './Playscreen';
+import RegistrationPage from './RegistrationPage';
+import Playscreen from './playscreen/Playscreen';
 import {refreshAuthToken} from '../actions/auth';
 
 

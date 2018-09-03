@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { refreshAuthToken, clearAuth } from '../actions/auth';
-import { clearAuthToken } from '../local-storage'
-import {Header} from './header/Header';
+import { refreshAuthToken, clearAuth } from '../../actions/auth';
+import { clearAuthToken } from '../../local-storage'
+import {Header} from '../header/Header';
 
 export class Playscreen extends React.Component {
     componentDidMount() {
@@ -41,14 +41,5 @@ export class Playscreen extends React.Component {
 const mapStateToProps = state => ({   
     currentUser: state.auth.currentUser  
 });
-
-// const mapStateToProps = state => {
-//   const {currentUser} = state.auth;
-//   return {
-//       username: state.auth.currentUser.username,
-//       name: `${currentUser.firstName} ${currentUser.lastName}`,
-//       protectedData: state.protectedData.data
-//   };
-// };
 
 export default connect(mapStateToProps)(Playscreen);
