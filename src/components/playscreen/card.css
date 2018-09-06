@@ -1,0 +1,14 @@
+.card-individual{
+  height: 220px;
+  width: 200px;
+  border: 2px solid chartreuse;
+  display: flex;
+  flex-direction: column;
+
+}
+.image-box{
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 8px auto;
+}

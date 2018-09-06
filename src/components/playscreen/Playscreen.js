@@ -34,9 +34,6 @@ export class Playscreen extends React.Component {
                 </div>
                 <button onClick={logout}>logout</button>
 
-                {/* <CardContainer 
-                    buttonName={'example Button!'}
-                /> */}
                 <CardContainer />
          
             </div>

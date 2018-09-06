@@ -1,52 +1,45 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import ProgressBar from './ProgressBar';
-
+import Card from './Card';
 
 export class CardContainer extends React.Component {
   constructor(props){
     super(props)
     
     this.state = {
-      percentage: 0
+      wheat1Percentage: 0,
+      wheat2Percentage: 0,
+      wheat3Percentage: 0,
     }
 
   }
 
   render(){
-    const progressTickInterval = () => {
-      console.log("tickIntervale called");
-      if(this.state.percentage >= 100){
-        resetProgressBar();
-      }
-      
-      setInterval(() => progressTick(), 10);
+
+    let intCall;
+    const progressTickInterval = () => {     
+      intCall = setInterval(progressTick,10);      
     }
 
     const progressTick = () => {
-      console.log('progressTick called');
-      
-      if(this.state.percentage === 100) return
-    
-      this.setState({ percentage: this.state.percentage + 5 })
-    }
+      if(this.state.wheat1Percentage >= 100){
+        clearInterval(intCall);
+        this.setState({ wheat1Percentage: 0 });
 
-    const resetProgressBar = () => {
-      this.setState({ percentage: 0 })
+      }    
+      this.setState({ wheat1Percentage: this.state.wheat1Percentage + 1 })
     }
     
     return(
-      <div>
-        <h1>here it is</h1>
-        <ProgressBar 
-          percentage={this.state.percentage}
-        />
-        <div>  
-          <button onClick={() => progressTickInterval()}>
-            click here!
-          </button>  
-        </div>
+      <div className='cards-container'>
+      
+      <Card 
+        wheat1Percentage={this.state.wheat1Percentage}
+        progressTickInterval={progressTickInterval}
+      />
+
+
       </div>
     )
   }
