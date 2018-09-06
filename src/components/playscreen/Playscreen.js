@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { refreshAuthToken, clearAuth } from '../../actions/auth';
+import { clearAuth } from '../../actions/auth';
 import { clearAuthToken } from '../../local-storage'
 import {Header} from '../header/Header';
+// import CardContainer from './CardContainer';
+import CardContainer from './CardContainer';
 
 export class Playscreen extends React.Component {
     componentDidMount() {
@@ -31,6 +33,11 @@ export class Playscreen extends React.Component {
                     Username: {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : '' }
                 </div>
                 <button onClick={logout}>logout</button>
+
+                {/* <CardContainer 
+                    buttonName={'example Button!'}
+                /> */}
+                <CardContainer />
          
             </div>
           </div>

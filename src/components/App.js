@@ -36,7 +36,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div role='main' className="App">        
+      <div role='main' className="app">        
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/playscreen" component={Playscreen} />
         <Route exact path="/register" component={RegistrationPage} />
