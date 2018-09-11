@@ -5,7 +5,7 @@ import { clearAuth } from '../../actions/auth';
 import { clearAuthToken } from '../../local-storage'
 import {Header} from '../header/Header';
 // import CardContainer from './CardContainer';
-import CardContainer from './CardContainer';
+import CardContainer from '../card/CardContainer';
 
 export class Playscreen extends React.Component {
     componentDidMount() {
@@ -24,7 +24,7 @@ export class Playscreen extends React.Component {
         return <Redirect to='/' />;
       }
         return (
-          <div>
+          <div className='playscreen-div'>
 
             <Header />
 
@@ -34,8 +34,8 @@ export class Playscreen extends React.Component {
             <button onClick={logout}>logout</button>
 
             <div className='inventory'>
-                Wheat: {this.props.wheat}<br></br>
-                Corn:
+                Wheat: {this.props.crops.wheat}<br></br>
+                Corn: {this.props.crops.corn}<br></br>
             </div>
 
 
@@ -54,7 +54,7 @@ export class Playscreen extends React.Component {
 
 const mapStateToProps = state => ({   
     currentUser: state.auth.currentUser,
-    wheat: state.crops.wheat, 
+    crops: state.crops
 });
 
 export default connect(mapStateToProps)(Playscreen);

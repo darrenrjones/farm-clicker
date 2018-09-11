@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import ProgressBar from './ProgressBar';
 
-import './card.css';
+import '../../styles/card.css';
 
 
 export const Card = props => {

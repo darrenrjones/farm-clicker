@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Filler from './Filler';
 
-import './progressBar.css'
+import '../../styles/progressBar.css';
 
 export const ProgressBar = props => {
   return(

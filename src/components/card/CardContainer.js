@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {incrementWheat} from '../../actions/crops';
 
 import Card from './Card';
+import CropImg from './cropImages/CropImg';
 
 export class CardContainer extends React.Component {
   constructor(props){
@@ -40,11 +41,12 @@ export class CardContainer extends React.Component {
     return(
       <div className='cards-container'>
           <div className='image-box'>
-            <img 
-              src={require('../../images/crops/wheatSmall.png')}
-              alt='icon of wheat'
-              className='small-crop-icon'
-            /> 
+            <CropImg 
+              source='wheatSmall'
+            />
+            <CropImg 
+              source='cornSmall'
+            />
           </div>
       
         <Card 
