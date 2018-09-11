@@ -34,8 +34,24 @@ export class Playscreen extends React.Component {
             <button onClick={logout}>logout</button>
 
             <div className='inventory'>
-                Wheat: {this.props.crops.wheat}<br></br>
-                Corn: {this.props.crops.corn}<br></br>
+                Wheat: {
+                    this.props.crops.wheat1.total +
+                    this.props.crops.wheat2.total +
+                    this.props.crops.wheat3.total
+                    }<br></br>
+                {/* Corn: {
+                    this.props.crops[3].total +
+                    this.props.crops[4].total +
+                    this.props.crops[5].total
+                    }<br></br>                
+                Soy: {
+                    this.props.crops[6].total +
+                    this.props.crops[7].total +
+                    this.props.crops[8].total
+                    }<br></br>
+                Corn: {this.props.crops[9].total}<br></br>
+                Corn: {this.props.crops[10].total}<br></br>
+                Corn: {this.props.crops[11].total}<br></br>                 */}
             </div>
 
 
@@ -43,6 +59,9 @@ export class Playscreen extends React.Component {
 
                 <CardContainer 
                     type='wheat'
+                />
+                <CardContainer 
+                    type='corn'
                 />
          
             </div>

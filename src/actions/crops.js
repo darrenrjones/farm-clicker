@@ -1,7 +1,7 @@
-export const INCREMENT_WHEAT = 'INCREMENT_WHEAT';
-export const incrementWheat = (fieldCount) => ({
-    type: INCREMENT_WHEAT, 
-    fieldCount
+export const INCREMENT_CROP = 'INCREMENT_CROP';
+export const incrementCrop = (crop) => ({
+    type: INCREMENT_CROP, 
+    crop
 });
 
 export const BUY_CROP = 'BUY_CROP';

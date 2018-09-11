@@ -12,18 +12,6 @@
   border-radius: inherit;
 }
 
-.card-individual button {
-  /* margin-right: 0 auto; */
-  width: 75%;
-  padding: 7px 12px;
-  font-size: 14px;
-  background: #0f1e49;
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  cursor: pointer;
-  outline: 0;
-}
-
 .small-crop-icon{
   height: 3em;
 }

@@ -1,10 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {incrementWheat} from '../../actions/crops';
+import {incrementCrop} from '../../actions/crops';
 
-import Card from './Card';
-import CropImg from './cropImages/CropImg';
+import ProgressBar from './ProgressBar';
+import CropImg from './CropImg';
+
+import '../../styles/card.css';
 
 export class CardContainer extends React.Component {
   constructor(props){
@@ -21,6 +23,7 @@ export class CardContainer extends React.Component {
 
     let intCall;
     let cropCount = this.state.count;
+    // let cropCountDisplay;
 
     const progressTickInterval = () => {     
       intCall = setInterval(progressTick,10);      
@@ -32,29 +35,44 @@ export class CardContainer extends React.Component {
       if(this.state.percentage >= 100){
         clearInterval(intCall);
         this.setState({ percentage: 0 });
-        this.props.dispatch(incrementWheat(cropCount))
+        this.props.dispatch(incrementCrop('wheat1'))
+        
       }    
       this.setState({ percentage: this.state.percentage + 1 });
-
     }
+
+    // const cropCountDisplayFunction = () => {
+    //   for (let i = 0; i <= this.state.count; i++) {
+    //     cropCountDisplay = (
+    //       <CropImg 
+    //         source='wheatSmall'
+    //       />
+    //     )
+    //   }
+    // }
     
     return(
-      <div className='cards-container'>
-          <div className='image-box'>
-            <CropImg 
-              source='wheatSmall'
-            />
-            <CropImg 
-              source='cornSmall'
-            />
-          </div>
       
-        <Card 
-          percentage={this.state.percentage}
-          progressTickInterval={progressTickInterval}
-          type={this.props.type}
-        />
+      <div className='cards-container'>
 
+        <div className='image-box'>
+          <CropImg 
+            source={`${this.props.type}Small`}
+          />
+          <CropImg 
+            source={`${this.props.type}Small`}
+          />
+        </div>
+    
+        <div className='progress-bar-container'>
+          <ProgressBar 
+            percentage={this.state.percentage}
+          />
+
+          <button onClick={progressTickInterval}>
+            HARVEST {this.props.type.toUpperCase()}
+          </button> 
+        </div>
 
       </div>
     )
