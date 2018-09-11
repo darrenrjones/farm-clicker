@@ -1,9 +1,10 @@
-.card-individual{
-  height: 220px;
-  width: 200px;
+.cards-container{
+  height: 250px;
+  width: 220px;
   border: 2px solid chartreuse;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
 }
 .image-box{
@@ -11,4 +12,8 @@
   grid-gap: 8px;
   grid-template-columns: repeat(3, 1fr);
   margin: 8px auto;
+}
+
+.progress-bar-container{
+  
 }

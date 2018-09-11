@@ -11,8 +11,6 @@ export class Playscreen extends React.Component {
     componentDidMount() {
         // this.props.dispatch(refreshAuthToken());
     }
-
-
   
     render() {
     const logout = () => {
@@ -27,23 +25,36 @@ export class Playscreen extends React.Component {
       }
         return (
           <div>
-            <Header />
-            <div className='playscreen-container'>
-                <div >
-                    Username: {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : '' }
-                </div>
-                <button onClick={logout}>logout</button>
 
-                <CardContainer />
+            <Header />
+
+            <div >
+                Username: {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : '' }
+            </div>
+            <button onClick={logout}>logout</button>
+
+            <div className='inventory'>
+                Wheat: {this.props.wheat}<br></br>
+                Corn:
+            </div>
+
+
+            <div className='playscreen-container'>                
+
+                <CardContainer 
+                    type='wheat'
+                />
          
             </div>
+
           </div>
         );
     }
 }
 
 const mapStateToProps = state => ({   
-    currentUser: state.auth.currentUser  
+    currentUser: state.auth.currentUser,
+    wheat: state.crops.wheat, 
 });
 
 export default connect(mapStateToProps)(Playscreen);

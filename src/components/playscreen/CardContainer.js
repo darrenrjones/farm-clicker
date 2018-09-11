@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import {incrementWheat} from '../../actions/crops';
+
 import Card from './Card';
 
 export class CardContainer extends React.Component {
@@ -8,9 +10,8 @@ export class CardContainer extends React.Component {
     super(props)
     
     this.state = {
-      wheat1Percentage: 0,
-      wheat2Percentage: 0,
-      wheat3Percentage: 0,
+      percentage: 0,
+      count: 1,
     }
 
   }
@@ -18,32 +19,44 @@ export class CardContainer extends React.Component {
   render(){
 
     let intCall;
+    let cropCount = this.state.count;
+
     const progressTickInterval = () => {     
       intCall = setInterval(progressTick,10);      
     }
 
+    //progressTick increments percentage of progress bar to fill
+    //when it fills then incrementCrop is called
     const progressTick = () => {
-      if(this.state.wheat1Percentage >= 100){
+      if(this.state.percentage >= 100){
         clearInterval(intCall);
-        this.setState({ wheat1Percentage: 0 });
-
+        this.setState({ percentage: 0 });
+        this.props.dispatch(incrementWheat(cropCount))
       }    
-      this.setState({ wheat1Percentage: this.state.wheat1Percentage + 1 })
+      this.setState({ percentage: this.state.percentage + 1 });
+
     }
     
     return(
       <div className='cards-container'>
+          <div className='image-box'>
+            <img 
+              src={require('../../images/crops/wheatSmall.png')}
+              alt='icon of wheat'
+              className='small-crop-icon'
+            /> 
+          </div>
       
-      <Card 
-        wheat1Percentage={this.state.wheat1Percentage}
-        progressTickInterval={progressTickInterval}
-      />
+        <Card 
+          percentage={this.state.percentage}
+          progressTickInterval={progressTickInterval}
+          type={this.props.type}
+        />
 
 
       </div>
     )
-  }
-
+  } 
 
 
 

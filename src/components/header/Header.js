@@ -10,9 +10,9 @@ export class Header extends React.Component{
 
         <div className='right-side-header'>
     
-          <div className={this.props.user ? 'signedin-div signedin' : 'signedin-div'}>
-            {this.props.authToken ? <span>{this.props.currentUser.username}</span> : <span></span>}
-          </div>   
+        <div>
+          Username: {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : '' }
+        </div>  
 
         </div>
 
@@ -21,10 +21,8 @@ export class Header extends React.Component{
   }
 }
 
-const mapStateToProps = state => ({
-  currentUser: state.auth.currentUser,
-  authToken: state.auth.authToken
-
+const mapStateToProps = state => ({   
+  currentUser: state.auth.currentUser  
 });
 
 export default connect(mapStateToProps)(Header);
