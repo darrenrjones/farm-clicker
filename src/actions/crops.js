@@ -1,11 +1,11 @@
 export const INCREMENT_CROP = 'INCREMENT_CROP';
-export const incrementCrop = (crop) => ({
+export const incrementCrop = (field) => ({
     type: INCREMENT_CROP, 
-    crop
+    field
 });
 
 export const BUY_CROP = 'BUY_CROP';
-export const buyCrop = (cropType) => ({
+export const buyCrop = (field) => ({
     type: BUY_CROP,
-    cropType
+    field
 });

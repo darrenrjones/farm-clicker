@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {incrementCrop} from '../../actions/crops';
+import {incrementCrop, buyCrop} from '../../actions/crops';
 
 import ProgressBar from './ProgressBar';
 import CropImg from './CropImg';
@@ -10,20 +10,15 @@ import '../../styles/card.css';
 
 export class CardContainer extends React.Component {
   constructor(props){
-    super(props)
-    
+    super(props)    
     this.state = {
-      percentage: 0,
-      count: 1,
+      percentage: 0      
     }
-
   }
 
   render(){
-
     let intCall;
-    let cropCount = this.state.count;
-    // let cropCountDisplay;
+    let field = this.props.field;
 
     const progressTickInterval = () => {     
       intCall = setInterval(progressTick,10);      
@@ -34,34 +29,30 @@ export class CardContainer extends React.Component {
     const progressTick = () => {
       if(this.state.percentage >= 100){
         clearInterval(intCall);
-        this.setState({ percentage: 0 });
-        this.props.dispatch(incrementCrop('wheat1'))
-        
+        this.setState({ percentage: 0 }); 
+        this.props.dispatch(incrementCrop(field))
       }    
       this.setState({ percentage: this.state.percentage + 1 });
     }
 
-    // const cropCountDisplayFunction = () => {
-    //   for (let i = 0; i <= this.state.count; i++) {
-    //     cropCountDisplay = (
-    //       <CropImg 
-    //         source='wheatSmall'
-    //       />
-    //     )
-    //   }
-    // }
+    const incrementFieldCount = (field) => {      
+      this.props.dispatch(buyCrop(field));
+    }
+
+    const count = this.props.crops[field].count;
+    let cropImages = [];        
+    for (let i = 1; i <= count; i++) {               
+      cropImages.push(
+        <CropImg source={`${this.props.type}`} />
+      );         
+    }      
     
     return(
       
       <div className='cards-container'>
 
-        <div className='image-box'>
-          <CropImg 
-            source={`${this.props.type}Small`}
-          />
-          <CropImg 
-            source={`${this.props.type}Small`}
-          />
+        <div className='image-box'>          
+          {cropImages}
         </div>
     
         <div className='progress-bar-container'>
@@ -72,18 +63,23 @@ export class CardContainer extends React.Component {
           <button onClick={progressTickInterval}>
             HARVEST {this.props.type.toUpperCase()}
           </button> 
+
+          <button onClick={() => incrementFieldCount(this.props.field)}>
+            PLANT {this.props.type.toUpperCase()}
+          </button>
+          <p>
+          count: {this.props.crops[field].count}
+          </p>
         </div>
 
       </div>
     )
   } 
 
-
-
-
-
-
-
 }
 
-export default connect()(CardContainer);
+const mapStateToProps = state => ({
+  crops: state.crops.crops
+});
+
+export default connect(mapStateToProps)(CardContainer);

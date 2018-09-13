@@ -33,25 +33,25 @@ export class Playscreen extends React.Component {
             </div>
             <button onClick={logout}>logout</button>
 
-            <div className='inventory'>
+            <div className='inventory'>  
                 Wheat: {
                     this.props.crops.wheat1.total +
                     this.props.crops.wheat2.total +
                     this.props.crops.wheat3.total
                     }<br></br>
-                {/* Corn: {
-                    this.props.crops[3].total +
-                    this.props.crops[4].total +
-                    this.props.crops[5].total
+                Corn: {
+                    this.props.crops.corn1.total +
+                    this.props.crops.corn2.total +
+                    this.props.crops.corn3.total
                     }<br></br>                
                 Soy: {
-                    this.props.crops[6].total +
-                    this.props.crops[7].total +
-                    this.props.crops[8].total
+                    this.props.crops.soy1.total +
+                    this.props.crops.soy2.total +
+                    this.props.crops.soy3.total
                     }<br></br>
-                Corn: {this.props.crops[9].total}<br></br>
-                Corn: {this.props.crops[10].total}<br></br>
-                Corn: {this.props.crops[11].total}<br></br>                 */}
+                Alfalfa: {this.props.crops.alfalfa.total}<br></br>
+                Hay: {this.props.crops.hay.total}<br></br>
+                Fishfood: {this.props.crops.fishfood.total}<br></br>                
             </div>
 
 
@@ -59,9 +59,23 @@ export class Playscreen extends React.Component {
 
                 <CardContainer 
                     type='wheat'
+                    field='wheat1'
+                />
+                <CardContainer 
+                    type='wheat'
+                    field='wheat2'
+                />
+                <CardContainer 
+                    type='wheat'
+                    field='wheat3'
                 />
                 <CardContainer 
                     type='corn'
+                    field='corn1'
+                />
+                <CardContainer 
+                    type='soy'
+                    field='soy1'
                 />
          
             </div>
@@ -73,7 +87,7 @@ export class Playscreen extends React.Component {
 
 const mapStateToProps = state => ({   
     currentUser: state.auth.currentUser,
-    crops: state.crops
+    crops: state.crops.crops
 });
 
 export default connect(mapStateToProps)(Playscreen);
