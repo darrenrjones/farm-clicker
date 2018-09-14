@@ -10,9 +10,9 @@ export class Header extends React.Component{
 
         <div className='right-side-header'>
     
-        <div>
+        {/* <div>
           Username: {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : '' }
-        </div>  
+        </div>   */}
 
         </div>
 

@@ -7,6 +7,8 @@ import {Header} from '../header/Header';
 // import CardContainer from './CardContainer';
 import CardContainer from '../card/CardContainer';
 
+import '../../styles/playscreen.css';
+
 export class Playscreen extends React.Component {
     componentDidMount() {
         // this.props.dispatch(refreshAuthToken());
@@ -29,8 +31,11 @@ export class Playscreen extends React.Component {
             <Header />
 
             <div >
-                Username: {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : '' }
+                {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : '' }<br></br>
+                {this.props.currentUser ? <span>{this.props.currentUser.farmname}</span> : '' }<br></br>
+                ${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : '' }
             </div>
+            
             <button onClick={logout}>logout</button>
 
             <div className='inventory'>  
@@ -55,11 +60,11 @@ export class Playscreen extends React.Component {
             </div>
 
 
-            <div className='playscreen-container'>                
+            <div className='crops9-container'>                
 
                 <CardContainer 
                     type='wheat'
-                    field='wheat1'
+                    field='wheat1'                    
                 />
                 <CardContainer 
                     type='wheat'
@@ -74,8 +79,24 @@ export class Playscreen extends React.Component {
                     field='corn1'
                 />
                 <CardContainer 
+                    type='corn'
+                    field='corn2'
+                />
+                <CardContainer 
+                    type='corn'
+                    field='corn3'
+                />
+                <CardContainer 
                     type='soy'
                     field='soy1'
+                />
+                <CardContainer 
+                    type='soy'
+                    field='soy2'
+                />
+                <CardContainer 
+                    type='soy'
+                    field='soy3'
                 />
          
             </div>

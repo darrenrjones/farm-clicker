@@ -1,18 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {incrementCrop, buyCrop} from '../../actions/crops';
+import {incrementCrop, buyCrop, increaseTickInterval} from '../../actions/crops';
 
 import ProgressBar from './ProgressBar';
 import CropImg from './CropImg';
 
-import '../../styles/card.css';
+import '../../styles/card-container.css';
 
 export class CardContainer extends React.Component {
   constructor(props){
     super(props)    
     this.state = {
-      percentage: 0      
+      percentage: 0,
+      ticking: false,
+      tickInterval: props.interval      
     }
   }
 
@@ -20,8 +22,10 @@ export class CardContainer extends React.Component {
     let intCall;
     let field = this.props.field;
 
-    const progressTickInterval = () => {     
-      intCall = setInterval(progressTick,10);      
+    const progressTickInterval = () => {
+      console.log(this.state.tickInterval)
+      this.setState({ticking: true}) // disabled button while progress bar filling     
+      intCall = setInterval(progressTick, this.props.crops[field].tickInterval);      
     }
 
     //progressTick increments percentage of progress bar to fill
@@ -29,14 +33,19 @@ export class CardContainer extends React.Component {
     const progressTick = () => {
       if(this.state.percentage >= 100){
         clearInterval(intCall);
-        this.setState({ percentage: 0 }); 
+        this.setState({ percentage: 0, ticking: false }); 
         this.props.dispatch(incrementCrop(field))
       }    
       this.setState({ percentage: this.state.percentage + 1 });
     }
 
-    const incrementFieldCount = (field) => {      
-      this.props.dispatch(buyCrop(field));
+
+    //increment count by 1 and increase tickInterval by 8 ms
+    const incrementFieldCount = (field) => {  
+      if(this.props.crops[field].count < 9){
+        this.props.dispatch(buyCrop(field));
+        this.props.dispatch(increaseTickInterval(field));
+      }    
     }
 
     const count = this.props.crops[field].count;
@@ -49,7 +58,7 @@ export class CardContainer extends React.Component {
     
     return(
       
-      <div className='cards-container'>
+      <div className='card-container'>
 
         <div className='image-box'>          
           {cropImages}
@@ -60,16 +69,14 @@ export class CardContainer extends React.Component {
             percentage={this.state.percentage}
           />
 
-          <button onClick={progressTickInterval}>
+          <button onClick={progressTickInterval} disabled={this.state.ticking || this.props.crops[field].count < 1} >
             HARVEST {this.props.type.toUpperCase()}
           </button> 
 
           <button onClick={() => incrementFieldCount(this.props.field)}>
             PLANT {this.props.type.toUpperCase()}
           </button>
-          <p>
-          count: {this.props.crops[field].count}
-          </p>
+
         </div>
 
       </div>

@@ -9,3 +9,9 @@ export const buyCrop = (field) => ({
     type: BUY_CROP,
     field
 });
+
+export const INCREASE_TICK_INTERVAL = 'INCREASE_TICK_INTERVAL';
+export const increaseTickInterval = (field) => ({
+    type: INCREASE_TICK_INTERVAL,
+    field
+});

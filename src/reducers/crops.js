@@ -1,6 +1,7 @@
 import {
   INCREMENT_CROP,
-  BUY_CROP
+  BUY_CROP,
+  INCREASE_TICK_INTERVAL
 } from '../actions/crops';
 
 const initialState = {
@@ -8,52 +9,76 @@ const initialState = {
   crops:{
 
     wheat1 : {
-      count: 1,
-      total: 1
+      count: 9,
+      total: 1,
+      price: 5,
+      tickInterval:1
     },
     wheat2 : {
       count: 2,
-      total: 3
+      total: 3,
+      price: 5,
+      tickInterval:1
     },
     wheat3 : {
       count: 3,
-      total: 7
+      total: 7,
+      price: 5,
+      tickInterval:1
     },
     corn1 : {
-      count: 11,
-      total: 1
+      count: 9,
+      total: 1,
+      price: 5,
+      tickInterval:1
     },
     corn2 : {
-      count: 1,
-      total: 0
+      count: 0,
+      total: 0,
+      price: 5,
+      tickInterval:1
     },
     corn3 : {
       count: 1,
-      total: 0
+      total: 0,
+      price: 5,
+      tickInterval:1
     },
     soy1 : {
       count: 1,
-      total: 0
+      total: 0,
+      price: 5,
+      tickInterval:1
     },
     soy2 : {
       count: 1,
-      total: 0
+      total: 0,
+      price: 5,
+      tickInterval:1
     },
     soy3 : {
       count: 1,
-      total: 0
+      total: 0,
+      price: 5,
+      tickInterval:1
     },
     alfalfa : {
       count: 1,
-      total: 0
+      total: 0,
+      price: 5,
+      tickInterval:1
     },
     hay : {
       count: 1,
-      total: 0
+      total: 0,
+      price: 5,
+      tickInterval:1
     },
     fishfood : {
       count: 1,
-      total: 0
+      total: 0,
+      price: 5,
+      tickInterval:1
     }
   } 
 };
@@ -83,6 +108,20 @@ export default (state=initialState, action) => {
         [cCrop]: {
           ...state.crops[cCrop], 
           count: state.crops[cCrop].count += 1
+        }
+      }
+    }  
+  }  
+
+  if(action.type === INCREASE_TICK_INTERVAL) {
+    //increment progres bar tick intervalby 8 ms
+    const cCrop = action.field; //cCrop = crop name / object key  
+    return {
+      ...state,
+      crops: {...state.crops,
+        [cCrop]: {
+          ...state.crops[cCrop], 
+          tickInterval: state.crops[cCrop].tickInterval+8
         }
       }
     }  

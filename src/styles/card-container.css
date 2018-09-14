@@ -1,0 +1,35 @@
+.card-container{
+  height: 260px;
+  /* width: 220px; */
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.click-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.image-box{
+  height: fit-content;
+  display: grid;
+  grid-gap: 8px;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 8px auto;
+}
+
+.card-container button {
+  margin: 0 auto;
+  width: 75%;
+  padding: 6px; 
+  font-size: 12px;
+  background: #072b04;
+  color: white;
+  cursor: pointer;
+  /* outline: 0; */
+}
+
+.progress-bar-container{
+  
+}
