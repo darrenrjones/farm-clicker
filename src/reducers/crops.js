@@ -4,8 +4,11 @@ import {
   INCREASE_TICK_INTERVAL
 } from '../actions/crops';
 
+import {AUTH_SUCCESS} from '../actions/auth';
+
 const initialState = {
 
+  crops1: null,
   crops:{
 
     wheat1 : {
@@ -15,8 +18,8 @@ const initialState = {
       tickInterval:1
     },
     wheat2 : {
-      count: 2,
-      total: 3,
+      count: 0,
+      total: 0,
       price: 5,
       tickInterval:1
     },
@@ -85,6 +88,13 @@ const initialState = {
 
 export default (state=initialState, action) => {
 
+  if (action.type === AUTH_SUCCESS) {
+    return {
+        ...state,
+        crops1: action.currentUser.crops
+    };
+}
+
   if(action.type === INCREMENT_CROP) {
     //increment crop.total by the fields count
     const cCrop = action.field; //cCrop = crop name / object key  
@@ -98,7 +108,6 @@ export default (state=initialState, action) => {
       }
     }  
   }  
-
   if(action.type === BUY_CROP) {
     //increment crop.count by 1 upon purchase
     const cCrop = action.field; //cCrop = crop name / object key  
@@ -112,7 +121,6 @@ export default (state=initialState, action) => {
       }
     }  
   }  
-
   if(action.type === INCREASE_TICK_INTERVAL) {
     //increment progres bar tick intervalby 8 ms
     const cCrop = action.field; //cCrop = crop name / object key  
@@ -126,10 +134,6 @@ export default (state=initialState, action) => {
       }
     }  
   }  
-
-
-
-
 
 
 

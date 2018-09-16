@@ -27,15 +27,11 @@ export class Playscreen extends React.Component {
       }
         return (
           <div className='playscreen-div'>
+          
+            <Header 
+                currentUser={this.props.currentUser}
+            />
 
-            <Header />
-
-            <div >
-                {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : '' }<br></br>
-                {this.props.currentUser ? <span>{this.props.currentUser.farmname}</span> : '' }<br></br>
-                ${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : '' }
-            </div>
-            
             <button onClick={logout}>logout</button>
 
             <div className='inventory'>  

@@ -3,7 +3,7 @@ import {
   CLEAR_AUTH,
   AUTH_REQUEST,
   AUTH_SUCCESS,
-  AUTH_ERROR
+  AUTH_ERROR,
 } from '../actions/auth';
 
 const initialState = {
@@ -43,6 +43,6 @@ export default (state = initialState, action) => {
           loading: false,
           error: action.error
       };
-  }
+  }  
   return state;
 }

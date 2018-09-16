@@ -52,7 +52,7 @@ export class CardContainer extends React.Component {
     let cropImages = [];        
     for (let i = 1; i <= count; i++) {               
       cropImages.push(
-        <CropImg source={`${this.props.type}`} />
+        <CropImg source={`${this.props.type}`} key={i} />
       );         
     }      
     

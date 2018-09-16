@@ -8,12 +8,10 @@ export class Header extends React.Component{
       <div className='header-container'>
         <h1>Farm Clicker Banner</h1>
 
-        <div className='right-side-header'>
-    
-        {/* <div>
-          Username: {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : '' }
-        </div>   */}
-
+        <div className='right-side-header'> 
+          {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : '' }<br></br>
+          {this.props.currentUser ? <span>{this.props.currentUser.farmname}</span> : '' }<br></br>
+          ${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : '' }
         </div>
 
       </div>
