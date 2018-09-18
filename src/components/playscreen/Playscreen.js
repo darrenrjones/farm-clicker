@@ -1,11 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { clearAuth } from '../../actions/auth';
+
 import { clearAuthToken } from '../../local-storage'
+//components
 import {Header} from '../header/Header';
-// import CardContainer from './CardContainer';
 import CardContainer from '../card/CardContainer';
+
+//actions
+import { clearAuth } from '../../actions/auth';
+import { save } from '../../actions/user';
+
 
 import '../../styles/playscreen.css';
 
@@ -21,6 +26,11 @@ export class Playscreen extends React.Component {
         this.props.dispatch(clearAuth());
         clearAuthToken();
     };
+    const saveState = () => {
+        // console.log('save clicked');
+        
+        this.props.dispatch(save());
+    };
 
       if (!this.props.currentUser) {
         return <Redirect to='/' />;
@@ -33,6 +43,8 @@ export class Playscreen extends React.Component {
             />
 
             <button onClick={logout}>logout</button>
+            <button onClick={saveState}>save</button>
+
 
             <div className='inventory'>  
                 Wheat: {
@@ -56,8 +68,7 @@ export class Playscreen extends React.Component {
             </div>
 
 
-            <div className='crops9-container'>                
-
+            <div className='crops9-container'> 
                 <CardContainer 
                     type='wheat'
                     field='wheat1'                    
@@ -93,8 +104,7 @@ export class Playscreen extends React.Component {
                 <CardContainer 
                     type='soy'
                     field='soy3'
-                />
-         
+                />         
             </div>
 
           </div>
@@ -105,7 +115,7 @@ export class Playscreen extends React.Component {
 const mapStateToProps = state => ({   
     currentUser: state.auth.currentUser,
     // crops: state.crops.crops,
-    crops: state.crops.crops1
+    crops: state.crops.crops
 
 });
 

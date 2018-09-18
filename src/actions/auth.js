@@ -39,32 +39,32 @@ const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
     dispatch(authSuccess(decodedToken.user));
-    dispatch(getUser(decodedToken.user.id))    
+    // dispatch(getUser(decodedToken.user.id))    
     saveAuthToken(authToken);
 };
 
-export const getUser = id => dispatch => {
-    return fetch(`${API_BASE_URL}/api/user/${id}`, {
-        method: 'GET',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(id)
-    })
-    .then(res => normalizeResponseErrors(res))
-    .then(res => res.json())
-    .catch(err => {
-        const {reason, message, location} = err;
-        if (reason === 'ValidationError') {
-            // Convert ValidationErrors into SubmissionErrors for Redux Form
-            return Promise.reject(
-                new SubmissionError({
-                    [location]: message
-                })
-            );
-        }
-    });
-}
+// export const getUser = id => dispatch => {
+//     return fetch(`${API_BASE_URL}/api/user/${id}`, {
+//         method: 'GET',
+//         headers: {
+//             'content-type': 'application/json'
+//         },
+//         body: JSON.stringify(id)
+//     })
+//     .then(res => normalizeResponseErrors(res))
+//     .then(res => res.json())
+//     .catch(err => {
+//         const {reason, message, location} = err;
+//         if (reason === 'ValidationError') {
+//             // Convert ValidationErrors into SubmissionErrors for Redux Form
+//             return Promise.reject(
+//                 new SubmissionError({
+//                     [location]: message
+//                 })
+//             );
+//         }
+//     });
+// }
 
 export const login = (username, password) => dispatch => {
     dispatch(authRequest());
@@ -106,7 +106,7 @@ export const login = (username, password) => dispatch => {
             })
     );
 };
-
+// DARREN IS THIS PROTECTED CHECK ?
 export const refreshAuthToken = () => (dispatch, getState) => {
     dispatch(authRequest());
     const authToken = getState().auth.authToken;

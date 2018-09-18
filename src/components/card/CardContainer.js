@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {incrementCrop, buyCrop, increaseTickInterval} from '../../actions/crops';
+import {incrementCrop, buyCrop} from '../../actions/crops';
 
 import ProgressBar from './ProgressBar';
 import CropImg from './CropImg';
@@ -28,9 +28,7 @@ export class CardContainer extends React.Component {
 
     const progressTickInterval = () => {
       this.setState({ticking: true}) // disabled button while progress bar filling     
-      // intCall = setInterval(progressTick, this.props.crops[field].tickInterval);    
-      intCall = setInterval(progressTick, this.props.crops);      
-  
+      intCall = setInterval(progressTick, (currentCrop.count+7 + currentCrop.count*4));      
     }
 
     //progressTick increments percentage of progress bar to fill
@@ -46,14 +44,9 @@ export class CardContainer extends React.Component {
 
 
     //increment count by 1 and increase tickInterval by 8 ms
-    const incrementFieldCount = (field) => {  
-      // if(this.props.crops[field].count < 9){
-      //   this.props.dispatch(buyCrop(field));
-      //   this.props.dispatch(increaseTickInterval(field));
-      // }   
+    const incrementFieldCount = (field) => {    
       if(currentCrop.count < 9){
         this.props.dispatch(buyCrop(field));
-        this.props.dispatch(increaseTickInterval(field));
       } 
     }
 
@@ -78,7 +71,7 @@ export class CardContainer extends React.Component {
             percentage={this.state.percentage}
           />
 
-          <button onClick={progressTickInterval} disabled={this.state.ticking /*|| this.props.crops[field].count < 1*/} >
+          <button onClick={progressTickInterval} disabled={this.state.ticking || currentCrop.count < 1} >
             HARVEST {this.props.type.toUpperCase()}
           </button> 
 
@@ -95,7 +88,7 @@ export class CardContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  crops: state.crops.crops1
+  crops: state.crops.crops
 });
 
 export default connect(mapStateToProps)(CardContainer);

@@ -6,11 +6,16 @@ import {
   AUTH_ERROR,
 } from '../actions/auth';
 
+import {
+    SAVE_SUCCESS_DISPLAY
+} from '../actions/user';
+
 const initialState = {
   authToken: null, // authToken !== null does not mean it has been validated
   currentUser: null,
   loading: false,
-  error: null
+  error: null,
+  saveSuccess: null,
 };
 
 export default (state = initialState, action) => {
@@ -43,6 +48,11 @@ export default (state = initialState, action) => {
           loading: false,
           error: action.error
       };
-  }  
+  } else if(action.type === SAVE_SUCCESS_DISPLAY){
+    return {
+      ...state,
+      saveSuccess: action.success   
+    }
+  }
   return state;
 }
