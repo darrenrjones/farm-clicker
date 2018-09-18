@@ -39,10 +39,32 @@ const storeAuthInfo = (authToken, dispatch) => {
     const decodedToken = jwtDecode(authToken);
     dispatch(setAuthToken(authToken));
     dispatch(authSuccess(decodedToken.user));
-    console.log('token user: ',decodedToken.user);
-    
+    dispatch(getUser(decodedToken.user.id))    
     saveAuthToken(authToken);
 };
+
+export const getUser = id => dispatch => {
+    return fetch(`${API_BASE_URL}/api/user/${id}`, {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(id)
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json())
+    .catch(err => {
+        const {reason, message, location} = err;
+        if (reason === 'ValidationError') {
+            // Convert ValidationErrors into SubmissionErrors for Redux Form
+            return Promise.reject(
+                new SubmissionError({
+                    [location]: message
+                })
+            );
+        }
+    });
+}
 
 export const login = (username, password) => dispatch => {
     dispatch(authRequest());
@@ -61,7 +83,10 @@ export const login = (username, password) => dispatch => {
             // errors which follow a consistent format
             .then(res => normalizeResponseErrors(res))
             .then(res => res.json())
-            .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+            .then(({authToken}) => {
+                storeAuthInfo(authToken, dispatch)
+                
+            })
             .catch(err => {
                 console.log(err.message);
                 

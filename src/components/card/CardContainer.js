@@ -22,10 +22,15 @@ export class CardContainer extends React.Component {
     let intCall;
     let field = this.props.field;
 
+    const currentCrop = this.props.crops.find(crop => crop.type === field)
+    const count = currentCrop.count;
+     
+
     const progressTickInterval = () => {
-      console.log(this.state.tickInterval)
       this.setState({ticking: true}) // disabled button while progress bar filling     
-      intCall = setInterval(progressTick, this.props.crops[field].tickInterval);      
+      // intCall = setInterval(progressTick, this.props.crops[field].tickInterval);    
+      intCall = setInterval(progressTick, this.props.crops);      
+  
     }
 
     //progressTick increments percentage of progress bar to fill
@@ -34,7 +39,7 @@ export class CardContainer extends React.Component {
       if(this.state.percentage >= 100){
         clearInterval(intCall);
         this.setState({ percentage: 0, ticking: false }); 
-        this.props.dispatch(incrementCrop(field))
+        this.props.dispatch(incrementCrop(field));
       }    
       this.setState({ percentage: this.state.percentage + 1 });
     }
@@ -42,18 +47,22 @@ export class CardContainer extends React.Component {
 
     //increment count by 1 and increase tickInterval by 8 ms
     const incrementFieldCount = (field) => {  
-      if(this.props.crops[field].count < 9){
+      // if(this.props.crops[field].count < 9){
+      //   this.props.dispatch(buyCrop(field));
+      //   this.props.dispatch(increaseTickInterval(field));
+      // }   
+      if(currentCrop.count < 9){
         this.props.dispatch(buyCrop(field));
         this.props.dispatch(increaseTickInterval(field));
-      }    
+      } 
     }
 
-    const count = this.props.crops[field].count;
+    // const count = this.props.crops[field].count;
     let cropImages = [];        
     for (let i = 1; i <= count; i++) {               
       cropImages.push(
-        <CropImg source={`${this.props.type}`} key={i} />
-      );         
+        <CropImg source={`${this.props.type}`} key={`crop-index-${i}`} />
+      );
     }      
     
     return(
@@ -69,7 +78,7 @@ export class CardContainer extends React.Component {
             percentage={this.state.percentage}
           />
 
-          <button onClick={progressTickInterval} disabled={this.state.ticking || this.props.crops[field].count < 1} >
+          <button onClick={progressTickInterval} disabled={this.state.ticking /*|| this.props.crops[field].count < 1*/} >
             HARVEST {this.props.type.toUpperCase()}
           </button> 
 
@@ -86,7 +95,7 @@ export class CardContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  crops: state.crops.crops
+  crops: state.crops.crops1
 });
 
 export default connect(mapStateToProps)(CardContainer);

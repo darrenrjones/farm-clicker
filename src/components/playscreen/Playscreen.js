@@ -36,23 +36,23 @@ export class Playscreen extends React.Component {
 
             <div className='inventory'>  
                 Wheat: {
-                    this.props.crops.wheat1.total +
-                    this.props.crops.wheat2.total +
-                    this.props.crops.wheat3.total
+                    this.props.crops[0].total +
+                    this.props.crops[1].total +
+                    this.props.crops[2].total
                     }<br></br>
                 Corn: {
-                    this.props.crops.corn1.total +
-                    this.props.crops.corn2.total +
-                    this.props.crops.corn3.total
+                    this.props.crops[3].total +
+                    this.props.crops[4].total +
+                    this.props.crops[5].total
                     }<br></br>                
                 Soy: {
-                    this.props.crops.soy1.total +
-                    this.props.crops.soy2.total +
-                    this.props.crops.soy3.total
+                    this.props.crops[6].total +
+                    this.props.crops[7].total +
+                    this.props.crops[8].total
                     }<br></br>
-                Alfalfa: {this.props.crops.alfalfa.total}<br></br>
-                Hay: {this.props.crops.hay.total}<br></br>
-                Fishfood: {this.props.crops.fishfood.total}<br></br>                
+                {/* Alfalfa: {this.props.crops.alfalfa.total}<br></br> */}
+                {/* Hay: {this.props.crops.hay.total}<br></br> */}
+                {/* Fishfood: {this.props.crops.fishfood.total}<br></br>                 */}
             </div>
 
 
@@ -104,7 +104,9 @@ export class Playscreen extends React.Component {
 
 const mapStateToProps = state => ({   
     currentUser: state.auth.currentUser,
-    crops: state.crops.crops
+    // crops: state.crops.crops,
+    crops: state.crops.crops1
+
 });
 
 export default connect(mapStateToProps)(Playscreen);
