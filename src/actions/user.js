@@ -34,7 +34,7 @@ export const registerUser = user => dispatch => {
 
 export const save = () => (dispatch, getState) => {
     const currentState = getState();
-    console.log(currentState.crops);
+    console.log(currentState.crops.crops);
     const authToken = getState().auth.authToken;
 
     return fetch(`${API_BASE_URL}/api/user/save/${currentState.auth.currentUser._id}`, {
@@ -43,7 +43,7 @@ export const save = () => (dispatch, getState) => {
             'content-type': 'application/json',
             Authorization: `Bearer ${authToken}`
         },
-        body: JSON.stringify({crops:currentState.crops})
+        body: JSON.stringify(currentState.crops.crops)
     })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
