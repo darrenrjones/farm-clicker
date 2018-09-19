@@ -15,20 +15,21 @@ import { save } from '../../actions/user';
 import '../../styles/playscreen.css';
 
 export class Playscreen extends React.Component {
-    componentDidMount() {
-        // this.props.dispatch(refreshAuthToken());
+    // componentDidMount() {
+    //     this.props.dispatch(refreshAuthToken());
+    // }
+    componentDidUpdate(prevProps) {
+        if(this.props.authToken !== prevProps.authToken){
+            console.log('it changed')
+        }
     }
   
     render() {
     const logout = () => {
-        console.log('logout clicked');
-        
         this.props.dispatch(clearAuth());
         clearAuthToken();
     };
     const saveState = () => {
-        // console.log('save clicked');
-        
         this.props.dispatch(save());
     };
 
@@ -113,9 +114,9 @@ export class Playscreen extends React.Component {
 }
 
 const mapStateToProps = state => ({   
-    currentUser: state.auth.currentUser,
-    // crops: state.crops.crops,
-    crops: state.crops.crops
+    currentUser: state.user.currentUser,
+    crops: state.crops.crops,
+    authToken: state.auth.authToken
 
 });
 

@@ -20,7 +20,7 @@ export class Header extends React.Component{
 }
 
 const mapStateToProps = state => ({   
-  currentUser: state.auth.currentUser  
+  currentUser: state.user.currentUser  
 });
 
 export default connect(mapStateToProps)(Header);

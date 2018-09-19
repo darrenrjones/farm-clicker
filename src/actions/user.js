@@ -4,10 +4,10 @@ import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 
 export const SAVE_SUCCESS_DISPLAY = 'SAVE_SUCCESS_DISPLAY';
-export const saveSuccessDisplay = (success) => ({
-  type: SAVE_SUCCESS_DISPLAY,
-  success  
-})
+export const saveSuccessDisplay = isSuccessful => ({
+    type: SAVE_SUCCESS_DISPLAY,
+    isSuccessful
+});
 
 export const registerUser = user => dispatch => {
     return fetch(`${API_BASE_URL}/api/user/register`, {
@@ -37,7 +37,7 @@ export const save = () => (dispatch, getState) => {
     console.log(currentState.crops.crops);
     const authToken = getState().auth.authToken;
 
-    return fetch(`${API_BASE_URL}/api/user/save/${currentState.auth.currentUser._id}`, {
+    return fetch(`${API_BASE_URL}/api/user/save/${currentState.user.currentUser._id}`, {
         method: 'PUT',
         headers: {
             'content-type': 'application/json',
