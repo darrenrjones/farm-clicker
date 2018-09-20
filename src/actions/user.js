@@ -33,8 +33,9 @@ export const registerUser = user => dispatch => {
 };
 
 export const save = () => (dispatch, getState) => {
+    console.log('auto saved...');
+    
     const currentState = getState();
-    console.log(currentState.crops.crops);
     const authToken = getState().auth.authToken;
 
     return fetch(`${API_BASE_URL}/api/user/save/${currentState.user.currentUser._id}`, {

@@ -6,12 +6,14 @@ import LandingPage from './LandingPage';
 import RegistrationPage from './RegistrationPage';
 import Playscreen from './playscreen/Playscreen';
 import {refreshAuthToken} from '../actions/auth';
+import {save} from '../actions/user';
 
 
 class App extends React.Component {
   componentDidUpdate(prevProps) {
     if (!prevProps.loggedIn && this.props.loggedIn) {
-      // When we are logged in, refresh the auth token periodically
+      // When we are logged in, refresh the auth token periodically and autosave
+      this.autoSave();
       this.startPeriodicRefresh();
     } else if (prevProps.loggedIn && !this.props.loggedIn) {
       // Stop refreshing when we log out
@@ -32,6 +34,12 @@ class App extends React.Component {
       return;
     }
     clearInterval(this.refreshInterval);
+  }
+  autoSave() {
+    this.refreshInterval = setInterval(
+      () => this.props.dispatch(save()),
+      40000 //40 seconds
+    );
   }
 
   render() {

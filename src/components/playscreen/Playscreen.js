@@ -22,18 +22,17 @@ export class Playscreen extends React.Component {
           screenDisplay: 'farmView'      
         }
       }
-    componentDidUpdate(prevProps) {
-        if(this.props.authToken !== prevProps.authToken){
-            console.log('it changed')
-        }
-    }
+
   
     render() {
     const logout = () => {
+        this.props.dispatch(save()); //autosave when logout
         this.props.dispatch(clearAuth());
         clearAuthToken();
     };
     const saveState = () => {
+        console.log('saved!!!');
+        
         this.props.dispatch(save());
     };
     const animalRender = () => {
