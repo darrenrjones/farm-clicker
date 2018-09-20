@@ -5,7 +5,8 @@ import { Redirect } from 'react-router-dom';
 import { clearAuthToken } from '../../local-storage'
 //components
 import {Header} from '../header/Header';
-import CardContainer from '../card/CardContainer';
+import {CropRender} from '../playscreen/cropRender';
+import {AnimalRender} from '../playscreen/animalRender';
 
 //actions
 import { clearAuth } from '../../actions/auth';
@@ -15,9 +16,12 @@ import { save } from '../../actions/user';
 import '../../styles/playscreen.css';
 
 export class Playscreen extends React.Component {
-    // componentDidMount() {
-    //     this.props.dispatch(refreshAuthToken());
-    // }
+    constructor(props){
+        super(props)    
+        this.state = {
+          screenDisplay: 'farmView'      
+        }
+      }
     componentDidUpdate(prevProps) {
         if(this.props.authToken !== prevProps.authToken){
             console.log('it changed')
@@ -32,6 +36,12 @@ export class Playscreen extends React.Component {
     const saveState = () => {
         this.props.dispatch(save());
     };
+    const animalRender = () => {
+        this.setState({ screenDisplay : 'animalView'})
+    }
+    const farmRender = () => {
+        this.setState({ screenDisplay : 'farmView'})
+    }
 
       if (!this.props.currentUser) {
         return <Redirect to='/' />;
@@ -45,6 +55,11 @@ export class Playscreen extends React.Component {
 
             <button onClick={logout}>logout</button>
             <button onClick={saveState}>save</button>
+            <br></br>
+            <button onClick={animalRender}>animalRender</button>
+            <br></br>
+            <button onClick={farmRender}>farmRender</button>
+            <span>view: {this.state.screenDisplay}</span>
 
 
             <div className='inventory'>  
@@ -68,45 +83,9 @@ export class Playscreen extends React.Component {
                 {/* Fishfood: {this.props.crops.fishfood.total}<br></br>                 */}
             </div>
 
+            <CropRender />
+            {/* <AnimalRender /> */}
 
-            <div className='crops9-container'> 
-                <CardContainer 
-                    type='wheat'
-                    field='wheat1'                    
-                />
-                <CardContainer 
-                    type='wheat'
-                    field='wheat2'
-                />
-                <CardContainer 
-                    type='wheat'
-                    field='wheat3'
-                />
-                <CardContainer 
-                    type='corn'
-                    field='corn1'
-                />
-                <CardContainer 
-                    type='corn'
-                    field='corn2'
-                />
-                <CardContainer 
-                    type='corn'
-                    field='corn3'
-                />
-                <CardContainer 
-                    type='soy'
-                    field='soy1'
-                />
-                <CardContainer 
-                    type='soy'
-                    field='soy2'
-                />
-                <CardContainer 
-                    type='soy'
-                    field='soy3'
-                />         
-            </div>
 
           </div>
         );

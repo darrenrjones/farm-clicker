@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 export const CropImg = prop => {
   return(
       <img 
-        src={require(`../../images/crops/${prop.source}.png`)}
+        src={require(`../../images/${prop.screen}/${prop.source}.png`)}
         alt={`icon of ${prop.source}`}
         className='small-crop-icon'
       />

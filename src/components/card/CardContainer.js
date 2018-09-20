@@ -14,7 +14,6 @@ export class CardContainer extends React.Component {
     this.state = {
       percentage: 0,
       ticking: false,
-      tickInterval: props.interval      
     }
   }
 
@@ -54,7 +53,11 @@ export class CardContainer extends React.Component {
     let cropImages = [];        
     for (let i = 1; i <= count; i++) {               
       cropImages.push(
-        <CropImg source={`${this.props.type}`} key={`crop-index-${i}`} />
+        <CropImg 
+          source={`${this.props.type}`} 
+          screen={`${this.props.screen}`}
+          key={`crop-index-${i}`} 
+        />
       );
     }      
     
@@ -71,8 +74,13 @@ export class CardContainer extends React.Component {
             percentage={this.state.percentage}
           />
 
+          {/* nested ternary to check card's 'screen' prop to render proper button text */}
           <button onClick={progressTickInterval} disabled={this.state.ticking || currentCrop.count < 1} >
-            HARVEST {this.props.type.toUpperCase()}
+            {this.props.screen === 'crops' ? 
+              'HARVEST ' : this.props.screen === 'animal' ?
+                'FEED ' : this.props.screen === 'menu' ?
+                  'menu ' : null}                   
+            {this.props.type.toUpperCase()}
           </button> 
 
           <button onClick={() => incrementFieldCount(this.props.field)}>

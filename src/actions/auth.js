@@ -89,7 +89,7 @@ export const refreshAuthToken = () => (dispatch, getState) => {
     return fetch(`${API_BASE_URL}/api/refresh`, {
         method: 'POST',
         headers: {
-            // Provide our existing token as credentials to get a new one
+            // Provide existing token as credentials to get a new one
             Authorization: `Bearer ${authToken}`
         }
     })
