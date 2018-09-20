@@ -61,7 +61,7 @@ export class Playscreen extends React.Component {
             <span>view: {this.state.screenDisplay}</span>
 
 
-            <div className='inventory'>  
+            <div className='crops-inventory'>  
                 Wheat: {
                     this.props.crops[0].total +
                     this.props.crops[1].total +
@@ -81,9 +81,24 @@ export class Playscreen extends React.Component {
                 {/* Hay: {this.props.crops.hay.total}<br></br> */}
                 {/* Fishfood: {this.props.crops.fishfood.total}<br></br>                 */}
             </div>
+            <div className='animals-inventory'>  
+                Chickens: {
+                    this.props.animals[0].total +
+                    this.props.animals[1].total +
+                    this.props.animals[2].total
+                    }<br></br>
+                Pigs: {
+                    this.props.animals[3].total +
+                    this.props.animals[4].total                    
+                    }<br></br>                
+                Cows: {
+                    this.props.animals[5].total +
+                    this.props.animals[6].total 
+                    }                             
+            </div>
 
             <CropRender />
-            {/* <AnimalRender /> */}
+            <AnimalRender />
 
 
           </div>
@@ -94,6 +109,7 @@ export class Playscreen extends React.Component {
 const mapStateToProps = state => ({   
     currentUser: state.user.currentUser,
     crops: state.crops.crops,
+    animals: state.animals.animals,
     authToken: state.auth.authToken
 
 });

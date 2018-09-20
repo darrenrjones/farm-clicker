@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {incrementCrop, buyCrop} from '../../actions/crops';
+import {incrementAnimal, buyAnimal} from '../../actions/animals';
 
 import ProgressBar from './ProgressBar';
-import CropImg from './CropImg';
+import CardImg from './CardImg';
 
 import '../../styles/card-container.css';
 
@@ -19,15 +20,20 @@ export class CardContainer extends React.Component {
 
   render(){
     let intCall;
-    let field = this.props.field;
+    const field = this.props.field;
+    const screen = this.props.screen;   
 
-    const currentCrop = this.props.crops.find(crop => crop.type === field)
-    const count = currentCrop.count;
-     
+    // const currentCrop = this.props.crops.find(crop => crop.type === field);
+    // const currentAnimal = this.props.animals.find(animal => animal.type === field);
+
+    //return currentCard based on whether its animal or crop card
+    const currentCard = screen === 'crops' ? 
+      this.props.crops.find(crop => crop.type === field) : screen === 'animals' ? 
+        this.props.animals.find(animal => animal.type === field) : null
 
     const progressTickInterval = () => {
       this.setState({ticking: true}) // disabled button while progress bar filling     
-      intCall = setInterval(progressTick, (currentCrop.count+7 + currentCrop.count*4));      
+      intCall = setInterval(progressTick, (currentCard.count+7 + currentCard.count*4));      
     }
 
     //progressTick increments percentage of progress bar to fill
@@ -36,7 +42,12 @@ export class CardContainer extends React.Component {
       if(this.state.percentage >= 100){
         clearInterval(intCall);
         this.setState({ percentage: 0, ticking: false }); 
-        this.props.dispatch(incrementCrop(field));
+        
+        if(screen === 'crops'){
+          this.props.dispatch(incrementCrop(field));
+        } else if(screen === 'animals'){
+          this.props.dispatch(incrementAnimal(field));
+        }
       }    
       this.setState({ percentage: this.state.percentage + 1 });
     }
@@ -44,16 +55,20 @@ export class CardContainer extends React.Component {
 
     //increment count by 1 and increase tickInterval by 8 ms
     const incrementFieldCount = (field) => {    
-      if(currentCrop.count < 9){
-        this.props.dispatch(buyCrop(field));
+      if(currentCard.count < 9){
+        if(screen === 'crops'){
+          this.props.dispatch(buyCrop(field));
+        } else if( screen === 'animals'){
+          this.props.dispatch(buyAnimal(field));
+        }
       } 
     }
 
     // const count = this.props.crops[field].count;
-    let cropImages = [];        
-    for (let i = 1; i <= count; i++) {               
-      cropImages.push(
-        <CropImg 
+    let cardImages = [];        
+    for (let i = 1; i <= currentCard.count; i++) {               
+      cardImages.push(
+        <CardImg 
           source={`${this.props.type}`} 
           screen={`${this.props.screen}`}
           key={`crop-index-${i}`} 
@@ -66,7 +81,7 @@ export class CardContainer extends React.Component {
       <div className='card-container'>
 
         <div className='image-box'>          
-          {cropImages}
+          {cardImages}
         </div>
     
         <div className='progress-bar-container'>
@@ -75,10 +90,10 @@ export class CardContainer extends React.Component {
           />
 
           {/* nested ternary to check card's 'screen' prop to render proper button text */}
-          <button onClick={progressTickInterval} disabled={this.state.ticking || currentCrop.count < 1} >
-            {this.props.screen === 'crops' ? 
-              'HARVEST ' : this.props.screen === 'animal' ?
-                'FEED ' : this.props.screen === 'menu' ?
+          <button onClick={progressTickInterval} disabled={this.state.ticking || currentCard.count < 1} >
+            {screen === 'crops' ? 
+              'HARVEST ' : screen === 'animals' ?
+                'FEED ' : screen === 'menu' ?
                   'menu ' : null}                   
             {this.props.type.toUpperCase()}
           </button> 
@@ -96,7 +111,8 @@ export class CardContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  crops: state.crops.crops
+  crops: state.crops.crops,
+  animals: state.animals.animals
 });
 
 export default connect(mapStateToProps)(CardContainer);

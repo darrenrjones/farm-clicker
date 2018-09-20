@@ -3,8 +3,9 @@ import {reducer as formReducer} from 'redux-form';
 import thunk from 'redux-thunk';
 import {loadAuthToken} from './local-storage';
 import authReducer from './reducers/auth';
-import cropsReducer from './reducers/crops';
 import userReducer from './reducers/user';
+import cropsReducer from './reducers/crops';
+import animalsReducer from './reducers/animals';
 
 
 import {setAuthToken, refreshAuthToken} from './actions/auth';
@@ -13,8 +14,9 @@ const store = createStore(
     combineReducers({
         form: formReducer,
         auth: authReducer,
+        user: userReducer,
         crops: cropsReducer,
-        user: userReducer
+        animals: animalsReducer
     }),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(thunk)
