@@ -9,7 +9,12 @@ export const AnimalRender = () => {
                   <CardContainer 
                       type='chicken'
                       field='chicken1'                    
-                      screen='animal'
+                      screen='animals'
+                  />
+                  <CardContainer 
+                      type='pig'
+                      field='pig1'                    
+                      screen='animals'
                   />
      
               </div>
