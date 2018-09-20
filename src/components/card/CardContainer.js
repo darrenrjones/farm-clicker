@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {incrementCrop, buyCrop} from '../../actions/crops';
+import {incrementAnimal, buyAnimal} from '../../actions/animals';
 
 import ProgressBar from './ProgressBar';
 import CardImg from './CardImg';
@@ -41,7 +42,12 @@ export class CardContainer extends React.Component {
       if(this.state.percentage >= 100){
         clearInterval(intCall);
         this.setState({ percentage: 0, ticking: false }); 
-        this.props.dispatch(incrementCrop(field));
+        
+        if(screen === 'crops'){
+          this.props.dispatch(incrementCrop(field));
+        } else if(screen === 'animals'){
+          this.props.dispatch(incrementAnimal(field));
+        }
       }    
       this.setState({ percentage: this.state.percentage + 1 });
     }
@@ -50,7 +56,11 @@ export class CardContainer extends React.Component {
     //increment count by 1 and increase tickInterval by 8 ms
     const incrementFieldCount = (field) => {    
       if(currentCard.count < 9){
-        this.props.dispatch(buyCrop(field));
+        if(screen === 'crops'){
+          this.props.dispatch(buyCrop(field));
+        } else if( screen === 'animals'){
+          this.props.dispatch(buyAnimal(field));
+        }
       } 
     }
 
@@ -81,9 +91,9 @@ export class CardContainer extends React.Component {
 
           {/* nested ternary to check card's 'screen' prop to render proper button text */}
           <button onClick={progressTickInterval} disabled={this.state.ticking || currentCard.count < 1} >
-            {this.props.screen === 'crops' ? 
-              'HARVEST ' : this.props.screen === 'animal' ?
-                'FEED ' : this.props.screen === 'menu' ?
+            {screen === 'crops' ? 
+              'HARVEST ' : screen === 'animals' ?
+                'FEED ' : screen === 'menu' ?
                   'menu ' : null}                   
             {this.props.type.toUpperCase()}
           </button> 

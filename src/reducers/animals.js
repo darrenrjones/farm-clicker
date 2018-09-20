@@ -1,7 +1,7 @@
 import {
-  // INCREMENT_CROP,
-  // BUY_CROP,
-} from '../actions/crops';
+  INCREMENT_ANIMAL,
+  BUY_ANIMAL,
+} from '../actions/animals';
 
 import {AUTH_SUCCESS} from '../actions/auth';
 
@@ -19,46 +19,46 @@ export default (state=initialState, action) => {
         animals: action.currentUser.animals
     }
   }
-  // if(action.type === INCREMENT_CROP) {
-  //   let copy = [...state.crops];
-  //   let index;
-  //   const cropObj = copy.find((crop, i) => {
-  //     if(crop.type === action.field){
-  //       index = i;
-  //       return true;
-  //     }
-  //     return false;    
-  //   });
-  //   cropObj.total += cropObj.count;
-  //   return {
-  //     ...state,
-  //     crops: [
-  //       ...copy.slice(0,index), 
-  //       cropObj, 
-  //       ...copy.slice(index+1,copy.length+1)  
-  //     ] 
-  //   }   
-  // }
-  // if(action.type === BUY_CROP) {
-  //   //increment crop.count by 1 upon purchase
-  //   let copy = [...state.crops];
-  //   let index;
-  //   const cropObj = copy.find((crop, i) => {
-  //     if(crop.type === action.field){
-  //       index = i;
-  //       return true;
-  //     }
-  //     return false;    
-  //   });
-  //   cropObj.count += 1;
-  //   return {
-  //     ...state,
-  //     crops: [
-  //       ...copy.slice(0,index), 
-  //       cropObj, 
-  //       ...copy.slice(index+1,copy.length+1)  
-  //     ] 
-  //   }
-  // }  
+  if(action.type === INCREMENT_ANIMAL) {
+    let copy = [...state.animals];
+    let index;
+    const animalObj = copy.find((animal, i) => {
+      if(animal.type === action.field){
+        index = i;
+        return true;
+      }
+      return false;    
+    });
+    animalObj.total += animalObj.count;
+    return {
+      ...state,
+      animals: [
+        ...copy.slice(0,index), 
+        animalObj, 
+        ...copy.slice(index+1,copy.length+1)  
+      ] 
+    }   
+  }
+  if(action.type === BUY_ANIMAL) {
+    //increment animal.count by 1 upon purchase
+    let copy = [...state.animals];
+    let index;
+    const animalObj = copy.find((animal, i) => {
+      if(animal.type === action.field){
+        index = i;
+        return true;
+      }
+      return false;    
+    });
+    animalObj.count += 1;
+    return {
+      ...state,
+      animals: [
+        ...copy.slice(0,index), 
+        animalObj, 
+        ...copy.slice(index+1,copy.length+1)  
+      ] 
+    }
+  }  
   return state;
 } 
