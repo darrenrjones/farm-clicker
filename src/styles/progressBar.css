@@ -5,6 +5,7 @@
   width: 90%;
   border-radius: 50px;
   border: 1px solid rgb(0, 0, 0);
+  cursor: pointer;
 }
 .filler {
   background: #1DA598;
@@ -14,4 +15,7 @@
 
 .small-crop-icon{
   height: 3em;
+}
+.progress-bar-btn-text{
+  position: absolute;
 }
