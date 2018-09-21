@@ -44,7 +44,7 @@ export const save = () => (dispatch, getState) => {
             'content-type': 'application/json',
             Authorization: `Bearer ${authToken}`
         },
-        body: JSON.stringify(currentState.crops.crops)
+        body: JSON.stringify(currentState.user.currentUser)
     })
     .then(res => normalizeResponseErrors(res))
     .then(res => res.json())
