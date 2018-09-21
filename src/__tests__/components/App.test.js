@@ -8,6 +8,6 @@ describe('<App />', () => {
   it('renders', () => {
     shallow(<App />);
   })
-  
+
 });
 

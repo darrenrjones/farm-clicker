@@ -8,6 +8,6 @@ describe('<LandingPage />', () => {
   it('renders', () => {
     shallow(<LandingPage />);
   })
-  
+
 });
 

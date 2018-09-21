@@ -1,12 +1,12 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Route, withRouter} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Route, withRouter } from 'react-router-dom';
 
 import LandingPage from './LandingPage';
 import RegistrationPage from './RegistrationPage';
 import Playscreen from './playscreen/Playscreen';
-import {refreshAuthToken} from '../actions/auth';
-import {save} from '../actions/user';
+import { refreshAuthToken } from '../actions/auth';
+import { save } from '../actions/user';
 
 
 class App extends React.Component {
@@ -44,7 +44,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div role='main' className="app">        
+      <div role='main' className="app">
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/playscreen" component={Playscreen} />
         <Route exact path="/register" component={RegistrationPage} />

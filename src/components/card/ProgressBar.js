@@ -6,7 +6,7 @@ import Filler from './Filler';
 import '../../styles/progressBar.css';
 
 export const ProgressBar = props => {
-  return(
+  return (
     <div className='progress-bar'>
 
       <Filler

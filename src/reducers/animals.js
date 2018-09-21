@@ -3,62 +3,62 @@ import {
   BUY_ANIMAL,
 } from '../actions/animals';
 
-import {AUTH_SUCCESS} from '../actions/auth';
+import { AUTH_SUCCESS } from '../actions/auth';
 
 const initialState = {
 
   animals: null,
- 
+
 };
 
-export default (state=initialState, action) => {
+export default (state = initialState, action) => {
 
   if (action.type === AUTH_SUCCESS) {
     return {
-        ...state,
-        animals: action.currentUser.animals
+      ...state,
+      animals: action.currentUser.animals
     }
   }
-  if(action.type === INCREMENT_ANIMAL) {
+  if (action.type === INCREMENT_ANIMAL) {
     let copy = [...state.animals];
     let index;
     const animalObj = copy.find((animal, i) => {
-      if(animal.type === action.field){
+      if (animal.type === action.field) {
         index = i;
         return true;
       }
-      return false;    
+      return false;
     });
     animalObj.total += animalObj.count;
     return {
       ...state,
       animals: [
-        ...copy.slice(0,index), 
-        animalObj, 
-        ...copy.slice(index+1,copy.length+1)  
-      ] 
-    }   
+        ...copy.slice(0, index),
+        animalObj,
+        ...copy.slice(index + 1, copy.length + 1)
+      ]
+    }
   }
-  if(action.type === BUY_ANIMAL) {
+  if (action.type === BUY_ANIMAL) {
     //increment animal.count by 1 upon purchase
     let copy = [...state.animals];
     let index;
     const animalObj = copy.find((animal, i) => {
-      if(animal.type === action.field){
+      if (animal.type === action.field) {
         index = i;
         return true;
       }
-      return false;    
+      return false;
     });
     animalObj.count += 1;
     return {
       ...state,
       animals: [
-        ...copy.slice(0,index), 
-        animalObj, 
-        ...copy.slice(index+1,copy.length+1)  
-      ] 
+        ...copy.slice(0, index),
+        animalObj,
+        ...copy.slice(index + 1, copy.length + 1)
+      ]
     }
-  }  
+  }
   return state;
 } 
