@@ -90,6 +90,8 @@ export class CardContainer extends React.Component {
             screen={screen}
             type={this.props.type}
             action={progressTickIntervalSet}
+            count={currentCard.count}
+            ticking={this.state.ticking}
           />
 
           {/* nested ternary to check card's 'screen' prop to render proper button text */}

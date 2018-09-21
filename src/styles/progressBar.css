@@ -18,4 +18,12 @@
 }
 .progress-bar-btn-text{
   position: absolute;
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+  -o-user-select: none;
+  user-select: none;
+}
+.disabled-progress-bar-action{
+  pointer-events:none
 }

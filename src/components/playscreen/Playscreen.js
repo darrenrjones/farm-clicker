@@ -72,7 +72,7 @@ export class Playscreen extends React.Component {
 				<button onClick={animalRender}>animalRender</button>
 				<br></br>
 				<button onClick={farmRender}>farmRender</button>
-				<span>view: {this.state.screenDisplay}</span>
+				{/* <span>view: {this.state.screenDisplay}</span> */}
 
 
 				<div className='crops-inventory'>

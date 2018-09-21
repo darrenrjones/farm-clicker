@@ -8,7 +8,7 @@ import '../../styles/progressBar.css';
 export const ProgressBar = props => {
   return (
     <div 
-      className='progress-bar'
+      className={props.count < 1 || props.ticking ? 'disabled-progress-bar-action progress-bar' : 'progress-bar'}
       onClick={props.action}
     >
       <div className='progress-bar-btn-text'>
