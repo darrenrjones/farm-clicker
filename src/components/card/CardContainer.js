@@ -31,13 +31,13 @@ export class CardContainer extends React.Component {
       this.props.crops.find(crop => crop.type === field) : screen === 'animals' ?
         this.props.animals.find(animal => animal.type === field) : null
 
-    const progressTickInterval = () => {
+    const progressTickIntervalSet = () => {
       this.setState({ ticking: true }) // disabled button while progress bar filling     
       intCall = setInterval(progressTick, (currentCard.count + 7 + currentCard.count * 4));
     }
 
     //progressTick increments percentage of progress bar to fill
-    //when it fills then incrementCrop is called
+    //when it fills then incrementCrop/incrementAnimal is called
     const progressTick = () => {
       if (this.state.percentage >= 100) {
         clearInterval(intCall);
@@ -87,22 +87,17 @@ export class CardContainer extends React.Component {
         <div className='progress-bar-container'>
           <ProgressBar
             percentage={this.state.percentage}
+            screen={screen}
+            type={this.props.type}
+            action={progressTickIntervalSet}
           />
 
           {/* nested ternary to check card's 'screen' prop to render proper button text */}
-          <button onClick={progressTickInterval} disabled={this.state.ticking || currentCard.count < 1} >
-            {screen === 'crops' ?
-              'HARVEST ' : screen === 'animals' ?
-                'FEED ' : screen === 'menu' ?
-                  'menu ' : null}
-            {this.props.type.toUpperCase()}
-          </button>
-
           <button onClick={() => incrementFieldCount(this.props.field)}>
-          {screen === 'crops' ?
+            {screen === 'crops' ?
               'PLANT ' : screen === 'animals' ?
                 'BUY ' : screen === 'menu' ?
-                  'menu ' : null} 
+                  'menu ' : null}
             {this.props.type.toUpperCase()}
           </button>
 

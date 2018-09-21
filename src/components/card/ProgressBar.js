@@ -7,8 +7,19 @@ import '../../styles/progressBar.css';
 
 export const ProgressBar = props => {
   return (
-    <div className='progress-bar'>
-
+    <div 
+      className='progress-bar'
+      onClick={props.action}
+    >
+      <div className='progress-bar-btn-text'>
+        {/* nested ternary to check card's 'screen' prop to render proper button text */}
+        {props.screen === 'crops' ?
+              'HARVEST ' : props.screen === 'animals' ?
+                'FEED ' : props.screen === 'menu' ?
+                  'menu ' : null}
+        {props.type.toUpperCase()}
+      </div>
+      
       <Filler
         percentage={props.percentage}
       />
