@@ -99,7 +99,11 @@ export class CardContainer extends React.Component {
           </button>
 
           <button onClick={() => incrementFieldCount(this.props.field)}>
-            PLANT {this.props.type.toUpperCase()}
+          {screen === 'crops' ?
+              'PLANT ' : screen === 'animals' ?
+                'BUY ' : screen === 'menu' ?
+                  'menu ' : null} 
+            {this.props.type.toUpperCase()}
           </button>
 
         </div>

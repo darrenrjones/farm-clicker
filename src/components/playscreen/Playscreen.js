@@ -25,26 +25,40 @@ export class Playscreen extends React.Component {
 
 
 	render() {
-		const logout = () => {
-			this.props.dispatch(save()); //autosave when logout
-			this.props.dispatch(clearAuth());
-			clearAuthToken();
-		};
-		const saveState = () => {
-			console.log('saved!!!');
 
-			this.props.dispatch(save());
-		};
+		const logout = () => {
+			this.props.dispatch(save()) //autosave when logout
+			this.props.dispatch(clearAuth())
+			clearAuthToken()
+		}
+
+		const saveState = () => {
+			this.props.dispatch(save())
+		}
+
 		const animalRender = () => {
 			this.setState({ screenDisplay: 'animalView' })
 		}
+
 		const farmRender = () => {
 			this.setState({ screenDisplay: 'farmView' })
 		}
 
 		if (!this.props.currentUser) {
-			return <Redirect to='/' />;
+			return <Redirect to='/' />
 		}
+
+		let display;
+		if (this.state.screenDisplay === 'animalView') {
+			display = (<AnimalRender />)
+
+		} else if (this.state.screenDisplay === 'farmView') {
+			display = (<CropRender />)
+		}
+
+
+
+
 		return (
 			<div className='playscreen-div'>
 
@@ -97,8 +111,8 @@ export class Playscreen extends React.Component {
 					}
 				</div>
 
-				<CropRender />
-				<AnimalRender />
+				{display}
+
 
 
 			</div>
