@@ -23,6 +23,7 @@ export class CardContainer extends React.Component {
     let intCall;
     const field = this.props.field;
     const screen = this.props.screen;
+    
 
     // const currentCrop = this.props.crops.find(crop => crop.type === field);
     // const currentAnimal = this.props.animals.find(animal => animal.type === field);
@@ -47,8 +48,10 @@ export class CardContainer extends React.Component {
         if (screen === 'crops') {
           this.props.dispatch(incrementCrop(field));
         } else if (screen === 'animals') {
+          const feed1 = this.props.feed.split(' ')[0];
+          const feed2 = this.props.feed.split(' ')[1];
           this.props.dispatch(sellAnimal(currentCard.count));
-          // this.props.dispatch(decrementCrop(currentCard.feed, currentCard.count ));
+          this.props.dispatch(decrementCrop(currentCard.count, feed1, feed2 ));
 
         }
       }

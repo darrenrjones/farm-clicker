@@ -61,25 +61,27 @@ export default (state = initialState, action) => {
       ]
     }
   }
-  if (action.type === DECREMENT_CROP) {
+  if (action.type === DECREMENT_CROP) { 
     let copy = [...state.crops];
     let index;
     const cropObj = copy.find((crop, i) => {
-      if (crop.type === action.field) {
+      if (crop.type === action.feed1+'1') {
         index = i;
         return true;
       }
       return false;
     });
-    cropObj.total -= cropObj.count;
-    return {
-      ...state,
-      crops: [
-        ...copy.slice(0, index),
-        cropObj,
-        ...copy.slice(index + 1, copy.length + 1)
-      ]
-    }
+    console.log(cropObj);
+    
+    // cropObj.total -= cropObj.count;
+    // return {
+    //   ...state,
+    //   crops: [
+    //     ...copy.slice(0, index),
+    //     cropObj,
+    //     ...copy.slice(index + 1, copy.length + 1)
+    //   ]
+    // }
   }
   return state;
 } 

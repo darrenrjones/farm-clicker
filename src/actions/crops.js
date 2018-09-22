@@ -11,7 +11,9 @@ export const buyCrop = (field) => ({
 });
 
 export const DECREMENT_CROP = 'DECREMENT_CROP';
-export const decrementCrop = (field) => ({
+export const decrementCrop = (count, feed1, feed2 ) => ({
 	type: DECREMENT_CROP,
-	field
+	count,
+	feed1,
+	feed2
 });
