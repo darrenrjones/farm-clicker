@@ -9,10 +9,25 @@ export const saveSuccessDisplay = isSuccessful => ({
 	isSuccessful
 });
 
+export const INCREMENT_CROP = 'INCREMENT_CROP';
+export const incrementCrop = (cropType, count) => ({
+	type: INCREMENT_CROP,
+	cropType,
+	count
+});
+
 export const SELL_ANIMAL = 'SELL_ANIMAL';
 export const sellAnimal = (value) => ({
     type: SELL_ANIMAL, 
     value
+});
+
+export const DECREMENT_CROP = 'DECREMENT_CROP';
+export const decrementCrop = (count, feed1, feed2 ) => ({
+	type: DECREMENT_CROP,
+	count,
+	feed1,
+	feed2
 });
 
 export const registerUser = user => dispatch => {

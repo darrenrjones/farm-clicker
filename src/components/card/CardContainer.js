@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { incrementCrop, buyCrop, decrementCrop } from '../../actions/crops';
+import { buyCrop } from '../../actions/crops';
 import { buyAnimal } from '../../actions/animals';
-import { sellAnimal } from '../../actions/user';
+import { sellAnimal, incrementCrop, decrementCrop } from '../../actions/user';
 
 import ProgressBar from './ProgressBar';
 import CardImg from './CardImg';
@@ -21,9 +21,9 @@ export class CardContainer extends React.Component {
 
   render() {
     let intCall;
+    const type = this.props.type;
     const field = this.props.field;
     const screen = this.props.screen;
-    
 
     // const currentCrop = this.props.crops.find(crop => crop.type === field);
     // const currentAnimal = this.props.animals.find(animal => animal.type === field);
@@ -46,13 +46,18 @@ export class CardContainer extends React.Component {
         this.setState({ percentage: 0, ticking: false });
 
         if (screen === 'crops') {
-          this.props.dispatch(incrementCrop(field));
+          this.props.dispatch(incrementCrop(type, currentCard.count));
         } else if (screen === 'animals') {
           const feed1 = this.props.feed.split(' ')[0];
           const feed2 = this.props.feed.split(' ')[1];
-          this.props.dispatch(sellAnimal(currentCard.count));
-          this.props.dispatch(decrementCrop(currentCard.count, feed1, feed2 ));
-
+          if(this.props.cropTotals[feed1] >= currentCard.count || this.props.cropTotals[feed2] >= currentCard.count){
+            console.log(this.props.cropTotals[feed1]);
+            
+            this.props.dispatch(sellAnimal(currentCard.count));
+            this.props.dispatch(decrementCrop(currentCard.count, feed1, feed2 ));  
+          } else {
+            console.log('not enough crops');            
+          }
         }
       }
       this.setState({ percentage: this.state.percentage + 1 });
@@ -119,7 +124,8 @@ export class CardContainer extends React.Component {
 
 const mapStateToProps = state => ({
   crops: state.crops.crops,
-  animals: state.animals.animals
+  animals: state.animals.animals,
+  cropTotals: state.user.currentUser.cropTotals
 });
 
 export default connect(mapStateToProps)(CardContainer);
