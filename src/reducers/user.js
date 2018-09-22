@@ -6,6 +6,7 @@ import {
   AUTH_SUCCESS,
   CLEAR_AUTH
 } from '../actions/auth';
+import { SELL_ANIMAL } from '../actions/animals';
 
 const initialState = {
   currentUser: null,
@@ -29,6 +30,11 @@ export default (state = initialState, action) => {
       ...state,
       currentUser: null
     };
+  } else if(action.type === SELL_ANIMAL) {
+    return {
+      ...state,
+      currentUser: {...state.currentUser, cash: state.currentUser.cash += action.value}
+    }
   }
   return state;
 }

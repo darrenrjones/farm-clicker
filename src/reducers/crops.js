@@ -1,6 +1,7 @@
 import {
   INCREMENT_CROP,
   BUY_CROP,
+  DECREMENT_CROP,
 } from '../actions/crops';
 
 import { AUTH_SUCCESS } from '../actions/auth';
@@ -51,6 +52,26 @@ export default (state = initialState, action) => {
       return false;
     });
     cropObj.count += 1;
+    return {
+      ...state,
+      crops: [
+        ...copy.slice(0, index),
+        cropObj,
+        ...copy.slice(index + 1, copy.length + 1)
+      ]
+    }
+  }
+  if (action.type === DECREMENT_CROP) {
+    let copy = [...state.crops];
+    let index;
+    const cropObj = copy.find((crop, i) => {
+      if (crop.type === action.field) {
+        index = i;
+        return true;
+      }
+      return false;
+    });
+    cropObj.total -= cropObj.count;
     return {
       ...state,
       crops: [

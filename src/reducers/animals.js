@@ -1,5 +1,4 @@
 import {
-  INCREMENT_ANIMAL,
   BUY_ANIMAL,
 } from '../actions/animals';
 
@@ -17,26 +16,6 @@ export default (state = initialState, action) => {
     return {
       ...state,
       animals: action.currentUser.animals
-    }
-  }
-  if (action.type === INCREMENT_ANIMAL) {
-    let copy = [...state.animals];
-    let index;
-    const animalObj = copy.find((animal, i) => {
-      if (animal.type === action.field) {
-        index = i;
-        return true;
-      }
-      return false;
-    });
-    animalObj.total += animalObj.count;
-    return {
-      ...state,
-      animals: [
-        ...copy.slice(0, index),
-        animalObj,
-        ...copy.slice(index + 1, copy.length + 1)
-      ]
     }
   }
   if (action.type === BUY_ANIMAL) {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { incrementCrop, buyCrop } from '../../actions/crops';
-import { incrementAnimal, buyAnimal } from '../../actions/animals';
+import { incrementCrop, buyCrop, decrementCrop } from '../../actions/crops';
+import { buyAnimal } from '../../actions/animals';
+import { sellAnimal } from '../../actions/user';
 
 import ProgressBar from './ProgressBar';
 import CardImg from './CardImg';
@@ -37,7 +38,7 @@ export class CardContainer extends React.Component {
     }
 
     //progressTick increments percentage of progress bar to fill
-    //when it fills then incrementCrop/incrementAnimal is called
+    //when it fills then incrementCrop/sellAnimal is called
     const progressTick = () => {
       if (this.state.percentage >= 100) {
         clearInterval(intCall);
@@ -46,7 +47,9 @@ export class CardContainer extends React.Component {
         if (screen === 'crops') {
           this.props.dispatch(incrementCrop(field));
         } else if (screen === 'animals') {
-          this.props.dispatch(incrementAnimal(field));
+          this.props.dispatch(sellAnimal(currentCard.count));
+          // this.props.dispatch(decrementCrop(currentCard.feed, currentCard.count ));
+
         }
       }
       this.setState({ percentage: this.state.percentage + 1 });

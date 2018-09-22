@@ -51,10 +51,13 @@ export class Playscreen extends React.Component {
 		let display;
 		if (this.state.screenDisplay === 'animalView') {
 			display = (<AnimalRender />)
-
 		} else if (this.state.screenDisplay === 'farmView') {
 			display = (<CropRender />)
 		}
+
+		let wheatTotal = this.props.crops[0].total +
+		this.props.crops[1].total +
+		this.props.crops[2].total
 
 
 
@@ -76,11 +79,7 @@ export class Playscreen extends React.Component {
 
 
 				<div className='crops-inventory'>
-					Wheat: {
-						this.props.crops[0].total +
-						this.props.crops[1].total +
-						this.props.crops[2].total
-					}<br></br>
+					Wheat: {wheatTotal}<br></br>
 					Corn: {
 						this.props.crops[3].total +
 						this.props.crops[4].total +

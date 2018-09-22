@@ -9,6 +9,12 @@ export const saveSuccessDisplay = isSuccessful => ({
 	isSuccessful
 });
 
+export const SELL_ANIMAL = 'SELL_ANIMAL';
+export const sellAnimal = (value) => ({
+    type: SELL_ANIMAL, 
+    value
+});
+
 export const registerUser = user => dispatch => {
 	return fetch(`${API_BASE_URL}/api/user/register`, {
 		method: 'POST',
