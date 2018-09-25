@@ -79,6 +79,7 @@ export class Playscreen extends React.Component {
 
 
 				<div className='crops-inventory'>
+					<h2>Crops</h2>
 					Wheat: {wheatTotal}<br></br>
 					Corn: {
 						this.props.crops[3].total +
@@ -95,6 +96,7 @@ export class Playscreen extends React.Component {
 					{/* Fishfood: {this.props.crops.fishfood.total}<br></br>                 */}
 				</div>
 				<div className='animals-inventory'>
+					<h2>Livestock</h2>
 					Chickens: {
 						this.props.animals[0].total +
 						this.props.animals[1].total +

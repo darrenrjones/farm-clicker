@@ -12,7 +12,7 @@ export function LandingPage(props) {
 
 	return (
 		<div className="home">
-			<p>Welcome to Farm Clicker</p>
+			<h2>Welcome to Farm Clicker</h2>
 			<p>Log in or Register below </p>
 			<LoginForm />
 			<Link to="/register">Register</Link>

@@ -22,3 +22,9 @@ body {
   width: auto;
   width: auto\9;
 } */
+h2{
+  margin: 5px 0;
+}
+.form-error{
+  color: red;
+}
