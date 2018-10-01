@@ -22,7 +22,7 @@ export const ProgressBar = props => {
   }
   return (
     <div
-      className={props.count < 1 || props.ticking ? 'disabled-progress-bar-action progress-bar' : 'progress-bar'}
+      className={props.count < 1 || props.ticking || !props.enoughFeed ? 'disabled-progress-bar-action progress-bar' : 'progress-bar'}
       onClick={props.action}
     >
       <div className='progress-bar-btn-text'>

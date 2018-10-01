@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { buyCrop } from '../../actions/crops';
 import { buyAnimal } from '../../actions/animals';
+import enoughFeed from './helperFunctions';
 import { sellAnimal, incrementCrop, decrementCrop } from '../../actions/user';
 
 import ProgressBar from './ProgressBar';
@@ -24,6 +25,8 @@ export class CardContainer extends React.Component {
     const type = this.props.type;
     const field = this.props.field;
     const screen = this.props.screen;
+    const feed1 = this.props.feed.split(' ')[0];
+    const feed2 = this.props.feed.split(' ')[1];
 
     // const currentCrop = this.props.crops.find(crop => crop.type === field);
     // const currentAnimal = this.props.animals.find(animal => animal.type === field);
@@ -48,16 +51,24 @@ export class CardContainer extends React.Component {
         if (screen === 'crops') {
           this.props.dispatch(incrementCrop(type, currentCard.count));
         } else if (screen === 'animals') {
-          const feed1 = this.props.feed.split(' ')[0];
-          const feed2 = this.props.feed.split(' ')[1];
-          if(this.props.cropTotals[feed1] >= currentCard.count || this.props.cropTotals[feed2] >= currentCard.count){
-            console.log(this.props.cropTotals[feed1]);
+          //use feed names passed from props
+          // const feed1 = this.props.feed.split(' ')[0];
+          // const feed2 = this.props.feed.split(' ')[1];
+          console.log(feed1,feed2);
+          //make sure there are enough crops to feed animal before dispatching actions
+          if(enoughFeed(this.props.cropTotals[feed1], this.props.cropTotals[feed2], currentCard.count)){
+          this.props.dispatch(sellAnimal(currentCard.count));
+          this.props.dispatch(decrementCrop(currentCard.count, feed1, feed2 ));
+          console.log('feed1:',this.props.cropTotals[feed1]);
+          console.log('feed2:',this.props.cropTotals[feed2]);
+          console.log(currentCard.count);
             
-            this.props.dispatch(sellAnimal(currentCard.count));
-            this.props.dispatch(decrementCrop(currentCard.count, feed1, feed2 ));  
-          } else {
-            console.log('not enough crops');            
-          }
+        } else {
+          console.log('not enough crops');            
+        }
+
+
+
         }
       }
       this.setState({ percentage: this.state.percentage + 1 });
@@ -103,6 +114,13 @@ export class CardContainer extends React.Component {
             action={progressTickIntervalSet}
             count={currentCard.count}
             ticking={this.state.ticking}
+            enoughFeed={
+              // if current card is an animals card call enoughFeed helperFunction,
+              // else calling enoughFeed on crops is null so return true to pass into 
+              // ProgressBar component to set className ternary properly
+              screen === 'animals' ? enoughFeed(this.props.cropTotals[feed1], this.props.cropTotals[feed2], currentCard.count) : 
+              screen === 'crops' ? true : false
+            }
           />
 
           {/* nested ternary to check card's 'screen' prop to render proper button text */}
