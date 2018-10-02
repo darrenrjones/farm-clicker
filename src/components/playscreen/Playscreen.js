@@ -55,11 +55,9 @@ export class Playscreen extends React.Component {
 			display = (<CropRender />)
 		}
 
-		let wheatTotal = this.props.crops[0].total +
-		this.props.crops[1].total +
-		this.props.crops[2].total
-
-
+		let wheatTotal = this.props.currentUser.cropTotals.wheat;
+		let soyTotal = this.props.currentUser.cropTotals.soy;
+		let cornTotal = this.props.currentUser.cropTotals.corn;
 
 
 		return (
@@ -80,34 +78,8 @@ export class Playscreen extends React.Component {
 
 				<div className='crops-inventory'>
 					Wheat: {wheatTotal}<br></br>
-					Corn: {
-						this.props.crops[3].total +
-						this.props.crops[4].total +
-						this.props.crops[5].total
-					}<br></br>
-					Soy: {
-						this.props.crops[6].total +
-						this.props.crops[7].total +
-						this.props.crops[8].total
-					}<br></br>
-					{/* Alfalfa: {this.props.crops.alfalfa.total}<br></br> */}
-					{/* Hay: {this.props.crops.hay.total}<br></br> */}
-					{/* Fishfood: {this.props.crops.fishfood.total}<br></br>                 */}
-				</div>
-				<div className='animals-inventory'>
-					Chickens: {
-						this.props.animals[0].total +
-						this.props.animals[1].total +
-						this.props.animals[2].total
-					}<br></br>
-					Pigs: {
-						this.props.animals[3].total +
-						this.props.animals[4].total
-					}<br></br>
-					Cows: {
-						this.props.animals[5].total +
-						this.props.animals[6].total
-					}
+					Corn: {cornTotal}<br></br>
+					Soy: {soyTotal}<br></br>
 				</div>
 
 				{display}
