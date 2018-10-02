@@ -1,9 +1,12 @@
-.crops9-container{
+.cards9-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1em;
   padding: .5em;
   max-width: 50%;
-  border: 1px solid orange;
-  
+  border: 1px solid orange;  
+}
+
+.display-none{
+  display: none;
 }
