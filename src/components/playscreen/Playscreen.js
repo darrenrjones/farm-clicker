@@ -19,12 +19,15 @@ export class Playscreen extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			screenDisplay: 'farmView'
+			screenDisplay: 'cropsView'
 		}
 	}
 
-
 	render() {
+
+		if (!this.props.currentUser) {
+			return <Redirect to='/' />
+		}
 
 		const logout = () => {
 			this.props.dispatch(save()) //autosave when logout
@@ -32,27 +35,11 @@ export class Playscreen extends React.Component {
 			clearAuthToken()
 		}
 
-		const saveState = () => {
-			this.props.dispatch(save())
+		const animalsRender = () => {
+			this.setState({ screenDisplay: 'animalsView' })
 		}
-
-		const animalRender = () => {
-			this.setState({ screenDisplay: 'animalView' })
-		}
-
-		const farmRender = () => {
-			this.setState({ screenDisplay: 'farmView' })
-		}
-
-		if (!this.props.currentUser) {
-			return <Redirect to='/' />
-		}
-
-		let display;
-		if (this.state.screenDisplay === 'animalView') {
-			display = (<AnimalRender />)
-		} else if (this.state.screenDisplay === 'farmView') {
-			display = (<CropRender />)
+		const cropsRender = () => {
+			this.setState({ screenDisplay: 'cropsView' })
 		}
 
 		let wheatTotal = this.props.currentUser.cropTotals.wheat;
@@ -68,13 +55,10 @@ export class Playscreen extends React.Component {
 				/>
 
 				<button onClick={logout}>logout</button>
-				<button onClick={saveState}>save</button>
 				<br></br>
-				<button onClick={animalRender}>animalRender</button>
-				<br></br>
-				<button onClick={farmRender}>farmRender</button>
-				{/* <span>view: {this.state.screenDisplay}</span> */}
-
+				<button onClick={this.state.screenDisplay === 'cropsView' ? animalsRender : cropsRender}>
+					{this.state.screenDisplay === 'cropsView' ? 'animalsRender' : 'cropsRender'}
+				</button>
 
 				<div className='crops-inventory'>
 					Wheat: {wheatTotal}<br></br>
@@ -82,13 +66,19 @@ export class Playscreen extends React.Component {
 					Soy: {soyTotal}<br></br>
 				</div>
 
-				{display}
-
-
+				<AnimalRender
+					screenDisplay={this.state.screenDisplay}
+				/>
+				<CropRender
+					screenDisplay={this.state.screenDisplay}
+				/>
 
 			</div>
+
 		);
+
 	}
+
 }
 
 const mapStateToProps = state => ({

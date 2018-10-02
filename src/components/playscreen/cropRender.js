@@ -2,10 +2,10 @@ import React from 'react';
 import CardContainer from '../card/CardContainer';
 
 
-export const CropRender = () => {
+export const CropRender = props => {
 	return (
 
-		<div className='crops9-container'>
+		<div className={props.screenDisplay === 'animalsView' ? 'cards9-container display-none' : 'cards9-container'}>
 			<CardContainer
 				type='wheat'
 				field='wheat1'
