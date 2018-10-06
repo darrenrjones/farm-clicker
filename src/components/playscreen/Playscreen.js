@@ -83,8 +83,6 @@ export class Playscreen extends React.Component {
 
 const mapStateToProps = state => ({
 	currentUser: state.user.currentUser,
-	crops: state.crops.crops,
-	animals: state.animals.animals,
 
 });
 

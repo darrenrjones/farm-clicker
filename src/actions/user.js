@@ -30,6 +30,23 @@ export const decrementCrop = (count, feed1, feed2 ) => ({
 	feed2
 });
 
+export const BUY_CROP = 'BUY_CROP';
+export const buyCrop = (field) => ({
+	type: BUY_CROP,
+	field
+});
+export const BUY_ANIMAL = 'BUY_ANIMAL';
+export const buyAnimal = (field) => ({
+    type: BUY_ANIMAL,
+    field
+});
+
+export const HIRE_MANAGER = 'HIRE_MANAGER';
+export const hireManager = (field) => ({
+    type: HIRE_MANAGER, 
+    field
+});
+
 export const registerUser = user => dispatch => {
 	return fetch(`${API_BASE_URL}/api/user/register`, {
 		method: 'POST',
