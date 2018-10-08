@@ -25,5 +25,9 @@
   user-select: none;
 }
 .disabled-progress-bar-action{
-  pointer-events:none
+  pointer-events:none;
+  /* background-color: rgb(192, 161, 161); */
+}
+.disabled-progress-bar-text{
+    opacity: .4;
 }

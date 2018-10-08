@@ -19,6 +19,12 @@ export class CardContainer extends React.Component {
       ticking: false,
     }
   }
+  // componentDidMount(){
+    
+  // }
+  // componentWillMount(){
+    
+  // }
 
   render() {
     let intCall;
@@ -38,11 +44,13 @@ export class CardContainer extends React.Component {
     const progressTickIntervalSet = () => {
       this.setState({ ticking: true }) // disabled button while progress bar filling     
       intCall = setInterval(progressTick, (currentCard.count + 7 + currentCard.count * 4));
-      console.log('intCall::::::',intCall);      
+      // console.log('intCall::::::',intCall);      
     }
 
-    // if(currentCard.manager){
-    //   progressTickIntervalSet();
+    // if(currentCard.manager && !this.state.ticking){
+    //   // console.log(`manager on ${field}`);
+    //   // progressTickIntervalSet();
+    //   // setInterval(() => progressTickIntervalSet(), 3000)
     // }
     
     //progressTick increments percentage of progress bar to fill
@@ -51,6 +59,10 @@ export class CardContainer extends React.Component {
       if (this.state.percentage >= 100) {
         clearInterval(intCall);
         this.setState({ percentage: -1, ticking: false });
+
+        if(currentCard.manager){
+          progressTickIntervalSet();
+        }
 
         if (screen === 'crops') {
           this.props.dispatch(incrementCrop(type, currentCard.count));

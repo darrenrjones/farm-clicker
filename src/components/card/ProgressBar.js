@@ -25,7 +25,7 @@ export const ProgressBar = props => {
       className={props.count < 1 || props.ticking || !props.enoughFeed ? 'disabled-progress-bar-action progress-bar' : 'progress-bar'}
       onClick={props.action}
     >
-      <div className='progress-bar-btn-text'>
+      <div className={!props.enoughFeed || props.count < 1 ? 'progress-bar-btn-text disabled-progress-bar-text' : 'progress-bar-btn-text'}    >
 
         {displayText}           
 
