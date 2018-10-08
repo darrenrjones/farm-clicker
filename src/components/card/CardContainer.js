@@ -17,14 +17,18 @@ export class CardContainer extends React.Component {
     this.state = {
       percentage: 0,
       ticking: false,
+      touched: false
     }
   }
-  // componentDidMount(){
-    
-  // }
-  // componentWillMount(){
-    
-  // }
+  componentDidMount(){
+    // this.managerInitiate()
+  }
+  componentWillMount(){
+    // if(!this.state.touched && currentCard.manager){
+    //   progressTickIntervalSet();
+    //   this.setState({touched: true});
+    // }
+  }
 
   render() {
     let intCall;
@@ -39,19 +43,11 @@ export class CardContainer extends React.Component {
       this.props.crops.find(crop => crop.type === field) : screen === 'animals' ?
         this.props.animals.find(animal => animal.type === field) : null
 
-
-
     const progressTickIntervalSet = () => {
       this.setState({ ticking: true }) // disabled button while progress bar filling     
       intCall = setInterval(progressTick, (currentCard.count + 7 + currentCard.count * 4));
       // console.log('intCall::::::',intCall);      
     }
-
-    // if(currentCard.manager && !this.state.ticking){
-    //   // console.log(`manager on ${field}`);
-    //   // progressTickIntervalSet();
-    //   // setInterval(() => progressTickIntervalSet(), 3000)
-    // }
     
     //progressTick increments percentage of progress bar to fill
     //when it fills then incrementCrop/sellAnimal is called
@@ -60,6 +56,7 @@ export class CardContainer extends React.Component {
         clearInterval(intCall);
         this.setState({ percentage: -1, ticking: false });
 
+        //call again if manager, setting perpetual calls. 
         if(currentCard.manager){
           progressTickIntervalSet();
         }
@@ -78,8 +75,7 @@ export class CardContainer extends React.Component {
       }
       this.setState({ percentage: this.state.percentage + 1 });
     }
-
-
+    
     //increment count by 1
     const incrementFieldCount = (field) => {
       if (currentCard.count < 9 && this.props.userCash >= currentCard.price ) {
@@ -102,6 +98,13 @@ export class CardContainer extends React.Component {
         />
       );
     }
+
+    // const managerInitiate = () => {
+    // if(!this.state.touched && currentCard.manager){
+    //   progressTickIntervalSet();
+    //   this.setState({touched: true});
+    // }
+    // }
 
     return (
 
@@ -128,11 +131,11 @@ export class CardContainer extends React.Component {
             }
           />
 
-          {/* nested ternary to check card's 'screen' prop to render proper button text */}
           <button 
             onClick={() => incrementFieldCount(this.props.field)} 
             disabled={this.props.userCash < currentCard.price}
           >
+            {/* nested ternary to check card's 'screen' prop to render proper button text */}
             {screen === 'crops' && this.props.userCash >= currentCard.price ?
               `PLANT ${this.props.type.toUpperCase()}`  : screen === 'animals' && this.props.userCash >= currentCard.price ?
               `BUY ${this.props.type.toUpperCase()}` : screen === 'menu' ?
