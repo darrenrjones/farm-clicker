@@ -1,5 +1,5 @@
 import {
-  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, DECREMENT_CROP
+  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, DECREMENT_CROP, HIRE_MANAGER
 } from '../actions/user';
 
 import {
@@ -129,6 +129,34 @@ export default (state = initialState, action) => {
         }        
       }
     }
+  } 
+
+  else if(action.type === HIRE_MANAGER) {
+    let copy = action.screen === 'crops' ? [...state.currentUser.crops] : [...state.currentUser.animals];
+    let index;
+    const fieldObj = copy.find((field, i) => {
+      if (field.type === action.field) {
+        index = i;
+        return true;
+      }
+      return false;
+    });
+    fieldObj.manager = true;
+    return {
+      ...state,
+      currentUser: {
+        ...state.currentUser,
+        crops: [
+          ...copy.slice(0, index),
+          fieldObj,
+          ...copy.slice(index + 1, copy.length + 1)
+        ],
+        cash: state.currentUser.cash -= fieldObj.price*10
+      }
+    }
   }
+
+
+
   return state;
 }
