@@ -76,27 +76,31 @@ export const save = () => (dispatch, getState) => {
 
 	const currentState = getState();
 	const authToken = getState().auth.authToken;
-
-	return fetch(`${API_BASE_URL}/api/user/save/${currentState.user.currentUser._id}`, {
-		method: 'PUT',
-		headers: {
-			'content-type': 'application/json',
-			Authorization: `Bearer ${authToken}`
-		},
-		body: JSON.stringify(currentState.user.currentUser)
-	})
-		.then(res => normalizeResponseErrors(res))
-		.then(res => res.json())
-		// .then(() => {
-		//   dispatch(saveSuccessDisplay(true));
-		//   // dispatch(refreshAuthToken());
-
-		// })
-		.catch(err => {
-			console.error(err);
-
-			dispatch(saveSuccessDisplay(false));
+	
+	if(currentState.user.currentUser){
+		return fetch(`${API_BASE_URL}/api/user/save/${currentState.user.currentUser._id}`, {
+			method: 'PUT',
+			headers: {
+				'content-type': 'application/json',
+				Authorization: `Bearer ${authToken}`
+			},
+			body: JSON.stringify(currentState.user.currentUser)
 		})
+			.then(res => normalizeResponseErrors(res))
+			.then(res => res.json())
+			// .then(() => {
+			//   dispatch(saveSuccessDisplay(true));
+			//   // dispatch(refreshAuthToken());
+
+			// })
+			.catch(err => {
+				console.error(err);
+
+				dispatch(saveSuccessDisplay(false));
+			})		
+	}
+
+
 
 }
 

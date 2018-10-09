@@ -16,64 +16,74 @@ export class CardContainer extends React.Component {
     this.state = {
       percentage: 0,
       ticking: false,
-      touched: false
+      initiated: false
     }
   }
-  componentDidMount(){
-    if(!this.state.touched && this.currentCard.manager){
+  componentDidMount() { // upon page load if card has manager initiate progress
+    if (this.currentCard.manager) {
       this.progressTickIntervalSet();
-      this.setState({touched: true});
-    }   
+      this.setState({ initiated: true });
+    }
   }
   intCall;
   field = this.props.field;
   screen = this.props.screen;
   feed1 = this.props.feed.split(' ')[0];
   feed2 = this.props.feed.split(' ')[1];
-
   //return currentCard based on whether its animal or crop card
 
   currentCard = this.props.screen === 'crops' ?
     this.props.crops.find(crop => crop.type === this.props.field) : this.props.screen === 'animals' ?
       this.props.animals.find(animal => animal.type === this.props.field) : null
-  
+
+  currentlyEnoughFeed = enoughFeed(this.props.cropTotals[this.feed1], this.props.cropTotals[this.feed2], this.currentCard.count)
 
   progressTickIntervalSet = () => {
     this.setState({ ticking: true }) // disabled button while progress bar filling     
-    this.intCall = setInterval(this.progressTick, (this.currentCard.count + 7 + this.currentCard.count * 4));
+    this.intCall = setInterval(this.progressTick, (this.currentCard.count + 6 + this.currentCard.count * 8));
     // console.log('intCall::::::',intCall);      
   }
-  
+
   //progressTick increments percentage of progress bar to fill
   //when it fills then incrementCrop/sellAnimal is called
   progressTick = () => {
-    if (this.state.percentage >= 100) {
+    if (this.state.percentage >= 100) { // when progress bar is full
+
       clearInterval(this.intCall);
       this.setState({ percentage: -1, ticking: false });
-
-      //call again if manager, setting perpetual calls. 
-      if(this.currentCard.manager){
-        this.progressTickIntervalSet();
-      }
 
       if (this.screen === 'crops') {
         this.props.dispatch(incrementCrop(this.props.type, this.currentCard.count));
       } else if (this.screen === 'animals') {
-        //make sure there are enough crops to feed animal before dispatching actions
-        if(enoughFeed(this.props.cropTotals[this.feed1], this.props.cropTotals[this.feed2], this.currentCard.count)){
-          this.props.dispatch(sellAnimal(this.currentCard.count));
-          this.props.dispatch(decrementCrop(this.currentCard.count, this.feed1, this.feed2 ));
-        } else {
-          console.log('not enough crops');            
-        }
+        this.props.dispatch(sellAnimal(this.currentCard.count));
+        this.props.dispatch(decrementCrop(this.currentCard.count, this.feed1, this.feed2));
+      }
+      //call again if card has manager, setting perpetual calls. 
+      if (this.currentCard.manager) {
+        this.progressTickIntervalSet();
       }
     }
+    // while bar is not full check for enoughFeed to reset progress bar if food runs out mid progress
+    else if (this.screen === 'animals') {
+      if (!enoughFeed(this.props.cropTotals[this.feed1], this.props.cropTotals[this.feed2], this.currentCard.count)) {
+        clearInterval(this.intCall);
+        this.setState({ percentage: -1, ticking: false });
+        this.setState({ initiated: true });
+        //reset but if card has manager set progress again
+        if (this.currentCard.manager) {
+          this.progressTickIntervalSet();
+        }
+      }
+    } else {
+      this.setState({ percentage: this.state.percentage + 1 });
+    }
     this.setState({ percentage: this.state.percentage + 1 });
+
   }
-  
+
   //increment count by 1
   incrementFieldCount = (field) => {
-    if (this.currentCard.count < 9 && this.props.userCash >= this.currentCard.price ) {
+    if (this.currentCard.count < 9 && this.props.userCash >= this.currentCard.price) {
       if (this.screen === 'crops') {
         this.props.dispatch(buyCrop(field));
       } else if (this.screen === 'animals') {
@@ -83,7 +93,7 @@ export class CardContainer extends React.Component {
   }
 
   hireManager = (field, screen) => {
-    if(!this.currentCard.manager && this.props.userCash >= this.currentCard.price*10){
+    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price * 10) {
       this.props.dispatch(hireManager(field, screen));
     }
   }
@@ -100,7 +110,7 @@ export class CardContainer extends React.Component {
           key={`crop-index-${i}`}
         />
       );
-    }   
+    }
 
     return (
 
@@ -122,19 +132,19 @@ export class CardContainer extends React.Component {
               // if current card is an animals card call enoughFeed helperFunction,
               // else calling enoughFeed on crops is null so return true to pass into 
               // ProgressBar component to set className ternary properly
-              this.screen === 'animals' ? enoughFeed(this.props.cropTotals[this.feed1], this.props.cropTotals[this.feed2], this.currentCard.count) : 
-              this.screen === 'crops' ? true : false
+              this.screen === 'animals' ? enoughFeed(this.props.cropTotals[this.feed1], this.props.cropTotals[this.feed2], this.currentCard.count) :
+                this.screen === 'crops' ? true : false
             }
           />
 
-          <button 
-            onClick={() => this.incrementFieldCount(this.props.field)} 
+          <button
+            onClick={() => this.incrementFieldCount(this.props.field)}
             disabled={this.props.userCash < this.currentCard.price}
           >
             {/* nested ternary to check card's 'this.screen' prop to render proper button text */}
             {this.screen === 'crops' && this.props.userCash >= this.currentCard.price ?
-              `PLANT ${this.props.type.toUpperCase()}`  : this.screen === 'animals' && this.props.userCash >= this.currentCard.price ?
-              `BUY ${this.props.type.toUpperCase()}` : this.screen === 'menu' ?
+              `PLANT ${this.props.type.toUpperCase()}` : this.screen === 'animals' && this.props.userCash >= this.currentCard.price ?
+                `BUY ${this.props.type.toUpperCase()}` : this.screen === 'menu' ?
                   'menu ' : 'insufficient funds'}
           </button>
           <button

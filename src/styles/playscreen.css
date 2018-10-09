@@ -10,3 +10,11 @@
 .display-none{
   display: none;
 }
+.screenDisplay-button{
+  padding-top: 0;
+}
+.screenDisplay-button span{
+  font-size: .6em;
+  margin: 0 auto;
+  padding: 0;
+}

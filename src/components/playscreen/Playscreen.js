@@ -56,8 +56,8 @@ export class Playscreen extends React.Component {
 
 				<button onClick={logout}>logout</button>
 				<br></br>
-				<button onClick={this.state.screenDisplay === 'cropsView' ? animalsRender : cropsRender}>
-					{this.state.screenDisplay === 'cropsView' ? 'animalsRender' : 'cropsRender'}
+				<button className="screenDisplay-button" onClick={this.state.screenDisplay === 'cropsView' ? animalsRender : cropsRender}>
+					{this.state.screenDisplay === 'cropsView' ? <div><span>manage</span><br></br>animals</div> : 'manage crops'}
 				</button>
 
 				<div className='crops-inventory'>
