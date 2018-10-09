@@ -42,9 +42,10 @@ export const buyAnimal = (field) => ({
 });
 
 export const HIRE_MANAGER = 'HIRE_MANAGER';
-export const hireManager = (field) => ({
+export const hireManager = (field, screen) => ({
     type: HIRE_MANAGER, 
-    field
+		field,
+		screen
 });
 
 export const registerUser = user => dispatch => {

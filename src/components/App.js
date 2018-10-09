@@ -38,7 +38,7 @@ class App extends React.Component {
   autoSave() {
     this.refreshInterval = setInterval(
       () => this.props.dispatch(save()),
-      40000 //40 seconds
+      20000 //40 seconds
     );
   }
 
