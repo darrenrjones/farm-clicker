@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { buyCrop, buyAnimal, hireManager } from '../../actions/user';
 import enoughFeed from './helperFunctions';
-import { sellAnimal, incrementCrop, decrementCrop } from '../../actions/user';
+import { sellAnimalProduct, incrementCrop } from '../../actions/user';
 
 import ProgressBar from './ProgressBar';
 import CardImg from './CardImg';
@@ -36,27 +36,25 @@ export class CardContainer extends React.Component {
     this.props.crops.find(crop => crop.type === this.props.field) : this.props.screen === 'animals' ?
       this.props.animals.find(animal => animal.type === this.props.field) : null
 
-  currentlyEnoughFeed = enoughFeed(this.props.cropTotals[this.feed1], this.props.cropTotals[this.feed2], this.currentCard.count)
+  currentlyEnoughFeed = enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)
 
   progressTickIntervalSet = () => {
-    this.setState({ ticking: true }) // disabled button while progress bar filling     
-    this.intCall = setInterval(this.progressTick, (this.currentCard.count + 6 + this.currentCard.count * 8));
-    // console.log('intCall::::::',intCall);      
+    this.setState({ ticking: true }) // disabled button while progress bar filling    
+    this.intCall = setInterval(this.progressTick, (10 + ((this.currentCard.count-1)*5)));//1 count -> 1 second --- 9 count -> 5 seconds
+   
   }
 
   //progressTick increments percentage of progress bar to fill
-  //when it fills then incrementCrop/sellAnimal is called
+  //when it fills then incrementCrop/sellAnimalProduct is called
   progressTick = () => {
     if (this.state.percentage >= 100) { // when progress bar is full
-
       clearInterval(this.intCall);
       this.setState({ percentage: -1, ticking: false });
 
       if (this.screen === 'crops') {
-        this.props.dispatch(incrementCrop(this.props.type, this.currentCard.count));
+        this.props.dispatch(incrementCrop(this.currentCard));
       } else if (this.screen === 'animals') {
-        this.props.dispatch(sellAnimal(this.currentCard.count));
-        this.props.dispatch(decrementCrop(this.currentCard.count, this.feed1, this.feed2));
+        this.props.dispatch(sellAnimalProduct(this.currentCard));
       }
       //call again if card has manager, setting perpetual calls. 
       if (this.currentCard.manager) {
@@ -65,7 +63,7 @@ export class CardContainer extends React.Component {
     }
     // while bar is not full check for enoughFeed to reset progress bar if food runs out mid progress
     else if (this.screen === 'animals') {
-      if (!enoughFeed(this.props.cropTotals[this.feed1], this.props.cropTotals[this.feed2], this.currentCard.count)) {
+      if (!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
         clearInterval(this.intCall);
         this.setState({ percentage: -1, ticking: false });
         this.setState({ initiated: true });
@@ -74,9 +72,7 @@ export class CardContainer extends React.Component {
           this.progressTickIntervalSet();
         }
       }
-    } else {
-      this.setState({ percentage: this.state.percentage + 1 });
-    }
+    } 
     this.setState({ percentage: this.state.percentage + 1 });
 
   }
@@ -93,7 +89,7 @@ export class CardContainer extends React.Component {
   }
 
   hireManager = (field, screen) => {
-    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price * 10) {
+    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price*5) {
       this.props.dispatch(hireManager(field, screen));
     }
   }
@@ -132,7 +128,7 @@ export class CardContainer extends React.Component {
               // if current card is an animals card call enoughFeed helperFunction,
               // else calling enoughFeed on crops is null so return true to pass into 
               // ProgressBar component to set className ternary properly
-              this.screen === 'animals' ? enoughFeed(this.props.cropTotals[this.feed1], this.props.cropTotals[this.feed2], this.currentCard.count) :
+              this.screen === 'animals' ? enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count) :
                 this.screen === 'crops' ? true : false
             }
           />
@@ -164,7 +160,7 @@ export class CardContainer extends React.Component {
 const mapStateToProps = state => ({
   crops: state.user.currentUser.crops,
   animals: state.user.currentUser.animals,
-  cropTotals: state.user.currentUser.cropTotals,
+  inventory: state.user.currentUser.inventory,
   userCash: state.user.currentUser.cash
 });
 

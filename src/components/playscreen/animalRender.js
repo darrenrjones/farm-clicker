@@ -24,18 +24,6 @@ export const AnimalRender = props => {
 				feed='wheat'
 			/>
 			<CardContainer
-				type='pig'
-				field='pig1'
-				screen='animals'
-				feed='wheat soy'
-			/>
-			<CardContainer
-				type='pig'
-				field='pig2'
-				screen='animals'
-				feed='wheat soy'
-			/>
-			<CardContainer
 				type='cow'
 				field='cow1'
 				screen='animals'
@@ -47,6 +35,19 @@ export const AnimalRender = props => {
 				screen='animals'
 				feed='wheat corn'
 			/>
+			<CardContainer
+				type='pig'
+				field='pig1'
+				screen='animals'
+				feed='wheat soy'
+			/>
+			<CardContainer
+				type='pig'
+				field='pig2'
+				screen='animals'
+				feed='wheat soy'
+			/>
+
 
 		</div>
 	)

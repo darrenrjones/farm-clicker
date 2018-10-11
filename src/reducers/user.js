@@ -1,12 +1,12 @@
 import {
-  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, DECREMENT_CROP, HIRE_MANAGER
+  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, HIRE_MANAGER
 } from '../actions/user';
 
 import {
   AUTH_SUCCESS,
   CLEAR_AUTH
 } from '../actions/auth';
-import { SELL_ANIMAL, BUY_CROP, BUY_ANIMAL } from '../actions/user';
+import { SELL_ANIMAL_PRODUCT, BUY_CROP, BUY_ANIMAL } from '../actions/user';
 
 const initialState = {
   currentUser: null,
@@ -38,14 +38,14 @@ export default (state = initialState, action) => {
   } 
 
   else if(action.type === INCREMENT_CROP) {
-    let type = action.cropType;
+    let card = action.cropObj.type.slice(0,-1); //convert field to type ie 'wheat' instead of 'wheat1'
     return {
       ...state,
       currentUser: {
         ...state.currentUser,
-        cropTotals: {
-          ...state.currentUser.cropTotals, 
-          [type]: state.currentUser.cropTotals[type] += action.count
+        inventory: {
+          ...state.currentUser.inventory, 
+          [card]: state.currentUser.inventory[card] += action.cropObj.count
         }
       }
     }
@@ -63,6 +63,7 @@ export default (state = initialState, action) => {
       return false;
     });
     cropObj.count += 1;
+    cropObj.price *= 2; // increment price 
     return {
       ...state,
       currentUser: {
@@ -72,7 +73,7 @@ export default (state = initialState, action) => {
           cropObj,
           ...copy.slice(index + 1, copy.length + 1)
         ],
-        cash: state.currentUser.cash -= cropObj.price
+        cash: state.currentUser.cash -= cropObj.price/2 // subtract pre-incremented price
       }
     }
   }
@@ -89,6 +90,8 @@ export default (state = initialState, action) => {
       return false;
     });
     animalObj.count += 1;
+    animalObj.price *= 2; // increment price 
+
     return {
       ...state,
       currentUser: {
@@ -98,38 +101,61 @@ export default (state = initialState, action) => {
         animalObj,
         ...copy.slice(index + 1, copy.length + 1)
       ],
-      cash: state.currentUser.cash -= animalObj.price
-
+      cash: state.currentUser.cash -= animalObj.price/2 // subtract pre-incremented price
       }
-      
     }
   } 
     
 
 
-  else if(action.type === SELL_ANIMAL) {
-    return {
-      ...state,
-      currentUser: {...state.currentUser, cash: state.currentUser.cash += action.value}
+  else if(action.type === SELL_ANIMAL_PRODUCT) {
+    let product; 
+    switch (action.cardObj.type.slice(0,-1)) {
+      case 'chicken':
+        product = 'eggs'
+        break;
+      case 'pig':
+        product = 'bacon'
+        break;
+      case 'cow':
+        product = 'milk'
+        break;  
+      default:
+        break;
     }
-  }
-
-  else if(action.type === DECREMENT_CROP) {
-    let feed1 = action.feed1;
-    let feed2 = action.feed2;
-
+    let feed1 = action.cardObj.feed.split(' ')[0].replace(",","");
+    let feed2 = action.cardObj.feed.split(' ')[1];
     return {
       ...state,
       currentUser: {
-        ...state.currentUser,
-        cropTotals: {
-          ...state.currentUser.cropTotals, 
-          [feed1]: state.currentUser.cropTotals[feed1] -= action.count,
-          [feed2]: state.currentUser.cropTotals[feed2] -= action.count
-        }        
+        ...state.currentUser, 
+        inventory: {
+          ...state.currentUser.inventory, 
+          [feed1]: state.currentUser.inventory[feed1] -= action.cardObj.count,
+          [feed2]: state.currentUser.inventory[feed2] -= action.cardObj.count,
+          [product]: state.currentUser.inventory[product] += action.cardObj.count
+        }
+
       }
     }
-  } 
+  }
+
+  // else if(action.type === DECREMENT_CROP) {
+  //   let feed1 = action.feed1;
+  //   let feed2 = action.feed2;
+
+  //   return {
+  //     ...state,
+  //     currentUser: {
+  //       ...state.currentUser,
+  //       inventory: {
+  //         ...state.currentUser.inventory, 
+  //         [feed1]: state.currentUser.inventory[feed1] -= action.count,
+  //         [feed2]: state.currentUser.inventory[feed2] -= action.count
+  //       }        
+  //     }
+  //   }
+  // } 
 
   else if(action.type === HIRE_MANAGER) {
     let copy = action.screen === 'crops' ? [...state.currentUser.crops] : [...state.currentUser.animals];
@@ -151,7 +177,7 @@ export default (state = initialState, action) => {
           fieldObj,
           ...copy.slice(index + 1, copy.length + 1)
         ],
-        cash: state.currentUser.cash -= fieldObj.price*10
+        cash: state.currentUser.cash -= fieldObj.price*5
       }
     }
   }

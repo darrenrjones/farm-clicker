@@ -10,16 +10,15 @@ export const saveSuccessDisplay = isSuccessful => ({
 });
 
 export const INCREMENT_CROP = 'INCREMENT_CROP';
-export const incrementCrop = (cropType, count) => ({
+export const incrementCrop = (cropObj) => ({
 	type: INCREMENT_CROP,
-	cropType,
-	count
+	cropObj
 });
 
-export const SELL_ANIMAL = 'SELL_ANIMAL';
-export const sellAnimal = (value) => ({
-    type: SELL_ANIMAL, 
-    value
+export const SELL_ANIMAL_PRODUCT = 'SELL_ANIMAL_PRODUCT';
+export const sellAnimalProduct = (cardObj) => ({
+    type: SELL_ANIMAL_PRODUCT, 
+    cardObj
 });
 
 export const DECREMENT_CROP = 'DECREMENT_CROP';
