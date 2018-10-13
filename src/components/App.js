@@ -10,6 +10,7 @@ import { save } from '../actions/user';
 
 
 class App extends React.Component {
+
   componentDidUpdate(prevProps) {
     if (!prevProps.loggedIn && this.props.loggedIn) {
       // When we are logged in, refresh the auth token periodically and autosave
@@ -34,9 +35,11 @@ class App extends React.Component {
       return;
     }
     clearInterval(this.refreshInterval);
+    clearInterval(this.saveInterval);
+
   }
   autoSave() {
-    this.refreshInterval = setInterval(
+    this.saveInterval = setInterval(
       () => this.props.dispatch(save()),
       40000 //40 seconds
     );
@@ -57,7 +60,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   // hasAuthToken: state.auth.authToken !== null,
-  loggedIn: state.user.currentUser !== null
+  loggedIn: state.user.currentUser !== null,
+  currentUser: state.user.currentUser
 });
 
 export default withRouter(connect(mapStateToProps)(App));

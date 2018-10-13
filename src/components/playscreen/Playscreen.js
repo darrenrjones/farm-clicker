@@ -10,7 +10,7 @@ import { AnimalRender } from '../playscreen/animalRender';
 
 //actions
 import { clearAuth } from '../../actions/auth';
-import { save } from '../../actions/user';
+import { save, setLastLogout, manageLostTime } from '../../actions/user';
 
 
 import '../../styles/playscreen.css';
@@ -19,10 +19,33 @@ export class Playscreen extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			screenDisplay: 'cropsView'
+			screenDisplay: 'cropsView',
+
 		}
 	}
+	componentDidMount() {
+		window.addEventListener("beforeunload", this.onPageUnload);
+		if(this.props.currentUser){
+			let timeElapsed = Math.floor(Date.now() / 1000) - this.props.currentUser.lastLogout;
+			console.log(`props.lastLogout: ${this.props.currentUser.lastLogout}`)
+			console.log(timeElapsed + ' seconds passed');
+			// manageLostTime takes (timeElapsed, crops, animals)
+			// loop through crops and if crop.manager get addValue = (crop.count valueMap value) * timeElapsed
+		}
+
+	}
+	componentWillUnmount() {
+		window.removeEventListener("beforeunload", this.onPageUnload);
+	}
+	onPageUnload = (event) => {
+		event.preventDefault();    
+		let timeStamp = Math.floor(Date.now() / 1000); //seconds
+		this.props.dispatch(setLastLogout(timeStamp));
+		this.props.dispatch(save()) //autosave when logout
+	}
 	logout = () => {
+		let timeStamp = Math.floor(Date.now() / 1000); //seconds
+		this.props.dispatch(setLastLogout(timeStamp));
 		this.props.dispatch(save()) //autosave when logout
 		this.props.dispatch(clearAuth())
 		clearAuthToken()
@@ -33,40 +56,32 @@ export class Playscreen extends React.Component {
 	cropsRender = () => {
 		this.setState({ screenDisplay: 'cropsView' })
 	}
-	
+
 	render() {
 
 		if (!this.props.currentUser) {
 			return <Redirect to='/' />
 		}
 
-		let wheatTotal = this.props.currentUser.inventory.wheat;
-		let soyTotal = this.props.currentUser.inventory.soy;
-		let cornTotal = this.props.currentUser.inventory.corn;
-
-		let eggTotal = this.props.currentUser.inventory.eggs;
-		let baconTotal = this.props.currentUser.inventory.bacon;
-		let milkTotal = this.props.currentUser.inventory.milk;
-
-    // 1-10 1 - 1s
-    // 2-15 2 - 1.5s    
+		// 1-10 1 - 1s
+		// 2-15 2 - 1.5s    
 		// 3-20 3 - 2s     6 - 4.5
 
-    // 4-25 4 - 2.5s   
-    // 5-30 5 - 3s   
+		// 4-25 4 - 2.5s   
+		// 5-30 5 - 3s   
 		// 6-35 6 - 3.5s   15 - 9s  
-		
-    // 7-40      
-    // 8-45      
+
+		// 7-40      
+		// 8-45      
 		// 9-50   					24 - 13.5s
-		
+
 		//calculate harvest/produce per second
-		
-		let valueMap = { 
+
+		let valueMap = {
 			// maps productionValues to per second yield ex; 
 			// ex: 30 means it takes 3 seconds and will always have value of 5
 			// 5 produced / 3 seconds = 1.66666 produced per second 
-			0: 0, 
+			0: 0,
 			10: 1,
 			15: 1.33333,
 			20: 1.5,
@@ -80,27 +95,27 @@ export class Playscreen extends React.Component {
 
 		let cropProductionValues = [];
 		this.props.currentUser.crops.forEach(crop => { //push milisec ticks onto cropProductionValues - 10->1sec, 15->1.5s, 20->2s etc
-			if(crop.manager){
+			if (crop.manager) {
 				cropProductionValues.push((crop.count - 1) * 5 + 10)
 			} else {
 				cropProductionValues.push(0)
 			}
 		})
-		const wheatProduction = valueMap[cropProductionValues[0]]+valueMap[cropProductionValues[1]]+valueMap[cropProductionValues[2]];
-		const cornProduction = valueMap[cropProductionValues[3]]+valueMap[cropProductionValues[4]]+valueMap[cropProductionValues[5]]
-		const soyProduction = valueMap[cropProductionValues[6]]+valueMap[cropProductionValues[7]]+valueMap[cropProductionValues[8]];
+		const wheatProduction = valueMap[cropProductionValues[0]] + valueMap[cropProductionValues[1]] + valueMap[cropProductionValues[2]];
+		const cornProduction = valueMap[cropProductionValues[3]] + valueMap[cropProductionValues[4]] + valueMap[cropProductionValues[5]]
+		const soyProduction = valueMap[cropProductionValues[6]] + valueMap[cropProductionValues[7]] + valueMap[cropProductionValues[8]];
 
 		let animalProductionValues = [];
 		this.props.currentUser.animals.forEach(animal => {
-			if(animal.manager){
+			if (animal.manager) {
 				animalProductionValues.push((animal.count - 1) * 5 + 10)
 			} else {
 				animalProductionValues.push(0)
 			}
 		})
-		const chickenProduction = valueMap[animalProductionValues[0]]+valueMap[animalProductionValues[1]]+valueMap[animalProductionValues[2]];
-		const pigProduction = valueMap[animalProductionValues[3]]+valueMap[animalProductionValues[4]]
-		const cowProduction = valueMap[animalProductionValues[5]]+valueMap[animalProductionValues[6]];
+		const chickenProduction = valueMap[animalProductionValues[0]] + valueMap[animalProductionValues[1]] + valueMap[animalProductionValues[2]];
+		const pigProduction = valueMap[animalProductionValues[3]] + valueMap[animalProductionValues[4]]
+		const cowProduction = valueMap[animalProductionValues[5]] + valueMap[animalProductionValues[6]];
 
 		return (
 			<div className='playscreen-div'>
@@ -116,13 +131,25 @@ export class Playscreen extends React.Component {
 				</button>
 
 				<div className='crops-inventory'>
-					Wheat: {wheatTotal} --{Math.round(wheatProduction * 100) / 100}/sec<br></br>
-					Corn: {cornTotal} --{Math.round(cornProduction * 100) / 100}/sec<br></br>
-					Soy: {soyTotal} --{Math.round(soyProduction * 100) / 100}/sec<br></br>
+					Wheat: {this.props.currentUser.inventory.wheat} --
+						{Math.round(wheatProduction * 100) / 100}/sec
+						<br></br>
+					Corn: {this.props.currentUser.inventory.corn} --
+						{Math.round(cornProduction * 100) / 100}/sec
+						<br></br>
+					Soy: {this.props.currentUser.inventory.soy} --
+						{Math.round(soyProduction * 100) / 100}/sec
+						<br></br>
 					--------------<br></br>
-					Eggs: {eggTotal}--{Math.round(chickenProduction * 100) / 100}/sec<br></br>
-					Bacon: {baconTotal}--{Math.round(pigProduction * 100) / 100}/sec<br></br>
-					Milk: {milkTotal}--{Math.round(cowProduction * 100) / 100}/sec<br></br>
+					Eggs: {this.props.currentUser.inventory.eggs}--
+						{Math.round(chickenProduction * 100) / 100}/sec
+						<br></br>
+					Bacon: {this.props.currentUser.inventory.bacon}--
+						{Math.round(pigProduction * 100) / 100}/sec
+						<br></br>
+					Milk: {this.props.currentUser.inventory.milk}--
+						{Math.round(cowProduction * 100) / 100}/sec
+						<br></br>
 				</div>
 
 				<AnimalRender

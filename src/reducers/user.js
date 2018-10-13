@@ -1,5 +1,5 @@
 import {
-  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, HIRE_MANAGER
+  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, HIRE_MANAGER, SET_LAST_LOGOUT, MANAGE_LOST_TIME
 } from '../actions/user';
 
 import {
@@ -178,6 +178,26 @@ export default (state = initialState, action) => {
           ...copy.slice(index + 1, copy.length + 1)
         ],
         cash: state.currentUser.cash -= fieldObj.price*5
+      }
+    }
+  }
+
+  else if(action.type === SET_LAST_LOGOUT){
+    return {
+      ...state,
+      currentUser: {
+        ...state.currentUser,
+        lastLogout: action.timestamp
+      }
+    }
+  }
+
+  else if(action.type === MANAGE_LOST_TIME){
+    return {
+      ...state,
+      currentUser: {
+        ...state.currentUser,
+        farmname: state.currentUser.farmname += '!'
       }
     }
   }

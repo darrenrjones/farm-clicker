@@ -47,6 +47,18 @@ export const hireManager = (field, screen) => ({
 		screen
 });
 
+export const SET_LAST_LOGOUT = 'SET_LAST_LOGOUT';
+export const setLastLogout = (timestamp) => ({
+    type: SET_LAST_LOGOUT, 
+		timestamp
+});
+
+export const MANAGE_LOST_TIME = 'MANAGE_LOST_TIME';
+export const manageLostTime = (timestamp) => ({
+    type: MANAGE_LOST_TIME, 
+		timestamp
+});
+
 export const registerUser = user => dispatch => {
 	return fetch(`${API_BASE_URL}/api/user/register`, {
 		method: 'POST',
@@ -93,7 +105,7 @@ export const save = () => (dispatch, getState) => {
 
 			// })
 			.catch(err => {
-				console.error(err);
+				console.error('error from save',err);
 
 				dispatch(saveSuccessDisplay(false));
 			})		
