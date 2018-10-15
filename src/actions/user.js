@@ -59,6 +59,12 @@ export const manageLostTime = (timestamp) => ({
 		timestamp
 });
 
+export const INCREMENT_PRODUCTION_RATE = 'INCREMENT_PRODUCTION_RATE';
+export const incrementProductionRate = (currentCard) => ({
+    type: INCREMENT_PRODUCTION_RATE, 
+		currentCard
+});
+
 export const registerUser = user => dispatch => {
 	return fetch(`${API_BASE_URL}/api/user/register`, {
 		method: 'POST',

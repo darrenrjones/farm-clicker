@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import { loadAuthToken } from './local-storage';
 import authReducer from './reducers/auth';
 import userReducer from './reducers/user';
-// import cropsReducer from './reducers/crops';
+// import ratesReducer from './reducers/rates';
 // import animalsReducer from './reducers/animals';
 
 
@@ -15,7 +15,7 @@ const store = createStore(
 		form: formReducer,
 		auth: authReducer,
 		user: userReducer,
-		// crops: cropsReducer,
+		// rates: ratesReducer,
 		// animals: animalsReducer
 	}),
 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),

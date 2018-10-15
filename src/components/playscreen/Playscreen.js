@@ -11,7 +11,7 @@ import { AnimalRender } from '../playscreen/animalRender';
 //actions
 import { clearAuth } from '../../actions/auth';
 import { save, setLastLogout, manageLostTime } from '../../actions/user';
-
+import rateMap from '../../actions/helpers/rateMap';
 
 import '../../styles/playscreen.css';
 
@@ -20,25 +20,27 @@ export class Playscreen extends React.Component {
 		super(props)
 		this.state = {
 			screenDisplay: 'cropsView',
-
+			wheatProduction: 0,
 		}
 	}
 	componentDidMount() {
 		window.addEventListener("beforeunload", this.onPageUnload);
-		if(this.props.currentUser){
-			let timeElapsed = Math.floor(Date.now() / 1000) - this.props.currentUser.lastLogout;
-			console.log(`props.lastLogout: ${this.props.currentUser.lastLogout}`)
-			console.log(timeElapsed + ' seconds passed');
-			// manageLostTime takes (timeElapsed, crops, animals)
-			// loop through crops and if crop.manager get addValue = (crop.count valueMap value) * timeElapsed
-		}
-
+		// if(this.props.currentUser){
+		// 	let timeElapsed = Math.floor(Date.now() / 1000) - this.props.currentUser.lastLogout;
+		// 	console.log(`props.lastLogout: ${this.props.currentUser.lastLogout}`)
+		// 	console.log(timeElapsed + ' seconds passed');
+		// manageLostTime takes (timeElapsed, crops, animals)
+		// loop through crops and if crop.manager get addValue = (crop.count rateMap value) * timeElapsed
+		// }
 	}
+
+	// this.calculateWheatProduction(this.props.currentUser);
+
 	componentWillUnmount() {
 		window.removeEventListener("beforeunload", this.onPageUnload);
 	}
 	onPageUnload = (event) => {
-		event.preventDefault();    
+		event.preventDefault();
 		let timeStamp = Math.floor(Date.now() / 1000); //seconds
 		this.props.dispatch(setLastLogout(timeStamp));
 		this.props.dispatch(save()) //autosave when logout
@@ -57,65 +59,44 @@ export class Playscreen extends React.Component {
 		this.setState({ screenDisplay: 'cropsView' })
 	}
 
+	// cropRates = this.props.currentUser ? this.props.currentUser.crops.map(crop => rateMap[crop.count]) : null;
+	// animalRates = this.props.currentUser ? this.props.currentUser.animals.map(animal => rateMap[animal.count]) : null;
+
+	// wheatProduction = this.cropRates[0] + this.cropRates[1] + this.cropRates[2];
+	// cornProduction = this.cropRates[3] + this.cropRates[4] + this.cropRates[5];
+	// soyProduction = this.cropRates[6] + this.cropRates[7] + this.cropRates[8];
+
+	// eggProduction = this.animalRates[0] + this.animalRates[1] + this.animalRates[2];
+	// baconProduction = this.animalRates[3] + this.animalRates[4];
+	// milkProduction = this.animalRates[5] + this.animalRates[6];
+
 	render() {
 
 		if (!this.props.currentUser) {
 			return <Redirect to='/' />
 		}
 
-		// 1-10 1 - 1s
-		// 2-15 2 - 1.5s    
-		// 3-20 3 - 2s     6 - 4.5
+		// const wheatProduction = this.getFieldProductionRate(this.props.currentUser.crops[0]) + this.getFieldProductionRate(this.props.currentUser.crops[1]) + this.getFieldProductionRate(this.props.currentUser.crops[2]);
+		// const cornProduction = this.getFieldProductionRate(this.props.currentUser.crops[3]) + this.getFieldProductionRate(this.props.currentUser.crops[4]) + this.getFieldProductionRate(this.props.currentUser.crops[5]);
+		// const soyProduction = this.getFieldProductionRate(this.props.currentUser.crops[6]) + this.getFieldProductionRate(this.props.currentUser.crops[7]) + this.getFieldProductionRate(this.props.currentUser.crops[8]);
 
-		// 4-25 4 - 2.5s   
-		// 5-30 5 - 3s   
-		// 6-35 6 - 3.5s   15 - 9s  
+		// const eggProduction = this.getFieldProductionRate(this.props.currentUser.animals[0]) + this.getFieldProductionRate(this.props.currentUser.animals[1]) + this.getFieldProductionRate(this.props.currentUser.animals[2]);
+		// const baconProduction = this.getFieldProductionRate(this.props.currentUser.animals[3]) + this.getFieldProductionRate(this.props.currentUser.animals[4]);
+		// const milkProduction = this.getFieldProductionRate(this.props.currentUser.animals[5]) + this.getFieldProductionRate(this.props.currentUser.animals[6]);
 
-		// 7-40      
-		// 8-45      
-		// 9-50   					24 - 13.5s
+		// const cropRates = this.props.currentUser.crops.map(crop => rateMap[crop.count]);
+		const cropRates = this.props.currentUser.crops.map(crop => crop.manager ? rateMap[crop.count] : 0); // if no manager dont add to total.
 
-		//calculate harvest/produce per second
+		const animalRates = this.props.currentUser.animals.map(animal => animal.manager ? rateMap[animal.count] : 0);
+		const wheatProduction = cropRates[0] + cropRates[1] + cropRates[2];
+		const cornProduction = cropRates[3] + cropRates[4] + cropRates[5];
+		const soyProduction = cropRates[6] + cropRates[7] + cropRates[8];
 
-		let valueMap = {
-			// maps productionValues to per second yield ex; 
-			// ex: 30 means it takes 3 seconds and will always have value of 5
-			// 5 produced / 3 seconds = 1.66666 produced per second 
-			0: 0,
-			10: 1,
-			15: 1.33333,
-			20: 1.5,
-			25: 1.6,
-			30: 1.66666,
-			35: 1.71428,
-			40: 1.75,
-			45: 1.77777,
-			50: 1.8
-		};
+		const eggProduction = animalRates[0] + animalRates[1] + animalRates[2];
+		const baconProduction = animalRates[3] + animalRates[4];
+		const milkProduction = animalRates[5] + animalRates[6];
+		console.log(`croprates: ${cropRates}`);
 
-		let cropProductionValues = [];
-		this.props.currentUser.crops.forEach(crop => { //push milisec ticks onto cropProductionValues - 10->1sec, 15->1.5s, 20->2s etc
-			if (crop.manager) {
-				cropProductionValues.push((crop.count - 1) * 5 + 10)
-			} else {
-				cropProductionValues.push(0)
-			}
-		})
-		const wheatProduction = valueMap[cropProductionValues[0]] + valueMap[cropProductionValues[1]] + valueMap[cropProductionValues[2]];
-		const cornProduction = valueMap[cropProductionValues[3]] + valueMap[cropProductionValues[4]] + valueMap[cropProductionValues[5]]
-		const soyProduction = valueMap[cropProductionValues[6]] + valueMap[cropProductionValues[7]] + valueMap[cropProductionValues[8]];
-
-		let animalProductionValues = [];
-		this.props.currentUser.animals.forEach(animal => {
-			if (animal.manager) {
-				animalProductionValues.push((animal.count - 1) * 5 + 10)
-			} else {
-				animalProductionValues.push(0)
-			}
-		})
-		const chickenProduction = valueMap[animalProductionValues[0]] + valueMap[animalProductionValues[1]] + valueMap[animalProductionValues[2]];
-		const pigProduction = valueMap[animalProductionValues[3]] + valueMap[animalProductionValues[4]]
-		const cowProduction = valueMap[animalProductionValues[5]] + valueMap[animalProductionValues[6]];
 
 		return (
 			<div className='playscreen-div'>
@@ -135,21 +116,21 @@ export class Playscreen extends React.Component {
 						{Math.round(wheatProduction * 100) / 100}/sec
 						<br></br>
 					Corn: {this.props.currentUser.inventory.corn} --
-						{Math.round(cornProduction * 100) / 100}/sec
-						<br></br>
+					{Math.round(cornProduction * 100) / 100}/sec
+					<br></br>
 					Soy: {this.props.currentUser.inventory.soy} --
-						{Math.round(soyProduction * 100) / 100}/sec
-						<br></br>
+					{Math.round(soyProduction * 100) / 100}/sec
+					<br></br>
 					--------------<br></br>
 					Eggs: {this.props.currentUser.inventory.eggs}--
-						{Math.round(chickenProduction * 100) / 100}/sec
-						<br></br>
+					{Math.round(eggProduction * 100) / 100}/sec
+					<br></br>
 					Bacon: {this.props.currentUser.inventory.bacon}--
-						{Math.round(pigProduction * 100) / 100}/sec
-						<br></br>
+					{Math.round(baconProduction * 100) / 100}/sec
+					<br></br>
 					Milk: {this.props.currentUser.inventory.milk}--
-						{Math.round(cowProduction * 100) / 100}/sec
-						<br></br>
+					{Math.round(milkProduction * 100) / 100}/sec
+					<br></br>
 				</div>
 
 				<AnimalRender
@@ -168,7 +149,7 @@ export class Playscreen extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	currentUser: state.user.currentUser
+	currentUser: state.user.currentUser,
 });
 
 export default connect(mapStateToProps)(Playscreen);

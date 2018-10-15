@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { buyCrop, buyAnimal, hireManager } from '../../actions/user';
-import enoughFeed from './helperFunctions';
-import { sellAnimalProduct, incrementCrop } from '../../actions/user';
+import { buyCrop, buyAnimal, hireManager, sellAnimalProduct, incrementCrop, incrementProductionRate} from '../../actions/user';
+import enoughFeed from '../../actions/helpers/enoughFeed';
 
 import ProgressBar from './ProgressBar';
 import CardImg from './CardImg';
@@ -25,23 +24,35 @@ export class CardContainer extends React.Component {
       this.setState({ initiated: true });
     }
   }
+  componentWillUnmount() {
+    clearInterval(this.intCall);
+  }
   intCall;
   field = this.props.field;
   screen = this.props.screen;
   feed1 = this.props.feed.split(' ')[0];
   feed2 = this.props.feed.split(' ')[1];
   //return currentCard based on whether its animal or crop card
-
+ 
   currentCard = this.props.screen === 'crops' ?
     this.props.crops.find(crop => crop.type === this.props.field) : this.props.screen === 'animals' ?
       this.props.animals.find(animal => animal.type === this.props.field) : null
 
-  currentlyEnoughFeed = enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)
+  // currentlyEnoughFeed = enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)
 
   progressTickIntervalSet = () => {
-    this.setState({ ticking: true }) // disabled button while progress bar filling    
-    this.intCall = setInterval(this.progressTick, (10 + ((this.currentCard.count-1)*5)));//1 count -> 1 second --- 9 count -> 5 seconds
-   
+
+    if(!this.currentCard.manager){
+      this.setState({ ticking: true }) // disabled button while progress bar filling    
+      this.intCall = setInterval(this.progressTick, (10 + ((this.currentCard.count-1)*5)));//1 count -> 1 second --- 9 count -> 5 seconds
+      // console.log(10 + ((this.currentCard.count-1)*5));      
+    } else {
+      this.setState({ ticking: true });
+      clearInterval(this.intCall);
+      this.setState({ percentage: -1});
+
+    }
+
   }
 
   //progressTick increments percentage of progress bar to fill
@@ -77,14 +88,30 @@ export class CardContainer extends React.Component {
 
   }
 
+  managerTick = () => {
+
+  }
+
   //increment count by 1
   incrementFieldCount = (field) => {
     if (this.currentCard.count < 9 && this.props.userCash >= this.currentCard.price) {
+
       if (this.screen === 'crops') {
         this.props.dispatch(buyCrop(field));
+        if(this.currentCard.manager){
+          console.log('card has manager');
+          // dispatch action to increment Rates in rate reducer  
+          this.props.dispatch(incrementProductionRate(this.currentCard))        
+        }
       } else if (this.screen === 'animals') {
         this.props.dispatch(buyAnimal(field));
+        if(this.currentCard.manager){
+          console.log('card has manager'); 
+          // dispatch action to increment Rates in rate reducer 
+          this.props.dispatch(incrementProductionRate(this.currentCard))        
+        }
       }
+      
     }
   }
 
@@ -131,6 +158,8 @@ export class CardContainer extends React.Component {
               this.screen === 'animals' ? enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count) :
                 this.screen === 'crops' ? true : false
             }
+            manager={this.currentCard.manager}
+
           />
 
           <button
