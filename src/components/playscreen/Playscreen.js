@@ -5,8 +5,9 @@ import { Redirect } from 'react-router-dom';
 import { clearAuthToken } from '../../local-storage'
 //components
 import { Header } from '../header/Header';
-import { CropRender } from '../playscreen/cropRender';
-import { AnimalRender } from '../playscreen/animalRender';
+import { CropRender } from '../playscreen/CropRender';
+import { AnimalRender } from '../playscreen/AnimalRender';
+import { ManagerViewRender } from '../playscreen/ManagerViewRender';
 
 //actions
 import { clearAuth } from '../../actions/auth';
@@ -48,6 +49,9 @@ export class Playscreen extends React.Component {
 	cropsRender = () => {
 		this.setState({ screenDisplay: 'cropsView' })
 	}
+	toggleManagerView = () => {
+		this.setState({ screenDisplay: this.state.screenDisplay + ' managerView' })
+	}
 
 
 	render() {
@@ -55,11 +59,11 @@ export class Playscreen extends React.Component {
 		if (!this.props.currentUser) {
 			return <Redirect to='/' />
 		}
-		
+
 		const cropRates = this.props.currentUser.crops.map(crop => crop.manager ? rateMap[crop.count] : 0); // if no manager dont add to total.
 
 		const animalRates = this.props.currentUser.animals.map(animal => animal.manager ? rateMap[animal.count] : 0);
-		
+
 		const wheatProduction = cropRates[0] + cropRates[1] + cropRates[2];
 		const cornProduction = cropRates[3] + cropRates[4] + cropRates[5];
 		const soyProduction = cropRates[6] + cropRates[7] + cropRates[8];
@@ -103,7 +107,23 @@ export class Playscreen extends React.Component {
 					{Math.round(milkProduction * 100) / 100}/sec
 					<br></br>
 				</div>
+				<p>
+					{this.state.screenDisplay}		
+				</p>
 
+
+				<div className="manager-view-container">
+					<button
+						className="manager-view-toggle-button"
+						onClick={this.toggleManagerView}
+					>
+						toggle M View
+					</button>
+				</div>
+
+				<ManagerViewRender
+					screenDisplay={this.state.screenDisplay}
+				/>
 				<AnimalRender
 					screenDisplay={this.state.screenDisplay}
 				/>

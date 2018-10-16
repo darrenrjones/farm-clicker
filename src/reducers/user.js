@@ -129,7 +129,7 @@ export default (state = initialState, action) => {
       ...state,
       currentUser: {
         ...state.currentUser, 
-        cash: state.currentUser.cash += action.cardObj.price, // subtract pre-incremented price
+        cash: state.currentUser.cash += action.cardObj.count, // subtract pre-incremented price
         inventory: {
           ...state.currentUser.inventory, 
           [feed1]: state.currentUser.inventory[feed1] -= action.cardObj.count,

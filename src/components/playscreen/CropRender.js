@@ -5,7 +5,9 @@ import CardContainer from '../card/CardContainer';
 export const CropRender = props => {
 	return (
 
-		<div className={props.screenDisplay === 'animalsView' ? 'cards9-container display-none' : 'cards9-container'}>
+		// <div className={props.screenDisplay === 'animalsView' ? 'cards9-container display-none' : 'cards9-container'}>
+		<div className={'cards9-container ' + (props.screenDisplay === 'animalsView' || props.screenDisplay === 'managerView' ? 'display-none' : '')}>
+
 			<CardContainer
 				type='wheat'
 				field='wheat1'

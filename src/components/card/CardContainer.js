@@ -55,7 +55,7 @@ export class CardContainer extends React.Component {
     if(!this.currentCard.manager){
       this.setState({ ticking: true }) // disabled button while progress bar filling    
       this.intCall = setInterval(this.progressTick, (20 + ((this.currentCard.count-1)*10)));//1 count -> 1 second --- 9 count -> 5 seconds
-      console.log(10 + ((this.currentCard.count-1)*5));      
+      console.log(20 + ((this.currentCard.count-1)*10));      
     } else { 
       this.intCallManager = setInterval(this.callDispatches, 5000);
     }

@@ -12,8 +12,7 @@
   height: 100%;
   border-radius: inherit;
 }
-.filler-with-manager{
-}
+
 
 .small-crop-icon{
   height: 3em;
@@ -28,11 +27,9 @@
 }
 .disabled-progress-bar-action{
   pointer-events:none;
-  /* background-color: rgb(15, 13, 13); */
 }
 .disabled-progress-bar-text{
     opacity: .4;
-    /* background: rgb(148, 32, 32); */
 }
 
 
