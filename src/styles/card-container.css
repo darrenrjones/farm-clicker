@@ -5,6 +5,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-image: url('../images/backgrounds/grass-cropped.jpg');
+  background-repeat:no-repeat;
+  background-size:contain;
+  height: 256px;
+  width: 186px
 }
 .click-container{
   display: flex;
