@@ -53,12 +53,6 @@ export const setLastLogout = (timestamp) => ({
 		timestamp
 });
 
-export const MANAGE_LOST_TIME = 'MANAGE_LOST_TIME';
-export const manageLostTime = (timestamp) => ({
-    type: MANAGE_LOST_TIME, 
-		timestamp
-});
-
 export const INCREMENT_PRODUCTION_RATE = 'INCREMENT_PRODUCTION_RATE';
 export const incrementProductionRate = (currentCard) => ({
     type: INCREMENT_PRODUCTION_RATE, 

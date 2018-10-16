@@ -23,10 +23,7 @@ export const ProgressBar = props => {
   return (
     <div
     className={'progress-bar ' +  (props.count < 1 || props.ticking || !props.enoughFeed ? 'disabled-progress-bar-action' : '') + (props.manager ? 'progress-bar-manager' : '')}
-
-      // className={props.count < 1 || props.ticking || !props.enoughFeed ? 'disabled-progress-bar-action progress-bar' : 'progress-bar'}
       onClick={props.action}
-      // <div className={"btn-group pull-right " + (this.props.showBulkActions ? 'show' : 'hidden')}>
     >
       <div className={!props.enoughFeed || props.count < 1 ? 'progress-bar-btn-text disabled-progress-bar-text' : 'progress-bar-btn-text'}    >
 

@@ -10,7 +10,7 @@ import { AnimalRender } from '../playscreen/animalRender';
 
 //actions
 import { clearAuth } from '../../actions/auth';
-import { save, setLastLogout, manageLostTime } from '../../actions/user';
+import { save, setLastLogout } from '../../actions/user';
 import rateMap from '../../actions/helpers/rateMap';
 
 import '../../styles/playscreen.css';
@@ -25,17 +25,7 @@ export class Playscreen extends React.Component {
 	}
 	componentDidMount() {
 		window.addEventListener("beforeunload", this.onPageUnload);
-		// if(this.props.currentUser){
-		// 	let timeElapsed = Math.floor(Date.now() / 1000) - this.props.currentUser.lastLogout;
-		// 	console.log(`props.lastLogout: ${this.props.currentUser.lastLogout}`)
-		// 	console.log(timeElapsed + ' seconds passed');
-		// manageLostTime takes (timeElapsed, crops, animals)
-		// loop through crops and if crop.manager get addValue = (crop.count rateMap value) * timeElapsed
-		// }
 	}
-
-	// this.calculateWheatProduction(this.props.currentUser);
-
 	componentWillUnmount() {
 		window.removeEventListener("beforeunload", this.onPageUnload);
 	}
@@ -59,35 +49,17 @@ export class Playscreen extends React.Component {
 		this.setState({ screenDisplay: 'cropsView' })
 	}
 
-	// cropRates = this.props.currentUser ? this.props.currentUser.crops.map(crop => rateMap[crop.count]) : null;
-	// animalRates = this.props.currentUser ? this.props.currentUser.animals.map(animal => rateMap[animal.count]) : null;
-
-	// wheatProduction = this.cropRates[0] + this.cropRates[1] + this.cropRates[2];
-	// cornProduction = this.cropRates[3] + this.cropRates[4] + this.cropRates[5];
-	// soyProduction = this.cropRates[6] + this.cropRates[7] + this.cropRates[8];
-
-	// eggProduction = this.animalRates[0] + this.animalRates[1] + this.animalRates[2];
-	// baconProduction = this.animalRates[3] + this.animalRates[4];
-	// milkProduction = this.animalRates[5] + this.animalRates[6];
 
 	render() {
 
 		if (!this.props.currentUser) {
 			return <Redirect to='/' />
 		}
-
-		// const wheatProduction = this.getFieldProductionRate(this.props.currentUser.crops[0]) + this.getFieldProductionRate(this.props.currentUser.crops[1]) + this.getFieldProductionRate(this.props.currentUser.crops[2]);
-		// const cornProduction = this.getFieldProductionRate(this.props.currentUser.crops[3]) + this.getFieldProductionRate(this.props.currentUser.crops[4]) + this.getFieldProductionRate(this.props.currentUser.crops[5]);
-		// const soyProduction = this.getFieldProductionRate(this.props.currentUser.crops[6]) + this.getFieldProductionRate(this.props.currentUser.crops[7]) + this.getFieldProductionRate(this.props.currentUser.crops[8]);
-
-		// const eggProduction = this.getFieldProductionRate(this.props.currentUser.animals[0]) + this.getFieldProductionRate(this.props.currentUser.animals[1]) + this.getFieldProductionRate(this.props.currentUser.animals[2]);
-		// const baconProduction = this.getFieldProductionRate(this.props.currentUser.animals[3]) + this.getFieldProductionRate(this.props.currentUser.animals[4]);
-		// const milkProduction = this.getFieldProductionRate(this.props.currentUser.animals[5]) + this.getFieldProductionRate(this.props.currentUser.animals[6]);
-
-		// const cropRates = this.props.currentUser.crops.map(crop => rateMap[crop.count]);
+		
 		const cropRates = this.props.currentUser.crops.map(crop => crop.manager ? rateMap[crop.count] : 0); // if no manager dont add to total.
 
 		const animalRates = this.props.currentUser.animals.map(animal => animal.manager ? rateMap[animal.count] : 0);
+		
 		const wheatProduction = cropRates[0] + cropRates[1] + cropRates[2];
 		const cornProduction = cropRates[3] + cropRates[4] + cropRates[5];
 		const soyProduction = cropRates[6] + cropRates[7] + cropRates[8];

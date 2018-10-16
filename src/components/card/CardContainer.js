@@ -35,13 +35,12 @@ export class CardContainer extends React.Component {
   screen = this.props.screen;
   feed1 = this.props.feed.split(' ')[0];
   feed2 = this.props.feed.split(' ')[1];
+
   //return currentCard based on whether its animal or crop card
- 
-  currentCard = this.props.screen === 'crops' ?
+   currentCard = this.props.screen === 'crops' ?
     this.props.crops.find(crop => crop.type === this.props.field) : this.props.screen === 'animals' ?
       this.props.animals.find(animal => animal.type === this.props.field) : null
 
-  // currentlyEnoughFeed = enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)
 
   callDispatches = () => {
     if(this.props.inventory){
@@ -55,14 +54,10 @@ export class CardContainer extends React.Component {
 
     if(!this.currentCard.manager){
       this.setState({ ticking: true }) // disabled button while progress bar filling    
-      this.intCall = setInterval(this.progressTick, (10 + ((this.currentCard.count-1)*5)));//1 count -> 1 second --- 9 count -> 5 seconds
+      this.intCall = setInterval(this.progressTick, (20 + ((this.currentCard.count-1)*10)));//1 count -> 1 second --- 9 count -> 5 seconds
       console.log(10 + ((this.currentCard.count-1)*5));      
-    } else { //http://jsfiddle.net/jgx58guf/1/
-      
-      // this.setState({ ticking: true });
-      // clearInterval(this.intCall);
-      // this.setState({ percentage: -1});
-      this.intCallManager = setInterval(this.callDispatches, 1000);
+    } else { 
+      this.intCallManager = setInterval(this.callDispatches, 5000);
     }
 
   }
@@ -73,21 +68,7 @@ export class CardContainer extends React.Component {
     if (this.state.percentage >= 99) { // when progress bar is full
       clearInterval(this.intCall);
       this.setState({ percentage: -3, ticking: false });
-
-
-
-      // if (this.screen === 'crops') {
-      //   this.props.dispatch(incrementCrop(this.currentCard));
-      // } else if (this.screen === 'animals') {
-      //   this.props.dispatch(sellAnimalProduct(this.currentCard));
-      // }
-
-      // this.screen === 'crops' ? this.props.dispatch(incrementCrop(this.currentCard)) 
-      //   : this.props.dispatch(sellAnimalProduct(this.currentCard));
-
       this.callDispatches();
-
-
       //call again if card has manager, setting perpetual calls. 
       if (this.currentCard.manager) {
         this.progressTickIntervalSet();

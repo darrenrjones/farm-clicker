@@ -1,5 +1,5 @@
 import {
-  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, HIRE_MANAGER, SET_LAST_LOGOUT, MANAGE_LOST_TIME
+  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, HIRE_MANAGER, SET_LAST_LOGOUT
 } from '../actions/user';
 
 import {
@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
         ...state.currentUser,
         inventory: {
           ...state.currentUser.inventory, 
-          [card]: state.currentUser.inventory[card] += action.cropObj.count*3
+          [card]: state.currentUser.inventory[card] += action.cropObj.count
         }
       }
     }
@@ -141,22 +141,6 @@ export default (state = initialState, action) => {
     }
   }
 
-  // else if(action.type === DECREMENT_CROP) {
-  //   let feed1 = action.feed1;
-  //   let feed2 = action.feed2;
-
-  //   return {
-  //     ...state,
-  //     currentUser: {
-  //       ...state.currentUser,
-  //       inventory: {
-  //         ...state.currentUser.inventory, 
-  //         [feed1]: state.currentUser.inventory[feed1] -= action.count,
-  //         [feed2]: state.currentUser.inventory[feed2] -= action.count
-  //       }        
-  //     }
-  //   }
-  // } 
 
   else if(action.type === HIRE_MANAGER) {
     let copy = action.screen === 'crops' ? [...state.currentUser.crops] : [...state.currentUser.animals];
@@ -192,18 +176,6 @@ export default (state = initialState, action) => {
       }
     }
   }
-
-  else if(action.type === MANAGE_LOST_TIME){
-    return {
-      ...state,
-      currentUser: {
-        ...state.currentUser,
-        farmname: state.currentUser.farmname += '!'
-      }
-    }
-  }
-
-
 
   return state;
 }
