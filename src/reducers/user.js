@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
         ...state.currentUser,
         inventory: {
           ...state.currentUser.inventory, 
-          [card]: state.currentUser.inventory[card] += action.cropObj.count
+          [card]: state.currentUser.inventory[card] += action.cropObj.count*3
         }
       }
     }
@@ -129,6 +129,7 @@ export default (state = initialState, action) => {
       ...state,
       currentUser: {
         ...state.currentUser, 
+        cash: state.currentUser.cash += action.cardObj.price, // subtract pre-incremented price
         inventory: {
           ...state.currentUser.inventory, 
           [feed1]: state.currentUser.inventory[feed1] -= action.cardObj.count,

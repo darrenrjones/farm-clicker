@@ -8,9 +8,11 @@
   cursor: pointer;
 }
 .filler {
-  background: #1DA598;
+  background: rgb(0, 79, 168);
   height: 100%;
   border-radius: inherit;
+}
+.filler-with-manager{
 }
 
 .small-crop-icon{
@@ -26,8 +28,48 @@
 }
 .disabled-progress-bar-action{
   pointer-events:none;
-  /* background-color: rgb(192, 161, 161); */
+  /* background-color: rgb(15, 13, 13); */
 }
 .disabled-progress-bar-text{
     opacity: .4;
+    /* background: rgb(148, 32, 32); */
+}
+
+
+@keyframes blink {
+  0% {
+         background-color: rgba(0, 79, 168,1)
+  }
+  50% {
+         background-color: rgba(0, 79, 168,.5)
+  }
+  100% {
+         background-color: rgba(0, 79, 168,1)
+  }
+}
+@-webkit-keyframes blink {
+  0% {
+         background-color: rgba(0, 79, 168,1)
+  }
+  50% {
+         background-color: rgba(0, 79, 168,.5)
+  }
+  100% {
+         background-color: rgba(0, 79, 168,1)
+  }
+}
+.progress-bar-manager{
+  -moz-transition:all 0.5s ease-in-out;
+  -webkit-transition:all 0.5s ease-in-out;
+  -o-transition:all 0.5s ease-in-out;
+  -ms-transition:all 0.5s ease-in-out;
+  transition:all 0.5s ease-in-out;
+  -moz-animation:blink normal 1.5s infinite ease-in-out;
+  /* Firefox */
+  -webkit-animation:blink normal 1.5s infinite ease-in-out;
+  /* Webkit */
+  -ms-animation:blink normal 1.5s infinite ease-in-out;
+  /* IE */
+  animation:blink normal 1.5s infinite ease-in-out;
+  /* Opera */
 }

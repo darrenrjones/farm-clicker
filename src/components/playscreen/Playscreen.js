@@ -95,7 +95,6 @@ export class Playscreen extends React.Component {
 		const eggProduction = animalRates[0] + animalRates[1] + animalRates[2];
 		const baconProduction = animalRates[3] + animalRates[4];
 		const milkProduction = animalRates[5] + animalRates[6];
-		console.log(`croprates: ${cropRates}`);
 
 
 		return (

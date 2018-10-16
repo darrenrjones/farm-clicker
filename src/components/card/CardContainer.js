@@ -25,7 +25,10 @@ export class CardContainer extends React.Component {
     }
   }
   componentWillUnmount() {
-    clearInterval(this.intCall);
+    if (!this.intCallManager) {
+      return;
+    }
+    clearInterval(this.intCallManager);
   }
   intCall;
   field = this.props.field;
@@ -40,17 +43,26 @@ export class CardContainer extends React.Component {
 
   // currentlyEnoughFeed = enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)
 
+  callDispatches = () => {
+    if(this.props.inventory){
+      this.screen === 'crops' ? this.props.dispatch(incrementCrop(this.currentCard)) 
+        : this.props.dispatch(sellAnimalProduct(this.currentCard));
+    }
+
+  }
+
   progressTickIntervalSet = () => {
 
     if(!this.currentCard.manager){
       this.setState({ ticking: true }) // disabled button while progress bar filling    
       this.intCall = setInterval(this.progressTick, (10 + ((this.currentCard.count-1)*5)));//1 count -> 1 second --- 9 count -> 5 seconds
-      // console.log(10 + ((this.currentCard.count-1)*5));      
-    } else {
-      this.setState({ ticking: true });
-      clearInterval(this.intCall);
-      this.setState({ percentage: -1});
-
+      console.log(10 + ((this.currentCard.count-1)*5));      
+    } else { //http://jsfiddle.net/jgx58guf/1/
+      
+      // this.setState({ ticking: true });
+      // clearInterval(this.intCall);
+      // this.setState({ percentage: -1});
+      this.intCallManager = setInterval(this.callDispatches, 1000);
     }
 
   }
@@ -58,15 +70,24 @@ export class CardContainer extends React.Component {
   //progressTick increments percentage of progress bar to fill
   //when it fills then incrementCrop/sellAnimalProduct is called
   progressTick = () => {
-    if (this.state.percentage >= 100) { // when progress bar is full
+    if (this.state.percentage >= 99) { // when progress bar is full
       clearInterval(this.intCall);
-      this.setState({ percentage: -1, ticking: false });
+      this.setState({ percentage: -3, ticking: false });
 
-      if (this.screen === 'crops') {
-        this.props.dispatch(incrementCrop(this.currentCard));
-      } else if (this.screen === 'animals') {
-        this.props.dispatch(sellAnimalProduct(this.currentCard));
-      }
+
+
+      // if (this.screen === 'crops') {
+      //   this.props.dispatch(incrementCrop(this.currentCard));
+      // } else if (this.screen === 'animals') {
+      //   this.props.dispatch(sellAnimalProduct(this.currentCard));
+      // }
+
+      // this.screen === 'crops' ? this.props.dispatch(incrementCrop(this.currentCard)) 
+      //   : this.props.dispatch(sellAnimalProduct(this.currentCard));
+
+      this.callDispatches();
+
+
       //call again if card has manager, setting perpetual calls. 
       if (this.currentCard.manager) {
         this.progressTickIntervalSet();
@@ -76,7 +97,7 @@ export class CardContainer extends React.Component {
     else if (this.screen === 'animals') {
       if (!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
         clearInterval(this.intCall);
-        this.setState({ percentage: -1, ticking: false });
+        this.setState({ percentage: -3, ticking: false });
         this.setState({ initiated: true });
         //reset but if card has manager set progress again
         if (this.currentCard.manager) {
@@ -84,7 +105,7 @@ export class CardContainer extends React.Component {
         }
       }
     } 
-    this.setState({ percentage: this.state.percentage + 1 });
+    this.setState({ percentage: this.state.percentage + 3 });
 
   }
 
