@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
   } 
 
   else if (action.type === BUY_CROP) {
-    //increment crop.count by 1 upon purchase
+    //increment crop.count by 1 upon purchase and remove cash
     let copy = [...state.currentUser.crops];
     let index;
     const cropObj = copy.find((crop, i) => {
@@ -152,6 +152,8 @@ export default (state = initialState, action) => {
       }
       return false;
     });
+    console.log(fieldObj);
+    
     fieldObj.manager = true;
     return {
       ...state,

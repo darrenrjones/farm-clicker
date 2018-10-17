@@ -15,7 +15,8 @@
 
 
 .small-crop-icon{
-  height: 3em;
+  height: 50px; 
+  width: auto;
 }
 .progress-bar-btn-text{
   position: absolute;

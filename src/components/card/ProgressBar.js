@@ -20,7 +20,7 @@ export const ProgressBar = props => {
       displayText = '?'
     }
   }
-  console.log(props.count < 1, props.ticking, !props.enoughFeed);
+  // console.log(props.count < 1, props.ticking, !props.enoughFeed);
   
   return (
     <div
@@ -35,7 +35,7 @@ export const ProgressBar = props => {
 
       <Filler
         percentage={props.percentage}
-        manager={props.manager}
+        // manager={props.manager}
       />
     </div>
   )

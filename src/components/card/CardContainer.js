@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { buyCrop, buyAnimal, hireManager, sellAnimalProduct, incrementCrop, incrementProductionRate} from '../../actions/user';
+import { buyCrop, buyAnimal, hireManager, sellAnimalProduct, incrementCrop} from '../../actions/user';
 import enoughFeed from '../../actions/helpers/enoughFeed';
 
 import ProgressBar from './ProgressBar';
@@ -15,20 +15,16 @@ export class CardContainer extends React.Component {
     this.state = {
       percentage: 0,
       ticking: false,
-      initiated: false
+      // manager: false
     }
   }
   componentDidMount() { // upon page load if card has manager initiate progress
     if (this.currentCard.manager) {
-      this.progressTickIntervalSet();
-      this.setState({ initiated: true });
+      //dispatch action to auto increment
     }
   }
   componentWillUnmount() {
-    if (!this.intCallManager) {
-      return;
-    }
-    clearInterval(this.intCallManager);
+
   }
   intCall;
   field = this.props.field;
@@ -41,85 +37,56 @@ export class CardContainer extends React.Component {
     this.props.crops.find(crop => crop.type === this.props.field) : this.props.screen === 'animals' ?
       this.props.animals.find(animal => animal.type === this.props.field) : null
 
-
   callDispatches = () => {
     if(this.props.inventory){
+      console.log('call dispatches reached');      
       this.screen === 'crops' ? this.props.dispatch(incrementCrop(this.currentCard)) 
         : this.props.dispatch(sellAnimalProduct(this.currentCard));
     }
-
   }
 
   progressTickIntervalSet = () => {
-
     if(!this.currentCard.manager){
       this.setState({ ticking: true }) // disabled button while progress bar filling    
       this.intCall = setInterval(this.progressTick, (20 + ((this.currentCard.count-1)*10)));//1 count -> 1 second --- 9 count -> 5 seconds
-      console.log(20 + ((this.currentCard.count-1)*10));      
-    } else { 
-      this.intCallManager = setInterval(this.callDispatches, 5000);
-    }
-
+    } 
   }
 
   //progressTick increments percentage of progress bar to fill
-  //when it fills then incrementCrop/sellAnimalProduct is called
+  //when it fills to 99 then incrementCrop/sellAnimalProduct is called
   progressTick = () => {
-    if (this.state.percentage >= 99) { // when progress bar is full
+    if (this.state.percentage >= 99) {
       clearInterval(this.intCall);
       this.setState({ percentage: -3, ticking: false });
-      this.callDispatches();
-      //call again if card has manager, setting perpetual calls. 
-      if (this.currentCard.manager) {
-        this.progressTickIntervalSet();
-      }
+      this.callDispatches();  
     }
     // while bar is not full check for enoughFeed to reset progress bar if food runs out mid progress
     else if (this.screen === 'animals') {
       if (!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
         clearInterval(this.intCall);
         this.setState({ percentage: -3, ticking: false });
-        this.setState({ initiated: true });
-        //reset but if card has manager set progress again
-        if (this.currentCard.manager) {
-          this.progressTickIntervalSet();
-        }
       }
     } 
     this.setState({ percentage: this.state.percentage + 3 });
-
-  }
-
-  managerTick = () => {
-
   }
 
   //increment count by 1
   incrementFieldCount = (field) => {
     if (this.currentCard.count < 9 && this.props.userCash >= this.currentCard.price) {
-
       if (this.screen === 'crops') {
-        this.props.dispatch(buyCrop(field));
-        if(this.currentCard.manager){
-          console.log('card has manager');
-          // dispatch action to increment Rates in rate reducer  
-          this.props.dispatch(incrementProductionRate(this.currentCard))        
-        }
+        this.props.dispatch(buyCrop(field));        
       } else if (this.screen === 'animals') {
-        this.props.dispatch(buyAnimal(field));
-        if(this.currentCard.manager){
-          console.log('card has manager'); 
-          // dispatch action to increment Rates in rate reducer 
-          this.props.dispatch(incrementProductionRate(this.currentCard))        
-        }
-      }
-      
+        this.props.dispatch(buyAnimal(field));       
+      }      
     }
   }
 
   hireManager = (field, screen) => {
-    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price*5) {
+    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price) {
       this.props.dispatch(hireManager(field, screen));
+      //dispatch action here to implement auto incrementation
+      this.managerInterval = setInterval(this.callDispatches, 3000 );
+      // (20 + ((this.currentCard.count-1)*10))
     }
   }
 
