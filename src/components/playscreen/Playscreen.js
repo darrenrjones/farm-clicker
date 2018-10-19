@@ -7,7 +7,6 @@ import { clearAuthToken } from '../../local-storage'
 import { Header } from '../header/Header';
 import { CropRender } from '../playscreen/CropRender';
 import { AnimalRender } from '../playscreen/AnimalRender';
-import { ManagerViewRender } from '../playscreen/ManagerViewRender';
 
 //actions
 import { clearAuth } from '../../actions/auth';
@@ -21,7 +20,7 @@ export class Playscreen extends React.Component {
 		super(props)
 		this.state = {
 			screenDisplay: 'cropsView',
-			wheatProduction: 0,
+			managerDisplay: false
 		}
 	}
 	componentDidMount() {
@@ -50,7 +49,7 @@ export class Playscreen extends React.Component {
 		this.setState({ screenDisplay: 'cropsView' })
 	}
 	toggleManagerView = () => {
-		this.setState({ screenDisplay: this.state.screenDisplay + ' managerView' })
+		this.setState({ managerDisplay: !this.state.managerDisplay })
 	}
 
 
@@ -108,7 +107,8 @@ export class Playscreen extends React.Component {
 					<br></br>
 				</div>
 				<p>
-					{this.state.screenDisplay}		
+					{this.state.screenDisplay}<br></br>		
+					{this.state.managerDisplay.toString()}
 				</p>
 
 
@@ -121,14 +121,14 @@ export class Playscreen extends React.Component {
 					</button>
 				</div>
 
-				<ManagerViewRender
-					screenDisplay={this.state.screenDisplay}
-				/>
+		
 				<AnimalRender
 					screenDisplay={this.state.screenDisplay}
+					managerDisplay={this.state.managerDisplay}
 				/>
 				<CropRender
 					screenDisplay={this.state.screenDisplay}
+					managerDisplay={this.state.managerDisplay}
 				/>
 
 			</div>

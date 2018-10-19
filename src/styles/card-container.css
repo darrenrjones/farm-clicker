@@ -1,6 +1,4 @@
 .card-container{
-  height: 260px;
-  width: 170px;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -8,8 +6,9 @@
   background-image: url('../images/backgrounds/grass-cropped.jpg');
   background-repeat:no-repeat;
   background-size:contain;
-  height: 256px;
-  width: 186px
+  height: 204px;
+  background-color: #CEF03C;
+  /* width: 186px */
 }
 .click-container{
   display: flex;
@@ -34,9 +33,4 @@
   cursor: pointer;
   /* outline: 0; */
 }
-.manager-display{
-  /* background-color: pink; */
-}
 
-.progress-bar-container{
-}

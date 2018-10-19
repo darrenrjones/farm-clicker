@@ -141,11 +141,11 @@ export default (state = initialState, action) => {
     }
   }
 
-
-  else if(action.type === HIRE_MANAGER) {
-    let copy = action.screen === 'crops' ? [...state.currentUser.crops] : [...state.currentUser.animals];
+  //subtract manager price/ set manager to true
+  else if(action.type === HIRE_MANAGER) { 
+    let cardCopy = action.screen === 'crops' ? [...state.currentUser.crops] : [...state.currentUser.animals];
     let index;
-    const fieldObj = copy.find((field, i) => {
+    const fieldObj = cardCopy.find((field, i) => {
       if (field.type === action.field) {
         index = i;
         return true;
@@ -160,9 +160,9 @@ export default (state = initialState, action) => {
       currentUser: {
         ...state.currentUser,
         crops: [
-          ...copy.slice(0, index),
+          ...cardCopy.slice(0, index),
           fieldObj,
-          ...copy.slice(index + 1, copy.length + 1)
+          ...cardCopy.slice(index + 1, cardCopy.length + 1)
         ],
         cash: state.currentUser.cash -= fieldObj.price*5
       }
