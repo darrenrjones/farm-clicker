@@ -20,7 +20,7 @@ export class Playscreen extends React.Component {
 		super(props)
 		this.state = {
 			screenDisplay: 'cropsView',
-			managerDisplay: false
+			managerDisplay: false,
 		}
 	}
 	componentDidMount() {
@@ -51,7 +51,7 @@ export class Playscreen extends React.Component {
 	toggleManagerView = () => {
 		this.setState({ managerDisplay: !this.state.managerDisplay })
 	}
-
+	
 
 	render() {
 
@@ -71,7 +71,6 @@ export class Playscreen extends React.Component {
 		const baconProduction = animalRates[3] + animalRates[4];
 		const milkProduction = animalRates[5] + animalRates[6];
 
-
 		return (
 			<div className='playscreen-div'>
 
@@ -87,30 +86,33 @@ export class Playscreen extends React.Component {
 
 				<div className='crops-inventory'>
 					Wheat: {this.props.currentUser.inventory.wheat} --
-						{Math.round(wheatProduction * 100) / 100}/sec
+						{Math.round(wheatProduction * 10) / 10}/sec
 						<br></br>
 					Corn: {this.props.currentUser.inventory.corn} --
-					{Math.round(cornProduction * 100) / 100}/sec
+					{Math.round(cornProduction * 10) / 10}/sec
 					<br></br>
 					Soy: {this.props.currentUser.inventory.soy} --
-					{Math.round(soyProduction * 100) / 100}/sec
+					{Math.round(soyProduction * 10) / 10}/sec
 					<br></br>
 					--------------<br></br>
 					Eggs: {this.props.currentUser.inventory.eggs}--
-					{Math.round(eggProduction * 100) / 100}/sec
+					{Math.round(eggProduction * 10) / 10}/sec
 					<br></br>
 					Bacon: {this.props.currentUser.inventory.bacon}--
-					{Math.round(baconProduction * 100) / 100}/sec
+					{Math.round(baconProduction * 10) / 10}/sec
 					<br></br>
 					Milk: {this.props.currentUser.inventory.milk}--
-					{Math.round(milkProduction * 100) / 100}/sec
+					{Math.round(milkProduction * 10) / 10}/sec
 					<br></br>
 				</div>
 				<p>
-					{this.state.screenDisplay}<br></br>		
+					{this.state.screenDisplay}<br></br>
 					{this.state.managerDisplay.toString()}
 				</p>
-
+				<p>
+					wheatInterval: {this.state.wheatInterval} <br></br>
+					cornInterval : {this.state.cornInterval}
+				</p>
 
 				<div className="manager-view-container">
 					<button
@@ -121,7 +123,8 @@ export class Playscreen extends React.Component {
 					</button>
 				</div>
 
-		
+
+
 				<AnimalRender
 					screenDisplay={this.state.screenDisplay}
 					managerDisplay={this.state.managerDisplay}

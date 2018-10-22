@@ -7,8 +7,9 @@
   background-repeat:no-repeat;
   background-size:contain;
   height: 204px;
+  width: 186px;
   background-color: #CEF03C;
-  /* width: 186px */
+
 }
 .click-container{
   display: flex;

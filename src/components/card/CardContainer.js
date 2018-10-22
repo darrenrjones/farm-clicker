@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { buyCrop, buyAnimal, hireManager, sellAnimalProduct, incrementCrop} from '../../actions/user';
 import enoughFeed from '../../actions/helpers/enoughFeed';
+import cardIntMap from '../../actions/helpers/cardIntMap';
 
 import ProgressBar from './ProgressBar';
 import CardImg from './CardImg';
@@ -20,11 +21,12 @@ export class CardContainer extends React.Component {
   }
   componentDidMount() { // upon page load if card has manager initiate progress
     if (this.currentCard.manager) {
-      //dispatch action to auto increment
+      this.managerInterval = setInterval(this.callDispatches, cardIntMap[this.currentCard.count] );    
     }
   }
   componentWillUnmount() {
-
+    clearInterval(this.intCall);
+    clearInterval(this.managerInterval);
   }
   intCall;
   feed1 = this.props.feed.split(' ')[0];
@@ -36,8 +38,8 @@ export class CardContainer extends React.Component {
       this.props.animals.find(animal => animal.type === this.props.field) : null
 
   callDispatches = () => {
-    if(this.props.inventory){
-      console.log('call dispatches reached');      
+    if(this.props.currentUser){
+      console.log(`call dispatches reached with ${this.currentCard.type}`);      
       this.props.screen === 'crops' ? this.props.dispatch(incrementCrop(this.currentCard)) 
         : this.props.dispatch(sellAnimalProduct(this.currentCard));
     }
@@ -71,6 +73,9 @@ export class CardContainer extends React.Component {
   //increment count by 1
   incrementFieldCount = (field) => {
     if (this.currentCard.count < 9 && this.props.userCash >= this.currentCard.price) {
+      let currentIntervalName = `${this.props.type}Interval`;
+      console.log('currentIntervalName: ',currentIntervalName);
+      
       if (this.props.screen === 'crops') {
         this.props.dispatch(buyCrop(field));        
       } else if (this.props.screen === 'animals') {
@@ -79,47 +84,12 @@ export class CardContainer extends React.Component {
     }
   }
 
-  // setManagerInterval = (callback, factor, times) => {
-
-  //   let internalCallback = ((tick,counter) => {
-  //     return () => {
-  //       this.setTimeout(internalCallback, 20 + ((this.currentCard.count-1)*10))
-  //     }
-  //   })(times,0);
-
-  //   this.setTimeout(internalCallback, factor);
-
-
-  // }
-
-  // setDeceleratingTimeout(callback, factor, times)
-  // {
-  //     var internalCallback = (function(tick, counter){
-  //         return function(){
-  //             if (--tick > 0) {
-  //                 window.settimeout(internalCallback, ++counter * factor);
-  //                 callback();
-  //             }
-  //         }
-  //     })(times, 0);
   
-  //     window.setTimeout(internalCallback, factor);
-  // };
-
-
-
-
-
-
-
-
-
   hireManager = (field, screen) => {
-    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price) {
+    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price && this.currentCard.count > 0) {
       this.props.dispatch(hireManager(field, screen));
-      //dispatch action here to implement auto incrementation
-      this.managerInterval = setInterval(this.callDispatches, 3000 );
-      // (20 + ((this.currentCard.count-1)*10))
+      //auto incrementation due to manager 
+      this.managerInterval = setInterval(this.callDispatches, cardIntMap[this.currentCard.count] );
     }
   }
   //if managerDisplay make buttons show up, else they are display-none
@@ -164,7 +134,8 @@ export class CardContainer extends React.Component {
 
           <button
             onClick={() => this.hireManager(this.props.field, this.props.screen)}
-            className={this.displayManager()}
+            className={(this.displayManager()) + (this.currentCard.manager ? ' gray-scale' : '')}
+            disabled={this.currentCard.manager || this.currentCard.count < 1}
           >
             hire manager
           </button>
@@ -196,6 +167,7 @@ export class CardContainer extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  currentUser: state.user.currentUser,
   crops: state.user.currentUser.crops,
   animals: state.user.currentUser.animals,
   inventory: state.user.currentUser.inventory,
