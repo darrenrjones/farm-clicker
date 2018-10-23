@@ -5,18 +5,19 @@
   width: 90%;
   border-radius: 50px;
   border: 1px solid rgb(0, 0, 0);
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .filler {
   background: rgb(0, 79, 168);
   height: 100%;
   border-radius: inherit;
 }
-.filler-with-manager{
-}
+
 
 .small-crop-icon{
-  height: 3em;
+  height: 50px; 
+  width: auto;
+  user-select: none;
 }
 .progress-bar-btn-text{
   position: absolute;
@@ -24,15 +25,13 @@
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
   -o-user-select: none;
-  user-select: none;
+  user-select: none; /* prevent highlight clicking */
 }
-.disabled-progress-bar-action{
+.disabled-pointer-events{
   pointer-events:none;
-  /* background-color: rgb(15, 13, 13); */
 }
-.disabled-progress-bar-text{
+.reduce-opacity{
     opacity: .4;
-    /* background: rgb(148, 32, 32); */
 }
 
 

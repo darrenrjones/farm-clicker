@@ -52,7 +52,7 @@ export default (state = initialState, action) => {
   } 
 
   else if (action.type === BUY_CROP) {
-    //increment crop.count by 1 upon purchase
+    //increment crop.count by 1 upon purchase and remove cash
     let copy = [...state.currentUser.crops];
     let index;
     const cropObj = copy.find((crop, i) => {
@@ -129,7 +129,7 @@ export default (state = initialState, action) => {
       ...state,
       currentUser: {
         ...state.currentUser, 
-        cash: state.currentUser.cash += action.cardObj.price, // subtract pre-incremented price
+        cash: state.currentUser.cash += action.cardObj.count, // subtract pre-incremented price
         inventory: {
           ...state.currentUser.inventory, 
           [feed1]: state.currentUser.inventory[feed1] -= action.cardObj.count,
@@ -141,26 +141,28 @@ export default (state = initialState, action) => {
     }
   }
 
-
-  else if(action.type === HIRE_MANAGER) {
-    let copy = action.screen === 'crops' ? [...state.currentUser.crops] : [...state.currentUser.animals];
+  //subtract manager price/ set manager to true
+  else if(action.type === HIRE_MANAGER) { 
+    let cardCopy = action.screen === 'crops' ? [...state.currentUser.crops] : [...state.currentUser.animals];
     let index;
-    const fieldObj = copy.find((field, i) => {
+    const fieldObj = cardCopy.find((field, i) => {
       if (field.type === action.field) {
         index = i;
         return true;
       }
       return false;
     });
+    console.log(fieldObj);
+    
     fieldObj.manager = true;
     return {
       ...state,
       currentUser: {
         ...state.currentUser,
         crops: [
-          ...copy.slice(0, index),
+          ...cardCopy.slice(0, index),
           fieldObj,
-          ...copy.slice(index + 1, copy.length + 1)
+          ...cardCopy.slice(index + 1, cardCopy.length + 1)
         ],
         cash: state.currentUser.cash -= fieldObj.price*5
       }

@@ -1,6 +1,4 @@
 .card-container{
-  height: 260px;
-  width: 170px;
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -8,14 +6,16 @@
   background-image: url('../images/backgrounds/grass-cropped.jpg');
   background-repeat:no-repeat;
   background-size:contain;
-  height: 256px;
-  width: 186px
+  height: 204px;
+  width: 186px;
+  background-color: #CEF03C;
+  cursor: pointer;
 }
-.click-container{
+/* .click-container{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 .image-box{
   height: fit-content;
   display: grid;
@@ -29,14 +29,18 @@
   width: 75%;
   padding: 6px; 
   font-size: 12px;
-  background: #072b04;
+  background: var(--purple);
   color: white;
   cursor: pointer;
   /* outline: 0; */
 }
-.manager-display{
-  /* background-color: pink; */
+
+.card-buttons-container{
+  user-select: none;
+  position: absolute;
 }
 
-.progress-bar-container{
+.no-cursor{
+  cursor: default;
 }
+

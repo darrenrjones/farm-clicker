@@ -5,8 +5,8 @@ import { Redirect } from 'react-router-dom';
 import { clearAuthToken } from '../../local-storage'
 //components
 import { Header } from '../header/Header';
-import { CropRender } from '../playscreen/cropRender';
-import { AnimalRender } from '../playscreen/animalRender';
+import { CropRender } from '../playscreen/CropRender';
+import { AnimalRender } from '../playscreen/AnimalRender';
 
 //actions
 import { clearAuth } from '../../actions/auth';
@@ -20,7 +20,7 @@ export class Playscreen extends React.Component {
 		super(props)
 		this.state = {
 			screenDisplay: 'cropsView',
-			wheatProduction: 0,
+			managerDisplay: false,
 		}
 	}
 	componentDidMount() {
@@ -48,18 +48,21 @@ export class Playscreen extends React.Component {
 	cropsRender = () => {
 		this.setState({ screenDisplay: 'cropsView' })
 	}
-
+	toggleManagerView = () => {
+		this.setState({ managerDisplay: !this.state.managerDisplay })
+	}
+	
 
 	render() {
 
 		if (!this.props.currentUser) {
 			return <Redirect to='/' />
 		}
-		
+
 		const cropRates = this.props.currentUser.crops.map(crop => crop.manager ? rateMap[crop.count] : 0); // if no manager dont add to total.
 
 		const animalRates = this.props.currentUser.animals.map(animal => animal.manager ? rateMap[animal.count] : 0);
-		
+
 		const wheatProduction = cropRates[0] + cropRates[1] + cropRates[2];
 		const cornProduction = cropRates[3] + cropRates[4] + cropRates[5];
 		const soyProduction = cropRates[6] + cropRates[7] + cropRates[8];
@@ -67,7 +70,6 @@ export class Playscreen extends React.Component {
 		const eggProduction = animalRates[0] + animalRates[1] + animalRates[2];
 		const baconProduction = animalRates[3] + animalRates[4];
 		const milkProduction = animalRates[5] + animalRates[6];
-
 
 		return (
 			<div className='playscreen-div'>
@@ -84,31 +86,52 @@ export class Playscreen extends React.Component {
 
 				<div className='crops-inventory'>
 					Wheat: {this.props.currentUser.inventory.wheat} --
-						{Math.round(wheatProduction * 100) / 100}/sec
+						{Math.round(wheatProduction * 10) / 10}/sec
 						<br></br>
 					Corn: {this.props.currentUser.inventory.corn} --
-					{Math.round(cornProduction * 100) / 100}/sec
+					{Math.round(cornProduction * 10) / 10}/sec
 					<br></br>
 					Soy: {this.props.currentUser.inventory.soy} --
-					{Math.round(soyProduction * 100) / 100}/sec
+					{Math.round(soyProduction * 10) / 10}/sec
 					<br></br>
 					--------------<br></br>
 					Eggs: {this.props.currentUser.inventory.eggs}--
-					{Math.round(eggProduction * 100) / 100}/sec
+					{Math.round(eggProduction * 10) / 10}/sec
 					<br></br>
 					Bacon: {this.props.currentUser.inventory.bacon}--
-					{Math.round(baconProduction * 100) / 100}/sec
+					{Math.round(baconProduction * 10) / 10}/sec
 					<br></br>
 					Milk: {this.props.currentUser.inventory.milk}--
-					{Math.round(milkProduction * 100) / 100}/sec
+					{Math.round(milkProduction * 10) / 10}/sec
 					<br></br>
 				</div>
+				<p>
+					screenDisplay: {this.state.screenDisplay}<br></br>
+					managerDisplay: {this.state.managerDisplay.toString()}
+				</p>
+				<p>
+					wheatInterval: {this.state.wheatInterval} <br></br>
+					cornInterval : {this.state.cornInterval}
+				</p>
+
+				<div className="manager-view-container">
+					<button
+						className="manager-view-toggle-button"
+						onClick={this.toggleManagerView}
+					>
+						toggle M View
+					</button>
+				</div>
+
+
 
 				<AnimalRender
 					screenDisplay={this.state.screenDisplay}
+					managerDisplay={this.state.managerDisplay}
 				/>
 				<CropRender
 					screenDisplay={this.state.screenDisplay}
+					managerDisplay={this.state.managerDisplay}
 				/>
 
 			</div>

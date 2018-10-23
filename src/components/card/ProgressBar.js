@@ -20,12 +20,15 @@ export const ProgressBar = props => {
       displayText = '?'
     }
   }
+  // console.log(props.count < 1, props.ticking, !props.enoughFeed);
+  
   return (
     <div
-    className={'progress-bar ' +  (props.count < 1 || props.ticking || !props.enoughFeed ? 'disabled-progress-bar-action' : '') + (props.manager ? 'progress-bar-manager' : '')}
-      onClick={props.action}
+    // className='progress-bar'
+    className={'progress-bar ' + (props.manager ? ' progress-bar-manager' : '')}
+    //   onClick={props.action}
     >
-      <div className={!props.enoughFeed || props.count < 1 ? 'progress-bar-btn-text disabled-progress-bar-text' : 'progress-bar-btn-text'}    >
+      <div className={!props.enoughFeed || props.count < 1 ? 'progress-bar-btn-text reduce-opacity' : 'progress-bar-btn-text'}    >
 
         {displayText}           
 
@@ -33,7 +36,6 @@ export const ProgressBar = props => {
 
       <Filler
         percentage={props.percentage}
-        manager={props.manager}
       />
     </div>
   )
