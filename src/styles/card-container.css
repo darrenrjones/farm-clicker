@@ -9,13 +9,13 @@
   height: 204px;
   width: 186px;
   background-color: #CEF03C;
-
+  cursor: pointer;
 }
-.click-container{
+/* .click-container{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
+} */
 .image-box{
   height: fit-content;
   display: grid;
@@ -29,9 +29,18 @@
   width: 75%;
   padding: 6px; 
   font-size: 12px;
-  background: #072b04;
+  background: var(--purple);
   color: white;
   cursor: pointer;
   /* outline: 0; */
+}
+
+.card-buttons-container{
+  user-select: none;
+  position: absolute;
+}
+
+.no-cursor{
+  cursor: default;
 }
 

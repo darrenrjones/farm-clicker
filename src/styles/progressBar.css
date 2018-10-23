@@ -5,7 +5,7 @@
   width: 90%;
   border-radius: 50px;
   border: 1px solid rgb(0, 0, 0);
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .filler {
   background: rgb(0, 79, 168);
@@ -17,6 +17,7 @@
 .small-crop-icon{
   height: 50px; 
   width: auto;
+  user-select: none;
 }
 .progress-bar-btn-text{
   position: absolute;
@@ -26,10 +27,10 @@
   -o-user-select: none;
   user-select: none; /* prevent highlight clicking */
 }
-.disabled-progress-bar-action{
+.disabled-pointer-events{
   pointer-events:none;
 }
-.disabled-progress-bar-text{
+.reduce-opacity{
     opacity: .4;
 }
 

@@ -106,8 +106,8 @@ export class Playscreen extends React.Component {
 					<br></br>
 				</div>
 				<p>
-					{this.state.screenDisplay}<br></br>
-					{this.state.managerDisplay.toString()}
+					screenDisplay: {this.state.screenDisplay}<br></br>
+					managerDisplay: {this.state.managerDisplay.toString()}
 				</p>
 				<p>
 					wheatInterval: {this.state.wheatInterval} <br></br>
