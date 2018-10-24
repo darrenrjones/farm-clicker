@@ -20,7 +20,7 @@ export class CardContainer extends React.Component {
       // manager: false
     }
   }
-  componentDidMount() { // upon page load if card has manager initiate progress
+  componentDidMount() { // upon page load if card has manager initiate managerInterval
     if (this.currentCard.manager) {
       this.managerInterval = setInterval(this.callDispatches, cardIntMap[this.currentCard.count]);
     }
@@ -40,11 +40,21 @@ export class CardContainer extends React.Component {
   feed2 = this.props.screen === 'animals' ? this.currentCard.feed.split(' ')[1] : null;
 
   callDispatches = () => {
-    if (this.props.currentUser) {
+    console.log(`call dispatch : ${this.props.field}`);
+    
+    // if (this.props.currentUser) {
       // console.log(`call dispatches reached with ${this.currentCard.type}`);
+      if (this.currentCard.manager){
+        if(!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
+          console.log('managerInterval check stopped interval');
+    
+          clearInterval(this.managerInterval);
+          return;
+        }        
+      }
       this.props.screen === 'crops' ? this.props.dispatch(incrementCrop(this.currentCard))
-        : this.props.dispatch(sellAnimalProduct(this.currentCard));
-    }
+        : this.props.dispatch(sellAnimalProduct(this.currentCard));      
+    // }
   }
 
   progressTickIntervalSet = () => {
@@ -58,6 +68,10 @@ export class CardContainer extends React.Component {
 
       }
     }
+  }
+
+  dontSetIntervalLog = () => {
+    console.log(`dont set tick due to manager or count < 1: ${this.props.field}`)
   }
 
   //progressTick increments percentage of progress bar to fill
@@ -113,6 +127,23 @@ export class CardContainer extends React.Component {
         `BUY ${this.props.type.toUpperCase()}` : 'insufficient funds'
   }
 
+  feedImages = () => {
+
+  }
+
+  // managerIntervalCheck = () => {
+  //   if (!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
+  //     console.log('managerInterval check stopped interval');
+
+  //     clearInterval(this.managerInterval);
+  //   }
+
+  //   if (enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count) && this.currentCard.manager) {
+  //     console.log('restart managerInterval');
+  //     this.managerInterval = setInterval(this.callDispatches, cardIntMap[this.currentCard.count]);
+  //   }
+  // }
+
 
   render() {
 
@@ -128,10 +159,12 @@ export class CardContainer extends React.Component {
       );
     }
 
+    // this.managerIntervalCheck();
+
     return (
 
       <div
-        onClick={this.props.managerDisplay || this.currentCard.count < 1 ? '' : this.progressTickIntervalSet}
+        onClick={this.props.managerDisplay || this.currentCard.count < 1 || this.currentCard.manager ? this.dontSetIntervalLog : this.progressTickIntervalSet}
         className={'card-container' + (this.state.ticking ? ' disabled-pointer-events' : '') + (this.currentCard.count < 1 || this.props.managerDisplay || this.currentCard.manager ? ' no-cursor' : '')}
       >
 
@@ -151,7 +184,7 @@ export class CardContainer extends React.Component {
 
           <button
             onClick={() => { this.hireManager(this.props.field, this.props.screen) }}
-            className={(this.currentCard.manager || this.currentCard.count < 1 ? 'gray-scale disabled-pointer-events' : '')}
+            className={(this.currentCard.manager || this.currentCard.count < 1 || this.props.userCash < this.currentCard.price * 5 ? 'gray-scale disabled-pointer-events' : '')}
             disabled={this.currentCard.manager || this.currentCard.count < 1}
           >
             {!this.currentCard.manager ? `hire manager(${this.currentCard.price * 5})` : `Producing ${rateMap[this.currentCard.count]} /sec`}
