@@ -17,12 +17,15 @@ export class CardContainer extends React.Component {
     this.state = {
       percentage: 0,
       ticking: false,
-      // manager: false
+      feedChainBroken: false,
     }
+  }
+  setManagerInterval = () => {
+    this.managerInterval = setInterval(this.callDispatchesCheck, cardIntMap[this.currentCard.count]);
   }
   componentDidMount() { // upon page load if card has manager initiate managerInterval
     if (this.currentCard.manager) {
-      this.managerInterval = setInterval(this.callDispatches, cardIntMap[this.currentCard.count]);
+      this.setManagerInterval();
     }
   }
   componentWillUnmount() {
@@ -40,22 +43,31 @@ export class CardContainer extends React.Component {
   feed2 = this.props.screen === 'animals' ? this.currentCard.feed.split(' ')[1] : null;
 
   callDispatches = () => {
-    console.log(`call dispatch : ${this.props.field}`);
-    
-    // if (this.props.currentUser) {
-      // console.log(`call dispatches reached with ${this.currentCard.type}`);
-      if (this.currentCard.manager){
-        if(!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
+    this.props.screen === 'crops' ? this.props.dispatch(incrementCrop(this.currentCard))
+      : this.props.dispatch(sellAnimalProduct(this.currentCard));
+  }
+
+
+
+  callDispatchesCheck = () => {
+    console.log(`call dispatch check : ${this.props.field}`);
+    //if !enoughFeed clearInterval and set feedChainBroke Display and exit before callDispatches
+    if (this.props.screen === 'animals') {
+      if (this.currentCard.manager) {
+        if (!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
           console.log('managerInterval check stopped interval');
-    
+
+          this.setState({ feedChainBroken: true });
           clearInterval(this.managerInterval);
           return;
-        }        
+        }
       }
-      this.props.screen === 'crops' ? this.props.dispatch(incrementCrop(this.currentCard))
-        : this.props.dispatch(sellAnimalProduct(this.currentCard));      
-    // }
+    }
+    this.callDispatches();
   }
+
+  //create 'feedChainCheck' function to be called somewhere GOOD, 
+  // it will check enoughFeed and then set feedChain = button => reset managerIntervaland 
 
   progressTickIntervalSet = () => {
     if (!this.currentCard.manager) {
@@ -75,12 +87,12 @@ export class CardContainer extends React.Component {
   }
 
   //progressTick increments percentage of progress bar to fill
-  //when it fills to 99 then incrementCrop/sellAnimalProduct is called
+  //when it fills to 99 then increment Crop/sell Animal Product is called
   progressTick = () => {
     if (this.state.percentage >= 99) {
       clearInterval(this.intCall);
       this.setState({ percentage: -3, ticking: false });
-      this.callDispatches();
+      this.callDispatchesCheck();
     }
     // while bar is not full check for enoughFeed to reset progress bar if food runs out mid progress
     else if (this.props.screen === 'animals') {
@@ -112,12 +124,18 @@ export class CardContainer extends React.Component {
       this.props.dispatch(hireManager(field, screen));
       // this.setState({ ticking: true });
       //auto incrementation due to manager 
-      this.managerInterval = setInterval(this.callDispatches, cardIntMap[this.currentCard.count]);
+      this.setManagerInterval();
     }
   }
-  //if managerDisplay make buttons show up, else they are display-none
-  displayManager = () => {
+  
+  //if managerDisplay, make buttons show up, else they are display-none
+  displayManagerButtons = () => {
     return this.props.managerDisplay ? '' : ' display-none';
+  }
+
+  feedBrokenButtonDisplay = () => { 
+    //display fix feed button if feedChainBroken and enough Feed
+    return ((!this.state.feedChainBroken && enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) || this.props.screen === 'crops' ) ? 'display-none' : '';
   }
 
   generateIncrementButtonText = () => {
@@ -127,22 +145,14 @@ export class CardContainer extends React.Component {
         `BUY ${this.props.type.toUpperCase()}` : 'insufficient funds'
   }
 
+  fixFeedBroken = () => {
+    this.setState({feedChainBroken : false})
+    this.setManagerInterval();
+  }
+
   feedImages = () => {
 
   }
-
-  // managerIntervalCheck = () => {
-  //   if (!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
-  //     console.log('managerInterval check stopped interval');
-
-  //     clearInterval(this.managerInterval);
-  //   }
-
-  //   if (enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count) && this.currentCard.manager) {
-  //     console.log('restart managerInterval');
-  //     this.managerInterval = setInterval(this.callDispatches, cardIntMap[this.currentCard.count]);
-  //   }
-  // }
 
 
   render() {
@@ -159,8 +169,6 @@ export class CardContainer extends React.Component {
       );
     }
 
-    // this.managerIntervalCheck();
-
     return (
 
       <div
@@ -168,11 +176,11 @@ export class CardContainer extends React.Component {
         className={'card-container' + (this.state.ticking ? ' disabled-pointer-events' : '') + (this.currentCard.count < 1 || this.props.managerDisplay || this.currentCard.manager ? ' no-cursor' : '')}
       >
 
-        <div className={'image-box ' + (this.props.managerDisplay ? 'gray-scale' : '')}>
+        <div className={'image-box ' + (this.props.managerDisplay ? 'gray-scale' : '') + (this.state.feedChainBroken ? ' reduce-opacity' : '')}>
           {cardImages}
         </div>
 
-        <div className={'card-buttons-container' + (this.displayManager())}>
+        <div className={'card-buttons-container' + (this.displayManagerButtons())}>
           <p>{this.currentCard.count < 9 ? `Next ${this.props.type}: $${this.currentCard.price}` : `Max ${this.props.screen}`}</p>
           <button
             onClick={() => this.incrementFieldCount(this.props.field)}
@@ -188,6 +196,14 @@ export class CardContainer extends React.Component {
             disabled={this.currentCard.manager || this.currentCard.count < 1}
           >
             {!this.currentCard.manager ? `hire manager(${this.currentCard.price * 5})` : `Producing ${rateMap[this.currentCard.count]} /sec`}
+          </button>
+
+          <button 
+            className={this.feedBrokenButtonDisplay()}
+            onClick={() => {this.fixFeedBroken()}}
+            disabled={this.state.feedChainBroken === false}
+          >
+            Fix Feed
           </button>
         </div>
 
@@ -206,6 +222,7 @@ export class CardContainer extends React.Component {
                 this.props.screen === 'crops' ? true : false
             }
             manager={this.currentCard.manager}
+            feedChainBroken={this.state.feedChainBroken}
           />
         </div>
 
