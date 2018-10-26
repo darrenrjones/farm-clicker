@@ -32,26 +32,10 @@ export const AnimalRender = props => {
 				managerDisplay={props.managerDisplay}
 			/>
 			<CardContainer
-				type='cow'
-				field='cow1'
-				screen='animals'
-				feed='wheat corn'
-				screenDisplay={props.screenDisplay}
-				managerDisplay={props.managerDisplay}
-			/>
-			<CardContainer
-				type='cow'
-				field='cow2'
-				screen='animals'
-				feed='wheat corn'
-				screenDisplay={props.screenDisplay}
-				managerDisplay={props.managerDisplay}
-			/>
-			<CardContainer
 				type='pig'
 				field='pig1'
 				screen='animals'
-				feed='wheat soy'
+				feed='wheat corn'
 				screenDisplay={props.screenDisplay}
 				managerDisplay={props.managerDisplay}
 			/>
@@ -59,10 +43,27 @@ export const AnimalRender = props => {
 				type='pig'
 				field='pig2'
 				screen='animals'
-				feed='wheat soy'
+				feed='wheat corn'
 				screenDisplay={props.screenDisplay}
 				managerDisplay={props.managerDisplay}
 			/>
+			<CardContainer
+				type='cow'
+				field='cow1'
+				screen='animals'
+				feed='corn soy'
+				screenDisplay={props.screenDisplay}
+				managerDisplay={props.managerDisplay}
+			/>
+			<CardContainer
+				type='cow'
+				field='cow2'
+				screen='animals'
+				feed='corn soy'
+				screenDisplay={props.screenDisplay}
+				managerDisplay={props.managerDisplay}
+			/>
+
 
 
 		</div>

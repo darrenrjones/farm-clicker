@@ -51,10 +51,6 @@ export class CardContainer extends React.Component {
 
   callDispatchesCheck = () => {
     // console.log(`call dispatch check : ${this.props.field}`);
-    console.log('cCard: ', this.currentCard);
-    console.log('feed1: ', this.feed1);
-
-    console.log('feed2: ', this.feed2);
 
     //if !enoughFeed clearInterval and set feedChainBroke Display and exit before callDispatches
     if (this.props.screen === 'animals') {
@@ -71,9 +67,6 @@ export class CardContainer extends React.Component {
     this.callDispatches();
   }
 
-  //create 'feedChainCheck' function to be called somewhere GOOD, 
-  // it will check enoughFeed and then set feedChain = button => reset managerIntervaland 
-
   progressTickIntervalSet = () => {
     if (!this.currentCard.manager) {
       this.setState({ ticking: true }) // disabled button while progress bar filling    
@@ -82,7 +75,6 @@ export class CardContainer extends React.Component {
     if (this.props.screen === 'animals') {
       if (!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
         console.log('not enough foooood');
-
       }
     }
   }
@@ -119,6 +111,11 @@ export class CardContainer extends React.Component {
         this.props.dispatch(buyCrop(field));
       } else if (this.props.screen === 'animals') {
         this.props.dispatch(buyAnimal(field));
+      }
+
+      if(this.currentCard.manager){
+        clearInterval(this.managerInterval);
+        this.setManagerInterval();
       }
     }
   }
