@@ -51,7 +51,10 @@ export class Playscreen extends React.Component {
 	toggleManagerView = () => {
 		this.setState({ managerDisplay: !this.state.managerDisplay })
 	}
-	
+
+	roundToTwo = num => {
+		return (Math.round(num * 100) / 100);
+	}
 
 	render() {
 
@@ -71,6 +74,10 @@ export class Playscreen extends React.Component {
 		const baconProduction = animalRates[3] + animalRates[4];
 		const milkProduction = animalRates[5] + animalRates[6];
 
+		const wheatConsumption = eggProduction + baconProduction;
+		const cornConsumption = baconProduction + milkProduction;
+		const soyConsumption = milkProduction;
+
 		return (
 			<div className='playscreen-div'>
 
@@ -85,34 +92,62 @@ export class Playscreen extends React.Component {
 				</button>
 
 				<div className='crops-inventory'>
-					Wheat: {this.props.currentUser.inventory.wheat} --
-						{Math.round(wheatProduction * 10) / 10}/sec
-						<br></br>
-					Corn: {this.props.currentUser.inventory.corn} --
-					{Math.round(cornProduction * 10) / 10}/sec
+					Wheat: {this.props.currentUser.inventory.wheat}
 					<br></br>
-					Soy: {this.props.currentUser.inventory.soy} --
-					{Math.round(soyProduction * 10) / 10}/sec
+					+{this.roundToTwo(wheatProduction)}
+					<span>/sec</span>
 					<br></br>
-					--------------<br></br>
-					Eggs: {this.props.currentUser.inventory.eggs}--
-					{Math.round(eggProduction * 10) / 10}/sec
+					-{this.roundToTwo(wheatConsumption)} /sec  <br></br>
 					<br></br>
-					Bacon: {this.props.currentUser.inventory.bacon}--
-					{Math.round(baconProduction * 10) / 10}/sec
+
+					Corn: {this.props.currentUser.inventory.corn}
 					<br></br>
-					Milk: {this.props.currentUser.inventory.milk}--
-					{Math.round(milkProduction * 10) / 10}/sec
+					+{Math.round(cornProduction * 10) / 10}
+					<span>/sec</span>
+					<br></br>
+					-{this.roundToTwo(cornConsumption)} /sec  <br></br>
+					<br></br>
+
+					Soy: {this.props.currentUser.inventory.soy}
+					<br></br>
+					+{Math.round(soyProduction * 10) / 10}
+					<span>/sec</span>
+					<br></br>
+					-{this.roundToTwo(soyConsumption)} /sec  <br></br>
+					<br></br>
+					
+					Eggs: {this.props.currentUser.inventory.eggs}
+					<br></br>
+					+{Math.round(eggProduction * 10) / 10}
+					<span>/sec</span>
+					<br></br>
+					-XX /sec  <br></br>
+					<br></br>
+
+					Bacon: {this.props.currentUser.inventory.bacon}
+					<br></br>
+					+{Math.round(baconProduction * 10) / 10}
+					<span>/sec</span>
+					<br></br>
+					-XX /sec  <br></br>
+					<br></br>
+
+					Milk: {this.props.currentUser.inventory.milk}
+					<br></br>
+					+{Math.round(milkProduction * 10) / 10}
+					<span>/sec</span>
+					<br></br>
+					-XX /sec  <br></br>
 					<br></br>
 				</div>
-				<p>
+				{/* <p>
 					screenDisplay: {this.state.screenDisplay}<br></br>
 					managerDisplay: {this.state.managerDisplay.toString()}
-				</p>
-				<p>
+				</p> */}
+				{/* <p>
 					wheatInterval: {this.state.wheatInterval} <br></br>
 					cornInterval : {this.state.cornInterval}
-				</p>
+				</p> */}
 
 				<div className="manager-view-container">
 					<button

@@ -31,30 +31,53 @@
   pointer-events:none;
 }
 .reduce-opacity{
-    opacity: .4;
+  opacity: .4;
 }
 
 
 @keyframes blink {
   0% {
-         background-color: rgba(0, 79, 168,1)
+    background-color: rgba(0, 79, 168,1)
   }
   50% {
-         background-color: rgba(0, 79, 168,.5)
+    background-color: rgba(0, 79, 168,.5)
   }
   100% {
-         background-color: rgba(0, 79, 168,1)
+    background-color: rgba(0, 79, 168,1)
   }
 }
 @-webkit-keyframes blink {
   0% {
-         background-color: rgba(0, 79, 168,1)
+    background-color: rgba(0, 79, 168,1)
   }
   50% {
-         background-color: rgba(0, 79, 168,.5)
+    background-color: rgba(0, 79, 168,.5)
   }
   100% {
-         background-color: rgba(0, 79, 168,1)
+    background-color: rgba(0, 79, 168,1)
+  }
+}
+
+@keyframes blinkBroken {
+  0% {
+    background-color: rgb(187, 23, 23)
+  }
+  50% {
+    background-color: rgba(105, 2, 2, 0.5)
+  }
+  100% {
+    background-color: rgb(187, 23, 23)
+  }
+}
+@-webkit-keyframes blinkBroken {
+  0% {
+    background-color: rgb(187, 23, 23)
+  }
+  50% {
+    background-color: rgba(105, 2, 2, 0.5)
+  }
+  100% {
+    background-color: rgb(187, 23, 23)
   }
 }
 .progress-bar-manager{
@@ -70,5 +93,21 @@
   -ms-animation:blink normal 1.5s infinite ease-in-out;
   /* IE */
   animation:blink normal 1.5s infinite ease-in-out;
+  /* Opera */
+}
+
+.progress-bar-manager-broken{
+  -moz-transition:all 0.5s ease-in-out;
+  -webkit-transition:all 0.5s ease-in-out;
+  -o-transition:all 0.5s ease-in-out;
+  -ms-transition:all 0.5s ease-in-out;
+  transition:all 0.5s ease-in-out;
+  -moz-animation:blinkBroken normal 1.5s infinite ease-in-out;
+  /* Firefox */
+  -webkit-animation:blinkBroken normal 1.5s infinite ease-in-out;
+  /* Webkit */
+  -ms-animation:blinkBroken normal 1.5s infinite ease-in-out;
+  /* IE */
+  animation:blinkBroken normal 1.5s infinite ease-in-out;
   /* Opera */
 }
