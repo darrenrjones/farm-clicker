@@ -19,6 +19,11 @@
   width: auto;
   user-select: none;
 }
+.tiny-crop-icon{
+  height: 30px; 
+  width: auto;
+  user-select: none;
+}
 .progress-bar-btn-text{
   position: absolute;
   -webkit-user-select: none; /* Chrome/Safari */        

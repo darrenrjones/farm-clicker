@@ -16,7 +16,7 @@
   flex-direction: column;
   justify-content: space-between;
 } */
-.image-box{
+.card-icons-box{
   height: fit-content;
   display: grid;
   grid-gap: 8px;
@@ -26,7 +26,7 @@
 
 .card-container button {
   margin: 0 auto;
-  width: 75%;
+  /* width: 75%; */
   padding: 6px; 
   font-size: 12px;
   background: var(--purple);
@@ -36,6 +36,9 @@
 }
 
 .card-buttons-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; 
   user-select: none;
   position: absolute;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 import Filler from './Filler';
 
@@ -20,6 +20,12 @@ export const ProgressBar = props => {
       displayText = 'SELL BACON'
     } else if (props.type === 'cow') {
       displayText = 'SELL MILK'
+    } else if (props.type === 'sheep') {
+      displayText = 'SELL WOOL'
+    } else if (props.type === 'goat') {
+      displayText = 'SELL CHEVRE'
+    } else if (props.type === 'fish') {
+      displayText = 'SELL FILLET'
     } else {
       displayText = '?'
     }
@@ -50,4 +56,4 @@ export const ProgressBar = props => {
   )
 };
 
-export default connect()(ProgressBar);
+export default ProgressBar;

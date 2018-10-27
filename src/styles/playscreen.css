@@ -6,6 +6,14 @@
   max-width: 50%;
   /* border: 1px solid orange;   */
 }
+.cards4-container{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1em;
+  padding: .5em;
+  max-width: 50%;
+  /* border: 1px solid orange;   */
+}
 .gray-scale{
   -webkit-filter: grayscale(100%); 
   filter: grayscale(100%);

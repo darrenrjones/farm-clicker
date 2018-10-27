@@ -8,6 +8,7 @@ import rateMap from '../../actions/helpers/rateMap';
 
 import ProgressBar from './ProgressBar';
 import CardImg from './CardImg';
+import FeedTypeDisplay from './FeedTypeDisplay';
 
 import '../../styles/card-container.css';
 
@@ -122,6 +123,8 @@ export class CardContainer extends React.Component {
 
 
   hireManager = (field, screen) => {
+    console.log(this.currentCard);
+    
     if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price && this.currentCard.count > 0) {
       this.props.dispatch(hireManager(field, screen));
       // this.setState({ ticking: true });
@@ -131,13 +134,13 @@ export class CardContainer extends React.Component {
   }
 
   //if managerDisplay, make buttons show up, else they are display-none
-  displayManagerButtons = () => {
+  displayManagerItems = () => {
     return this.props.managerDisplay ? '' : ' display-none';
   }
 
   feedBrokenButtonDisplay = () => {
     //display fix feed button if feedChainBroken and enough Feed
-    return (!this.state.feedChainBroken || this.props.screen === 'crops') ? 'display-none' : '';
+    return (!this.state.feedChainBroken || this.props.screen === 'crops') ? 'display-none' : undefined;
   }
 
   generateIncrementButtonText = () => {
@@ -156,45 +159,6 @@ export class CardContainer extends React.Component {
 
   }
 
-  feedTypesManagerDisplay = () => {
-    if (this.props.screen === 'animals') {
-      if (!this.feed2) {
-        return (
-          <div>
-            <p>Feed:</p>
-            <CardImg
-              screen={'crops'}
-              source={`${this.feed1}`}
-            />
-
-          </div>
-        )
-      } else {
-        return (
-          <div>
-            <p>Feed:</p>
-            <CardImg
-              screen={'crops'}
-              source={`${this.feed1}`}
-            />
-            <CardImg
-              screen={'crops'}
-              source={`${this.feed2}`}
-            />
-          </div>
-        )
-      }
-
-
-
-    } else {
-      return <p>crops here</p>
-    }
-  };
-
-
-
-
   render() {
 
     // const count = this.props.crops[field].count;
@@ -204,6 +168,7 @@ export class CardContainer extends React.Component {
         <CardImg
           screen={`${this.props.screen}`}
           source={`${this.props.type}`}
+          imgClass={'small-crop-icon'}
           key={`crop-index-${i}`}
         />
       );
@@ -216,11 +181,11 @@ export class CardContainer extends React.Component {
         className={'card-container' + (this.state.ticking ? ' disabled-pointer-events' : '') + (this.currentCard.count < 1 || this.props.managerDisplay || this.currentCard.manager ? ' no-cursor' : '')}
       >
 
-        <div className={'image-box ' + (this.props.managerDisplay ? 'gray-scale reduce-opacity' : '') + (this.state.feedChainBroken ? ' reduce-opacity' : '')}>
+        <div className={'card-icons-box ' + (this.props.managerDisplay ? 'gray-scale reduce-opacity' : '')}>
           {cardImages}
         </div>
 
-        <div className={'card-buttons-container' + (this.displayManagerButtons())}>
+        <div className={'card-buttons-container' + (this.displayManagerItems())}>
           <p>{this.currentCard.count < 9 ? `Next ${this.props.type}: $${this.currentCard.price}` : `Max Capacity`}</p>
           <button
             onClick={() => this.incrementFieldCount(this.props.field)}
@@ -235,7 +200,7 @@ export class CardContainer extends React.Component {
             className={(this.currentCard.manager || this.currentCard.count < 1 || this.props.userCash < this.currentCard.price * 5 ? 'gray-scale disabled-pointer-events' : '')}
             disabled={this.currentCard.manager || this.currentCard.count < 1}
           >
-            {!this.currentCard.manager ? `hire manager(${this.currentCard.price * 5})` : `Producing ${rateMap[this.currentCard.count]} /sec`}
+            {!this.currentCard.manager ? `hire manager($${this.currentCard.price * 5})` : `Producing ${rateMap[this.currentCard.count]} ${this.props.type} /sec`}
           </button>
 
           <button
@@ -245,7 +210,12 @@ export class CardContainer extends React.Component {
           >
             Fix Feed
           </button>
-          {this.feedTypesManagerDisplay()}
+
+          <FeedTypeDisplay 
+            feed={this.props.screen === 'animals' ? this.currentCard.feed : 'crops'}
+            screen={this.props.screen}
+          />
+
         </div>
 
         <div className={this.props.managerDisplay ? 'display-none' : ''}>

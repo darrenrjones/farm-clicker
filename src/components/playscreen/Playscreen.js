@@ -69,14 +69,18 @@ export class Playscreen extends React.Component {
 		const wheatProduction = cropRates[0] + cropRates[1] + cropRates[2];
 		const cornProduction = cropRates[3] + cropRates[4] + cropRates[5];
 		const soyProduction = cropRates[6] + cropRates[7] + cropRates[8];
+		const cloverProduction = cropRates[9] + cropRates[10] + cropRates[11];
 
 		const eggProduction = animalRates[0] + animalRates[1] + animalRates[2];
-		const baconProduction = animalRates[3] + animalRates[4];
-		const milkProduction = animalRates[5] + animalRates[6];
+		const baconProduction = animalRates[3] + animalRates[4] + animalRates[5];
+		const woolProduction = animalRates[6] + animalRates[7] + animalRates[8];
+		const milkProduction = animalRates[9] + animalRates[10];
+
 
 		const wheatConsumption = eggProduction + baconProduction;
 		const cornConsumption = baconProduction + milkProduction;
 		const soyConsumption = milkProduction;
+		const cloverConsumption = woolProduction;
 
 		return (
 			<div className='playscreen-div'>
@@ -115,6 +119,18 @@ export class Playscreen extends React.Component {
 					<br></br>
 					-{this.roundToTwo(soyConsumption)} /sec  <br></br>
 					<br></br>
+
+					Clover: {this.props.currentUser.inventory.clover}
+					<br></br>
+					+{Math.round(cloverProduction * 10) / 10}
+					<span>/sec</span>
+					<br></br>
+					-{this.roundToTwo(cloverConsumption)} /sec  <br></br>
+					<br></br>
+
+
+
+
 					
 					Eggs: {this.props.currentUser.inventory.eggs}
 					<br></br>
@@ -127,6 +143,14 @@ export class Playscreen extends React.Component {
 					Bacon: {this.props.currentUser.inventory.bacon}
 					<br></br>
 					+{Math.round(baconProduction * 10) / 10}
+					<span>/sec</span>
+					<br></br>
+					-XX /sec  <br></br>
+					<br></br>
+					
+					Wool: {this.props.currentUser.inventory.wool}
+					<br></br>
+					+{Math.round(woolProduction * 10) / 10}
 					<span>/sec</span>
 					<br></br>
 					-XX /sec  <br></br>
