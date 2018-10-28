@@ -6,7 +6,7 @@ export class Header extends React.Component {
   render() {
     return (
       <div className='header-container'>
-        <h1>Farm Clicker Banner</h1>
+        <h1>Farm Clicker Tycoon</h1>
 
         <div className='right-side-header'>
           {/* {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : ''}<br></br> */}

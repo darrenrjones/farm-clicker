@@ -1,0 +1,16 @@
+.home, .login-form{
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.login-form button, .home a {
+  margin-top: 5px;
+}
+
+.form-error{
+  background: var(--yellow);
+  width: -moz-fit-content;
+}

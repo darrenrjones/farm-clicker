@@ -4,7 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import RegistrationForm from './forms/Registration-form';
 
-export function RegistrationPage(props) {
+export const RegistrationPage = (props) => {
 	// If we are logged in (which happens automatically when registration
 	// is successful) redirect to the user's playscreen
 	if (props.loggedIn) {
@@ -12,7 +12,8 @@ export function RegistrationPage(props) {
 	}
 	return (
 		<div className="home">
-			<h2>Register your business below</h2>
+			<h1>Welcome to Farm Clicker</h1>
+			<h2>Register your farm below</h2>
 			<RegistrationForm />
 			<Link to="/">Login</Link>
 		</div>

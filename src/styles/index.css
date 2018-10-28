@@ -10,10 +10,17 @@
   --green: #20bf55;
   --purple: #3b1f2b;
   --blue: #387d7a;
+  --red: rgb(189, 44, 44);
 }
 body {
   margin: .5em;
   padding: 0;
   font-family: sans-serif;
   background-color: var(--background-brown);
+  font-family: 'Indie Flower', cursive;
+  font-weight: bold;
+}
+body button{
+  font-family: 'Indie Flower', cursive;
+  font-weight: bolder;
 }

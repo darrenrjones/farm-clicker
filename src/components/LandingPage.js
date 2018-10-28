@@ -4,7 +4,9 @@ import { Link, Redirect } from 'react-router-dom';
 
 import LoginForm from './forms/Login-form';
 
-export function LandingPage(props) {
+import '../styles/landing-page.css';
+
+export const LandingPage = (props) => {
 	// If we are logged in redirect straight to the playscreen
 	if (props.loggedIn) {
 		return <Redirect to="/playscreen" />;
@@ -12,7 +14,7 @@ export function LandingPage(props) {
 
 	return (
 		<div className="home">
-			<p>Welcome to Farm Clicker</p>
+			<h1>Welcome to Farm Clicker</h1>
 			<p>Log in or Register below </p>
 			<LoginForm />
 			<Link to="/register">Register</Link>
