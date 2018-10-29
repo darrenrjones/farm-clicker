@@ -23,7 +23,7 @@ export const ProgressBar = props => {
     } else if (props.type === 'sheep') {
       displayText = 'SELL WOOL'
     } else if (props.type === 'goat') {
-      displayText = 'SELL CHEVRE'
+      displayText = 'SELL GOAT CHEESE'
     } else if (props.type === 'fish') {
       displayText = 'SELL FILLET'
     } else {
@@ -43,7 +43,7 @@ export const ProgressBar = props => {
     <div
       className={'progress-bar ' + managerDisplay()}
     >
-      <div className={!props.enoughFeed || props.count < 1 ? 'progress-bar-btn-text reduce-opacity' : 'progress-bar-btn-text'}    >
+      <div className={!props.enoughFeed || props.count < 1 ? 'progress-bar-btn-text reduce-opacity' : 'progress-bar-btn-text'} >
 
         {displayText}
 

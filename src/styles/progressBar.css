@@ -5,27 +5,17 @@
   width: 90%;
   border-radius: 50px;
   border: 1px solid rgb(0, 0, 0);
-  /* cursor: pointer; */
+  background: rgba(255,255,255,0.2);
 }
 .filler {
   background: rgb(0, 79, 168);
   height: 100%;
   border-radius: inherit;
 }
-
-
-.small-crop-icon{
-  height: 50px; 
-  width: auto;
-  user-select: none;
-}
-.tiny-crop-icon{
-  height: 30px; 
-  width: auto;
-  user-select: none;
-}
 .progress-bar-btn-text{
   position: absolute;
+  text-align: center;
+  width: 27%;
   -webkit-user-select: none; /* Chrome/Safari */        
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
