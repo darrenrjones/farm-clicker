@@ -1,0 +1,6 @@
+.logo{
+  background-image: url('../images/logoBlue.png');
+  height: 7em;
+  background-repeat:no-repeat;
+  background-size:contain;
+}

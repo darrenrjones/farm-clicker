@@ -20,36 +20,36 @@ export default (state = initialState, action) => {
       ...state,
       saveSuccess: action.success
     }
-  } 
-  
+  }
+
   else if (action.type === AUTH_SUCCESS) {
     return {
       ...state,
       loading: false,
       currentUser: action.currentUser
     };
-  } 
-  
+  }
+
   else if (action.type === CLEAR_AUTH) {
     return {
       ...state,
       currentUser: null
     };
-  } 
+  }
 
-  else if(action.type === INCREMENT_CROP) {
-    let card = action.cropObj.type.slice(0,-1); //convert field to type ie 'wheat' instead of 'wheat1'
+  else if (action.type === INCREMENT_CROP) {
+    let card = action.cropObj.type.slice(0, -1); //convert field to type ie 'wheat' instead of 'wheat1'
     return {
       ...state,
       currentUser: {
         ...state.currentUser,
         inventory: {
-          ...state.currentUser.inventory, 
+          ...state.currentUser.inventory,
           [card]: state.currentUser.inventory[card] += action.cropObj.count
         }
       }
     }
-  } 
+  }
 
   else if (action.type === BUY_CROP) {
     //increment crop.count by 1 upon purchase and remove cash
@@ -73,7 +73,7 @@ export default (state = initialState, action) => {
           cropObj,
           ...copy.slice(index + 1, copy.length + 1)
         ],
-        cash: state.currentUser.cash -= cropObj.price/2 // subtract pre-incremented price
+        cash: state.currentUser.cash -= cropObj.price / 2 // subtract pre-incremented price
       }
     }
   }
@@ -97,41 +97,50 @@ export default (state = initialState, action) => {
       currentUser: {
         ...state.currentUser,
         animals: [
-        ...copy.slice(0, index),
-        animalObj,
-        ...copy.slice(index + 1, copy.length + 1)
-      ],
-      cash: state.currentUser.cash -= animalObj.price/2 // subtract pre-incremented price
+          ...copy.slice(0, index),
+          animalObj,
+          ...copy.slice(index + 1, copy.length + 1)
+        ],
+        cash: state.currentUser.cash -= animalObj.price / 2 // subtract pre-incremented price
       }
     }
-  } 
-    
+  }
 
 
-  else if(action.type === SELL_ANIMAL_PRODUCT) {
-    let product; 
-    switch (action.cardObj.type.slice(0,-1)) {
+
+  else if (action.type === SELL_ANIMAL_PRODUCT) {
+    let product;
+    switch (action.cardObj.type.slice(0, -1)) {
       case 'chicken':
         product = 'eggs'
         break;
       case 'pig':
         product = 'bacon'
         break;
+      case 'sheep':
+        product = 'wool'
+        break;
       case 'cow':
         product = 'milk'
-        break;  
+        break;
+      case 'goat':
+        product = 'goatmilk'
+        break;
+      case 'fish':
+        product = 'fishfillet'
+        break;
       default:
         break;
     }
-    let feed1 = action.cardObj.feed.split(' ')[0].replace(",","");
+    let feed1 = action.cardObj.feed.split(' ')[0].replace(",", "");
     let feed2 = action.cardObj.feed.split(' ')[1];
     return {
       ...state,
       currentUser: {
-        ...state.currentUser, 
+        ...state.currentUser,
         cash: state.currentUser.cash += action.cardObj.count, // subtract pre-incremented price
         inventory: {
-          ...state.currentUser.inventory, 
+          ...state.currentUser.inventory,
           [feed1]: state.currentUser.inventory[feed1] -= action.cardObj.count,
           [feed2]: state.currentUser.inventory[feed2] -= action.cardObj.count,
           [product]: state.currentUser.inventory[product] += action.cardObj.count
@@ -142,7 +151,7 @@ export default (state = initialState, action) => {
   }
 
   //subtract manager price/ set manager to true
-  else if(action.type === HIRE_MANAGER) { 
+  else if (action.type === HIRE_MANAGER) {
     let cardCopy = action.screen === 'crops' ? [...state.currentUser.crops] : [...state.currentUser.animals];
     let index;
     const fieldObj = cardCopy.find((field, i) => {
@@ -152,8 +161,8 @@ export default (state = initialState, action) => {
       }
       return false;
     });
-    console.log(fieldObj);
-    
+    // console.log(fieldObj);
+
     fieldObj.manager = true;
     return {
       ...state,
@@ -164,12 +173,12 @@ export default (state = initialState, action) => {
           fieldObj,
           ...cardCopy.slice(index + 1, cardCopy.length + 1)
         ],
-        cash: state.currentUser.cash -= fieldObj.price*5
+        cash: state.currentUser.cash -= fieldObj.price * 5
       }
     }
   }
 
-  else if(action.type === SET_LAST_LOGOUT){
+  else if (action.type === SET_LAST_LOGOUT) {
     return {
       ...state,
       currentUser: {

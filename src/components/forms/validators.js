@@ -4,14 +4,14 @@ export const nonEmpty = value =>
 	value.trim() !== '' ? undefined : 'Cannot be empty';
 
 export const isTrimmed = value =>
-	value.trim() === value ? undefined : 'Cannot start or end with whitespace';
+	value.trim() === value ? undefined : 'start/end with character';
 
 export const length = length => value => {
 	if (length.min && value.length < length.min) {
-		return `Must be at least ${length.min} characters long`;
+		return `${length.min}+ characters`;
 	}
 	if (length.max && value.length > length.max) {
-		return `Must be at most ${length.max} characters long`;
+		return `Max ${length.max} character`;
 	}
 };
 

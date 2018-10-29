@@ -10,35 +10,56 @@
   width: 186px;
   background-color: #CEF03C;
   cursor: pointer;
+  text-align: center;
 }
-/* .click-container{
+.card-buttons-container{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-} */
-.image-box{
+  justify-content: space-around; 
+  user-select: none;
+  position: absolute;
+  align-self: center;
+}
+
+.card-icons-box{
   height: fit-content;
   display: grid;
   grid-gap: 8px;
   grid-template-columns: repeat(3, 1fr);
   margin: 8px auto;
 }
+.small-crop-icon{
+  height: 50px; 
+  width: auto;
+  user-select: none;
+}
+.tiny-crop-icon{
+  height: 30px; 
+  width: auto;
+  user-select: none;
+}
 
 .card-container button {
-  margin: 0 auto;
-  width: 75%;
+  margin: 5px auto;
+  width: fit-content;
   padding: 6px; 
   font-size: 12px;
-  background: var(--purple);
-  color: white;
+  /* background: var(--purple); */
+  background: whitesmoke;
+  color: var(--black);
   cursor: pointer;
   /* outline: 0; */
+  
+}
+.card-container button:hover {
+  background: var(--blue);
 }
 
-.card-buttons-container{
-  user-select: none;
-  position: absolute;
+.x-pointer{
+  cursor: crosshair;
 }
+
+
 
 .no-cursor{
   cursor: default;
