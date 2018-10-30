@@ -8,6 +8,7 @@ import Playscreen from './playscreen/Playscreen';
 import { refreshAuthToken } from '../actions/auth';
 import { save } from '../actions/user';
 
+import 'normalize.css';
 
 class App extends React.Component {
 

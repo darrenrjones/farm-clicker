@@ -3,15 +3,15 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 //components
-import { Header } from '../header/Header';
+import Header from '../header/Header';
 import { CropRender } from '../playscreen/CropRender';
 import { AnimalRender } from '../playscreen/AnimalRender';
 import { Inventory } from './Inventory';
 
 //actions
-import { clearAuth } from '../../actions/auth';
+// import { clearAuth } from '../../actions/auth';
 import { save, setLastLogout } from '../../actions/user';
-import { clearAuthToken } from '../../local-storage'
+// import { clearAuthToken } from '../../local-storage'
 
 //styles
 import '../../styles/playscreen.css';
@@ -36,13 +36,13 @@ export class Playscreen extends React.Component {
 		this.props.dispatch(setLastLogout(timeStamp));
 		this.props.dispatch(save()) //autosave when logout
 	}
-	logout = () => {
-		let timeStamp = Math.floor(Date.now() / 1000); //seconds
-		this.props.dispatch(setLastLogout(timeStamp));
-		this.props.dispatch(save()) //autosave when logout
-		this.props.dispatch(clearAuth())
-		clearAuthToken()
-	}
+	// logout = () => {
+	// 	let timeStamp = Math.floor(Date.now() / 1000); //seconds
+	// 	this.props.dispatch(setLastLogout(timeStamp));
+	// 	this.props.dispatch(save()) //autosave when logout
+	// 	this.props.dispatch(clearAuth())
+	// 	clearAuthToken()
+	// }
 	animalsRender = () => {
 		this.setState({ screenDisplay: 'animalsView' })
 	}
@@ -54,24 +54,23 @@ export class Playscreen extends React.Component {
 	}
 
 		render() {
-
 		if (!this.props.currentUser) {
 			return <Redirect to='/' />
 		}
-
 		return (
-			<div className='playscreen-div'>
+			<div className='playscreen-container'>
 
 				<Header
 					currentUser={this.props.currentUser}
+					screenDisplay={this.state.screenDisplay}
+					managerDisplay={this.state.managerDisplay}
 				/>
 
-				<button onClick={this.logout}>logout</button>
+				{/* <button onClick={this.logout}>logout</button> */}
 				<br></br>
 				<button className="screenDisplay-button" onClick={this.state.screenDisplay === 'cropsView' ? this.animalsRender : this.cropsRender}>
-					{this.state.screenDisplay === 'cropsView' ? <div><span>manage</span><br></br>animals</div> : <div><span>manage</span><br></br>crops</div>}
+					{this.state.screenDisplay === 'cropsView' ? <div>animals</div> : <div>crops</div>}
 				</button>
-
 				
 				{/* <p>
 					screenDisplay: {this.state.screenDisplay}<br></br>
@@ -87,11 +86,9 @@ export class Playscreen extends React.Component {
 						className="manager-view-toggle-button"
 						onClick={this.toggleManagerView}
 					>
-						toggle M View
+						manager 
 					</button>
 				</div>
-
-
 
 				<AnimalRender
 					screenDisplay={this.state.screenDisplay}
@@ -101,15 +98,10 @@ export class Playscreen extends React.Component {
 					screenDisplay={this.state.screenDisplay}
 					managerDisplay={this.state.managerDisplay}
 				/>
-
 				<Inventory currentUser={this.props.currentUser} />
-
 			</div>
-
 		);
-
 	}
-
 }
 
 const mapStateToProps = state => ({

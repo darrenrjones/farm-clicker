@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
+// import CardImg from '../components/card/CardImg';
 import LoginForm from './forms/Login-form';
 
 import '../styles/landing-page.css';
@@ -14,10 +15,26 @@ export const LandingPage = (props) => {
 
 	return (
 		<div className="home">
-			<h1>Welcome to Farm Clicker</h1>
-			<p>Log in or Register below </p>
-			<LoginForm />
-			<Link to="/register">Register</Link>
+			<div className='landing-logo'></div>
+
+			{/* <div className={'login-text'}> */}
+			{/* <CardImg
+          screen={'animals'}
+          source={'chicken'}
+          imgClass={'tiny-crop-icon'}
+        /> */}
+			{/* Log in or Register below */}
+			{/* <CardImg
+          screen={'animals'}
+          source={'chicken'}
+          imgClass={'tiny-crop-icon'}
+        /> */}
+
+			{/* </div> */}
+			<div className='home-content'>
+				<LoginForm />
+				<Link to="/register">Register</Link>
+			</div>
 		</div>
 	);
 }

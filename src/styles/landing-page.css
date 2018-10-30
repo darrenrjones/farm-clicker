@@ -1,16 +1,61 @@
-.home, .login-form{
+.home{
   display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.home label {
+  margin: 5px auto; 
 }
 
-.login-form button, .home a {
-  margin-top: 5px;
+.home-content{
+  display: flex;
+  flex-direction: column;
+}
+.home-content a{
+  text-align: center;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+}
+.login-form{
+  display: flex;
+  flex-direction: column;
+  width: 25vw;
+  padding: 3em;
+  /* height: 15vw; */
+  /* align-items: center; */
+  /* margin-top: 10px; */
+  background: white;
+  text-align: center;
+  /* margin: 19% auto; */
+}
+
+.login-form input{
+  width: 100%;
+  margin: 5px auto;
+  height: 25px;
+}
+
+.login-form button {
+  margin-top: 10px;
+  /* width: 210px; */
 }
 
 .form-error{
   background: var(--yellow);
   width: -moz-fit-content;
+  border-radius: 5px;
+  padding: 0px 4px;
+}
+
+.landing-logo{
+  background-image: url('../images/logoBlue.png');
+  height: 3em;
+  width: 16em;
+  background-repeat:no-repeat;
+  background-size:contain;
 }

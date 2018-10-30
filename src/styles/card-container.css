@@ -43,7 +43,7 @@
   margin: 5px auto;
   width: fit-content;
   padding: 6px; 
-  font-size: 12px;
+  /* font-size: 12px; */
   /* background: var(--purple); */
   background: whitesmoke;
   color: var(--black);

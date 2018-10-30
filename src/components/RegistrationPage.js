@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
 import RegistrationForm from './forms/Registration-form';
+import CardImg from '../components/card/CardImg';
+
 
 export const RegistrationPage = (props) => {
 	// If we are logged in (which happens automatically when registration
@@ -12,8 +14,21 @@ export const RegistrationPage = (props) => {
 	}
 	return (
 		<div className="home">
-			<h1>Welcome to Farm Clicker</h1>
-			<h2>Register your farm below</h2>
+			<div className='landing-logo'></div>
+			<div className={'login-text'}>
+				{/* <Image /> */}
+				<CardImg
+          screen={'animals'}
+          source={'chicken'}
+          imgClass={'tiny-crop-icon'}
+        />
+				Log in or Register below
+				<CardImg
+          screen={'animals'}
+          source={'chicken'}
+          imgClass={'tiny-crop-icon'}
+        />			
+			</div>
 			<RegistrationForm />
 			<Link to="/">Login</Link>
 		</div>
