@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
 import RegistrationForm from './forms/Registration-form';
-import CardImg from '../components/card/CardImg';
+// import CardImg from '../components/card/CardImg';
 
+import '../styles/landing-page.css';
 
 export const RegistrationPage = (props) => {
 	// If we are logged in (which happens automatically when registration
@@ -16,8 +17,7 @@ export const RegistrationPage = (props) => {
 		<div className="home">
 			<div className='landing-logo'></div>
 			<div className={'login-text'}>
-				{/* <Image /> */}
-				<CardImg
+				{/* <CardImg
           screen={'animals'}
           source={'chicken'}
           imgClass={'tiny-crop-icon'}
@@ -27,10 +27,10 @@ export const RegistrationPage = (props) => {
           screen={'animals'}
           source={'chicken'}
           imgClass={'tiny-crop-icon'}
-        />			
+        />			 */}
 			</div>
 			<RegistrationForm />
-			<Link to="/">Login</Link>
+			{/* <Link to="/">Login</Link> */}
 		</div>
 	);
 }
