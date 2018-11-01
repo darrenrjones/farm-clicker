@@ -10,25 +10,26 @@ import '../../styles/header.css';
 export class Header extends React.Component {
 
   logout = () => {
-		let timeStamp = Math.floor(Date.now() / 1000); //seconds
-		this.props.dispatch(setLastLogout(timeStamp));
-		this.props.dispatch(save()) //autosave when logout
-		this.props.dispatch(clearAuth())
-		clearAuthToken()
-	}
+    let timeStamp = Math.floor(Date.now() / 1000); //seconds
+    this.props.dispatch(setLastLogout(timeStamp));
+    this.props.dispatch(save()) //autosave when logout
+    this.props.dispatch(clearAuth())
+    clearAuthToken()
+  }
 
   render() {
     return (
       <div className='header-container'>
         <div className='logo'></div>
 
-        <div className='right-side-header'>
+        <div className='cash-display'>
           {/* {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : ''}<br></br> */}
-          {this.props.currentUser ? <span>{this.props.currentUser.farmname}</span> : ''}<br></br>
+          {/* {this.props.currentUser ? <span>{this.props.currentUser.farmname}</span> : ''}<br></br> */}
           ${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : ''}
-
-          <button onClick={this.logout}>logout</button>
         </div>
+
+        <button onClick={this.logout}>logout</button>
+
 
       </div>
     )
