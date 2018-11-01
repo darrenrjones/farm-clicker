@@ -36,13 +36,6 @@ export class Playscreen extends React.Component {
 		this.props.dispatch(setLastLogout(timeStamp));
 		this.props.dispatch(save()) //autosave when logout
 	}
-	// logout = () => {
-	// 	let timeStamp = Math.floor(Date.now() / 1000); //seconds
-	// 	this.props.dispatch(setLastLogout(timeStamp));
-	// 	this.props.dispatch(save()) //autosave when logout
-	// 	this.props.dispatch(clearAuth())
-	// 	clearAuthToken()
-	// }
 	animalsRender = () => {
 		this.setState({ screenDisplay: 'animalsView' })
 	}
@@ -53,12 +46,12 @@ export class Playscreen extends React.Component {
 		this.setState({ managerDisplay: !this.state.managerDisplay })
 	}
 
-		render() {
+	render() {
 		if (!this.props.currentUser) {
 			return <Redirect to='/' />
 		}
 		return (
-			<div className='playscreen-container'>
+			<div className='playscreen-main'>
 
 				<Header
 					currentUser={this.props.currentUser}
@@ -66,39 +59,30 @@ export class Playscreen extends React.Component {
 					managerDisplay={this.state.managerDisplay}
 				/>
 
-				{/* <button onClick={this.logout}>logout</button> */}
-				<br></br>
-				<button className="screenDisplay-button" onClick={this.state.screenDisplay === 'cropsView' ? this.animalsRender : this.cropsRender}>
-					{this.state.screenDisplay === 'cropsView' ? <div>animals</div> : <div>crops</div>}
-				</button>
-				
-				{/* <p>
-					screenDisplay: {this.state.screenDisplay}<br></br>
-					managerDisplay: {this.state.managerDisplay.toString()}
-				</p> */}
-				{/* <p>
-					wheatInterval: {this.state.wheatInterval} <br></br>
-					cornInterval : {this.state.cornInterval}
-				</p> */}
+				<div className='playscreen-content'>
+					<AnimalRender
+						screenDisplay={this.state.screenDisplay}
+						managerDisplay={this.state.managerDisplay}
+					/>
+					<CropRender
+						screenDisplay={this.state.screenDisplay}
+						managerDisplay={this.state.managerDisplay}
+					/>
 
-				<div className="manager-view-container">
-					<button
-						className="manager-view-toggle-button"
-						onClick={this.toggleManagerView}
-					>
-						manager 
-					</button>
+					<div className='playscreen-inventory'>
+						<button className="screenDisplay-button" onClick={this.state.screenDisplay === 'cropsView' ? this.animalsRender : this.cropsRender}>
+							{this.state.screenDisplay === 'cropsView' ? <div>animals</div> : <div>crops</div>}
+						</button>
+
+						<button className="manager-view-toggle-button"
+							onClick={this.toggleManagerView}>
+							manager
+						</button>
+
+						<Inventory currentUser={this.props.currentUser} />
+					</div>
 				</div>
 
-				<AnimalRender
-					screenDisplay={this.state.screenDisplay}
-					managerDisplay={this.state.managerDisplay}
-				/>
-				<CropRender
-					screenDisplay={this.state.screenDisplay}
-					managerDisplay={this.state.managerDisplay}
-				/>
-				<Inventory currentUser={this.props.currentUser} />
 			</div>
 		);
 	}

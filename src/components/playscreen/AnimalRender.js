@@ -4,10 +4,8 @@ import CardContainer from '../card/CardContainer';
 
 export const AnimalRender = props => {
 	return (
-		<div>
-			<div className={
-				'cards9-container ' + (props.screenDisplay === 'cropsView' ? 'display-none' : '')
-			}>
+		<div className={'cards-container-main ' + (props.screenDisplay === 'cropsView' ? 'display-none' : '')}>
+			<div className='cards9-container'>
 				<CardContainer
 					type='chicken'
 					field='chicken1'

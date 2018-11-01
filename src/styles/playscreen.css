@@ -1,24 +1,45 @@
-.playscreen-container{
+.playscreen-main{
   font-family: 'Indie Flower', cursive;
   /* font-weight: bolder; */
 }
 
+.cards-container-main{
+  display: flex;
+  width: 50%;
+}
+
+.playscreen-content{
+  display: flex;
+}
+
+.playscreen-inventory{
+  width: 40%;
+
+}
+
+
+
 .cards9-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 1em;
+  grid-gap: .5em;
   padding: .5em;
-  max-width: 50%;
+  /* width: 35vw; */
+  max-width: 66%;
   border: 1px solid orange;  
 }
+
 .cards4-container{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1em;
+  grid-gap: .5em;
   padding: .5em;
-  max-width: 50%;
-  /* border: 1px solid orange;   */
+  height: 50%;
+  /* width: 15%; */
+  max-width: 33%;
+  border: 1px solid greenyellow;  
 }
+
 .gray-scale{
   -webkit-filter: grayscale(100%); 
   filter: grayscale(100%);
