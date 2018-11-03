@@ -33,94 +33,113 @@ export const Inventory = (props) => {
 	}
 
 	return (
-		<div className='inventory-text'>
-			Wheat: {props.currentUser.inventory.wheat}
-			<br></br>
-			+{roundToTwo(wheatProduction)}
-			<span>/sec</span>
-			<br></br>
-			-{roundToTwo(wheatConsumption)} /sec  <br></br>
-			<br></br>
+		<div class="Rtable Rtable--4cols">
 
-			Corn: {props.currentUser.inventory.corn}
-			<br></br>
-			+{Math.round(cornProduction * 10) / 10}
-			<span>/sec</span>
-			<br></br>
-			-{roundToTwo(cornConsumption)} /sec  <br></br>
-			<br></br>
+			<div class="Rtable-cell"><h3>Wheat</h3></div>
+			<div class="Rtable-cell">{props.currentUser.inventory.wheat}</div>
+			<div class="Rtable-cell">+{roundToTwo(wheatProduction)}/sec</div>
+			<div class="Rtable-cell"><strong>-{roundToTwo(wheatConsumption)} /sec</strong></div>
 
-			Soy: {props.currentUser.inventory.soy}
-			<br></br>
-			+{Math.round(soyProduction * 10) / 10}
-			<span>/sec</span>
-			<br></br>
-			-{roundToTwo(soyConsumption)} /sec  <br></br>
-			<br></br>
-
-			Clover: {props.currentUser.inventory.clover}
-			<br></br>
-			+{Math.round(cloverProduction * 10) / 10}
-			<span>/sec</span>
-			<br></br>
-			-{roundToTwo(cloverConsumption)} /sec  <br></br>
-			<br></br>
-
-			Fishfood: {props.currentUser.inventory.fishfood}
-			<br></br>
-			+{Math.round(fishfoodProduction * 10) / 10}
-			<span>/sec</span>
-			<br></br>
-			-{roundToTwo(fishfoodConsumption)} /sec  <br></br>
-			<br></br>
-
-
-
-
-
-			Eggs: {props.currentUser.inventory.eggs}
-			<br></br>
-			+{Math.round(eggProduction * 10) / 10}
-			<span>/sec</span>
-			<br></br>
-			<br></br>
-
-			Bacon: {props.currentUser.inventory.bacon}
-			<br></br>
-			+{Math.round(baconProduction * 10) / 10}
-			<span>/sec</span>
-			<br></br>
-			<br></br>
-
-			Wool: {props.currentUser.inventory.wool}
-			<br></br>
-			+{Math.round(woolProduction * 10) / 10}
-			<span>/sec</span>
-			<br></br>
-			<br></br>
-
-			Milk: {props.currentUser.inventory.milk}
-			<br></br>
-			+{Math.round(milkProduction * 10) / 10}
-			<span>/sec</span>
-			<br></br>
-			<br></br>
-
-			Goat Cheese: {props.currentUser.inventory.goatcheese}
-			<br></br>
-			+{Math.round(goatcheeseProduction * 10) / 10}
-			<span>/sec</span>
-			<br></br>
-			<br></br>
-
-			Fish Fillet: {props.currentUser.inventory.fishfillet}
-			<br></br>
-			+{Math.round(fishfilletProduction * 10) / 10}
-			<span>/sec</span>
-			<br></br>
-			<br></br>
 		</div>
 	)
+
+
+
+
+
+
+
+
+
+	// return (
+	// 	<div className='inventory-text'>
+			// Wheat: {props.currentUser.inventory.wheat}
+			// <br></br>
+			// +{roundToTwo(wheatProduction)}
+			// <span>/sec</span>
+			// <br></br>
+			// -{roundToTwo(wheatConsumption)} /sec  <br></br>
+			// <br></br>
+
+	// 		Corn: {props.currentUser.inventory.corn}
+	// 		<br></br>
+	// 		+{Math.round(cornProduction * 10) / 10}
+	// 		<span>/sec</span>
+	// 		<br></br>
+	// 		-{roundToTwo(cornConsumption)} /sec  <br></br>
+	// 		<br></br>
+
+	// 		Soy: {props.currentUser.inventory.soy}
+	// 		<br></br>
+	// 		+{Math.round(soyProduction * 10) / 10}
+	// 		<span>/sec</span>
+	// 		<br></br>
+	// 		-{roundToTwo(soyConsumption)} /sec  <br></br>
+	// 		<br></br>
+
+	// 		Clover: {props.currentUser.inventory.clover}
+	// 		<br></br>
+	// 		+{Math.round(cloverProduction * 10) / 10}
+	// 		<span>/sec</span>
+	// 		<br></br>
+	// 		-{roundToTwo(cloverConsumption)} /sec  <br></br>
+	// 		<br></br>
+
+	// 		Fishfood: {props.currentUser.inventory.fishfood}
+	// 		<br></br>
+	// 		+{Math.round(fishfoodProduction * 10) / 10}
+	// 		<span>/sec</span>
+	// 		<br></br>
+	// 		-{roundToTwo(fishfoodConsumption)} /sec  <br></br>
+	// 		<br></br>
+
+
+
+
+
+	// 		Eggs: {props.currentUser.inventory.eggs}
+	// 		<br></br>
+	// 		+{Math.round(eggProduction * 10) / 10}
+	// 		<span>/sec</span>
+	// 		<br></br>
+	// 		<br></br>
+
+	// 		Bacon: {props.currentUser.inventory.bacon}
+	// 		<br></br>
+	// 		+{Math.round(baconProduction * 10) / 10}
+	// 		<span>/sec</span>
+	// 		<br></br>
+	// 		<br></br>
+
+	// 		Wool: {props.currentUser.inventory.wool}
+	// 		<br></br>
+	// 		+{Math.round(woolProduction * 10) / 10}
+	// 		<span>/sec</span>
+	// 		<br></br>
+	// 		<br></br>
+
+	// 		Milk: {props.currentUser.inventory.milk}
+	// 		<br></br>
+	// 		+{Math.round(milkProduction * 10) / 10}
+	// 		<span>/sec</span>
+	// 		<br></br>
+	// 		<br></br>
+
+	// 		Goat Cheese: {props.currentUser.inventory.goatcheese}
+	// 		<br></br>
+	// 		+{Math.round(goatcheeseProduction * 10) / 10}
+	// 		<span>/sec</span>
+	// 		<br></br>
+	// 		<br></br>
+
+	// 		Fish Fillet: {props.currentUser.inventory.fishfillet}
+	// 		<br></br>
+	// 		+{Math.round(fishfilletProduction * 10) / 10}
+	// 		<span>/sec</span>
+	// 		<br></br>
+	// 		<br></br>
+	// 	</div>
+	// )
 
 }
 

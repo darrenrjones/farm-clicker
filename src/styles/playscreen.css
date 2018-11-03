@@ -5,7 +5,8 @@
 
 .cards-container-main{
   display: flex;
-  width: 50%;
+  width: 66%;
+  height: 75vh;
 }
 
 .playscreen-content{
@@ -13,7 +14,7 @@
 }
 
 .playscreen-inventory{
-  width: 40%;
+  width: 33%;
 
 }
 
@@ -22,21 +23,22 @@
 .cards9-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: .5em;
-  padding: .5em;
+  grid-gap: .3em;
+  padding: .3em;
+  height: 100%;
   /* width: 35vw; */
-  max-width: 66%;
+  max-width: 60%;
   border: 1px solid orange;  
 }
 
 .cards4-container{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: .5em;
-  padding: .5em;
-  height: 50%;
+  grid-gap: .3em;
+  padding: .3em;
+  height: 66%;
   /* width: 15%; */
-  max-width: 33%;
+  max-width: 40%;
   border: 1px solid greenyellow;  
 }
 

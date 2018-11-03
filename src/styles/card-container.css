@@ -6,8 +6,8 @@
   background-image: url('../images/backgrounds/grass-cropped.jpg');
   background-repeat:no-repeat;
   background-size:contain;
-  height: 8vw;
-  width: 7.5vw;
+  height: 13vw;
+  width: 11.5vw;
   background-color: #CEF03C;
   cursor: pointer;
   text-align: center;
@@ -40,24 +40,30 @@
 }
 
 .card-container button {
-  margin: 5px auto;
+  margin: 2px auto;
   width: fit-content;
-  padding: 6px; 
+  padding: 2px; 
   /* font-size: 12px; */
   /* background: var(--purple); */
   background: whitesmoke;
   color: var(--black);
   cursor: pointer;
   /* outline: 0; */
+  font-size: .5em;
   
 }
 .card-container button:hover {
   background: var(--blue);
 }
 
-.x-pointer{
-  cursor: crosshair;
+.card-container p {
+  font-size: .5em;
 }
+
+
+/* .x-pointer{
+  cursor: crosshair;
+} */
 
 
 
