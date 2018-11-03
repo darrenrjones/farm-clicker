@@ -1,5 +1,6 @@
 import React from 'react';
 import CardContainer from '../card/CardContainer';
+import FarmImage from './FarmImage';
 
 
 export const CropRender = props => {

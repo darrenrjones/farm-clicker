@@ -69,6 +69,12 @@ export class Playscreen extends React.Component {
 						managerDisplay={this.state.managerDisplay}
 					/>
 
+					<img
+						src={require('../../images/barn.png')}
+						alt='barn'
+						className='barn-image'
+					/>
+
 					<div className='playscreen-inventory'>
 						<button className="screenDisplay-button" onClick={this.state.screenDisplay === 'cropsView' ? this.animalsRender : this.cropsRender}>
 							{this.state.screenDisplay === 'cropsView' ? <div>animals</div> : <div>crops</div>}

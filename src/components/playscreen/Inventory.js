@@ -40,6 +40,14 @@ export const Inventory = (props) => {
 			<div class="Rtable-cell">+{roundToTwo(wheatProduction)}/sec</div>
 			<div class="Rtable-cell"><strong>-{roundToTwo(wheatConsumption)} /sec</strong></div>
 
+		<div class="Rtable-cell"><h3>Wheat</h3></div>
+			<div class="Rtable-cell">{props.currentUser.inventory.wheat}</div>
+			<div class="Rtable-cell">+{roundToTwo(wheatProduction)}/sec</div>
+			<div class="Rtable-cell"><strong>-{roundToTwo(wheatConsumption)} /sec</strong></div>
+			<div class="Rtable-cell"><h3>Wheat</h3></div>
+			<div class="Rtable-cell">{props.currentUser.inventory.wheat}</div>
+			<div class="Rtable-cell">+{roundToTwo(wheatProduction)}/sec</div>
+			<div class="Rtable-cell"><strong>-{roundToTwo(wheatConsumption)} /sec</strong></div>
 		</div>
 	)
 
