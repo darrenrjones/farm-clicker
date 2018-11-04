@@ -1,5 +1,5 @@
 .playscreen-main{
-  font-family: 'Indie Flower', cursive;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   /* font-weight: bolder; */
 }
 
@@ -12,13 +12,10 @@
 .cards9-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: .3em;
-
+  /* grid-gap: .3em; */
   /* padding: .3em; */
   /* height: 76vh; */
-  /* width: 35vw; */
-  /* max-width: 60%; */
-  border: 1px solid orange;  
+  /* border: 1px solid orange;   */
 
   grid-column: 1 / span 3;
   grid-row: 1 / span 3;
@@ -26,35 +23,60 @@
 .cards4-container{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-gap: .3em;
+  /* grid-gap: .3em; */
   /* row-gap: .3em; */
   /* padding: .3em; */
   /* height: 48vh; */
-  /* width: 15%; */
-  /* max-width: 40%; */
-  border: 1px solid greenyellow;  
+  /* border: 1px solid greenyellow;   */
 
   grid-column: 4 /  span 2;
   grid-row: 2 / span 2;
 }
-.barn-image{
+/* .barn-image{
   font-size: .8em;
   grid-column: 4 / span 2;
   grid-row: 1;
   text-align: center;
+  user-select: none;
+  font-family: fantasy;
+} */
+
+.barn-image{
+  /* font-size: .8em; */
+  grid-column: 4 / span 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* justify-content: space-around; */
+  text-align: center;
+  /* user-select: none; */
+  /* font-family: fantasy; */
 }
 .barn-image img{
-  height: 20vh;
+  /* height: 23vh; */
+  height: 18vh;
+  width: 20vh;
+  margin: 0 auto;
 }
 .barn-image p{
   position: absolute;
-  margin: -4% 6%;
+  /* margin: -4.5% 4%; */
+  left: 52.5%;
+
+top: 20%;
+  background: #E7F3FA;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
   
+}
+.barn-image span{
+  font-size: 1.2em;
 }
 
 .playscreen-inventory{
   font-size: .6em;
-  /* width: 33%; */
   grid-column: 6 / span 2;
   grid-row: 1 / span 3;
 }

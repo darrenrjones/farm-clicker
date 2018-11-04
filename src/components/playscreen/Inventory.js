@@ -38,10 +38,10 @@ export const Inventory = (props) => {
 	return (
 		<div className="inventory-table inventory-table--4cols">
 
-			<div className="inventory-table-cell"><p></p></div>
-			<div className="inventory-table-cell"><h3>In Stock</h3></div>
-			<div className="inventory-table-cell"><h3>+rate/sec</h3></div>
-			<div className="inventory-table-cell"><h3>-rate/sec</h3></div>
+			<div className="inventory-table-cell-icon"><p></p></div>
+			<div className="inventory-table-cell"><p>In Stock</p></div>
+			<div className="inventory-table-cell"><p>+rate/sec</p></div>
+			<div className="inventory-table-cell"><p>-rate/sec</p></div>
 
 			<InventoryTableRow
 				name='wheat'

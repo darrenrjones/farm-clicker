@@ -10,7 +10,7 @@ export const InventoryTableRow = props => {
   return (
     <div className='inventory-table inventory-table-row inventory-table--4cols'>
 
-      <div class="inventory-table-cell">
+      <div class="inventory-table-cell-icon">
         {/* <h3>{props.name}</h3> */}
         <CardImg
           screen={props.screen}
@@ -20,8 +20,8 @@ export const InventoryTableRow = props => {
       </div>
 
       <div class="inventory-table-cell">{props.inventoryName}</div>
-      <div class="inventory-table-cell">+{roundToTwo(props.productionCall)}/sec</div>
-      <div class="inventory-table-cell">-{roundToTwo(props.consumptionCall)} /sec</div>
+      <div class="inventory-table-cell">+{roundToTwo(props.productionCall)}</div>
+      <div class="inventory-table-cell">-{roundToTwo(props.consumptionCall)}</div>
 
     </div>
   )

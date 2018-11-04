@@ -1,11 +1,12 @@
 .progress-bar {
   /* position: relative; */
   margin: 0 auto;
-  height: .5em;
+  height: 1.5vw;
   width: 90%;
   border-radius: 50px;
   border: 1px solid rgb(0, 0, 0);
   background: rgba(255,255,255,0.2);
+  /* display: inline-block; */
 }
 .filler {
   background: rgb(0, 79, 168);
@@ -15,13 +16,13 @@
 .progress-bar-btn-text{
   position: absolute;
   /* text-align: center; */
-  /* width: 27%; */
+  width: 10%;
   -webkit-user-select: none; /* Chrome/Safari */        
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
   -o-user-select: none;
   user-select: none; /* prevent highlight clicking */
-  font-size: .2em;
+  font-size: 1.2vw;
 }
 .disabled-pointer-events{
   pointer-events:none;

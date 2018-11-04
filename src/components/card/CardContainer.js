@@ -161,7 +161,6 @@ export class CardContainer extends React.Component {
 
   render() {
 
-    // const count = this.props.crops[field].count;
     let cardImages = [];
     for (let i = 1; i <= this.currentCard.count; i++) {
       cardImages.push(

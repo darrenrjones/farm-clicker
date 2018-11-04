@@ -24,17 +24,17 @@
 .card-icons-box{
   height: fit-content;
   display: grid;
-  grid-gap: 8px;
+  grid-gap: 3px;
   grid-template-columns: repeat(3, 1fr);
-  margin: 8px auto;
+  margin: 0 auto;
 }
 .small-crop-icon{
-  height: 1em; 
+  height: 3.4vw; 
   width: auto;
   user-select: none;
 }
 .tiny-crop-icon{
-  height: 30px; 
+  height: 2.5vw; 
   width: auto;
   user-select: none;
 }

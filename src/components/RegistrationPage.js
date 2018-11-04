@@ -17,20 +17,9 @@ export const RegistrationPage = (props) => {
 		<div className="home">
 			<div className='landing-logo'></div>
 			<div className={'login-text'}>
-				{/* <CardImg
-          screen={'animals'}
-          source={'chicken'}
-          imgClass={'tiny-crop-icon'}
-        />
-				Log in or Register below
-				<CardImg
-          screen={'animals'}
-          source={'chicken'}
-          imgClass={'tiny-crop-icon'}
-        />			 */}
+		
 			</div>
 			<RegistrationForm />
-			{/* <Link to="/">Login</Link> */}
 		</div>
 	);
 }
