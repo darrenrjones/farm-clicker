@@ -3,44 +3,61 @@
   /* font-weight: bolder; */
 }
 
-.cards-container-main{
-  display: flex;
-  width: 66%;
-  height: 75vh;
-}
-
 .playscreen-content{
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  height: 88vh;
 }
-
-.playscreen-inventory{
-  width: 33%;
-
-}
-
-
-
 .cards9-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: .3em;
-  padding: .3em;
-  height: 100%;
-  /* width: 35vw; */
-  max-width: 60%;
-  border: 1px solid orange;  
-}
 
+  /* padding: .3em; */
+  /* height: 76vh; */
+  /* width: 35vw; */
+  /* max-width: 60%; */
+  border: 1px solid orange;  
+
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 3;
+}
 .cards4-container{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: .3em;
-  padding: .3em;
-  height: 66%;
+  /* row-gap: .3em; */
+  /* padding: .3em; */
+  /* height: 48vh; */
   /* width: 15%; */
-  max-width: 40%;
+  /* max-width: 40%; */
   border: 1px solid greenyellow;  
+
+  grid-column: 4 /  span 2;
+  grid-row: 2 / span 2;
 }
+.barn-image{
+  font-size: .8em;
+  grid-column: 4 / span 2;
+  grid-row: 1;
+  text-align: center;
+}
+.barn-image img{
+  height: 20vh;
+}
+.barn-image p{
+  position: absolute;
+  margin: -4% 6%;
+  
+}
+
+.playscreen-inventory{
+  font-size: .6em;
+  /* width: 33%; */
+  grid-column: 6 / span 2;
+  grid-row: 1 / span 3;
+}
+
 
 .gray-scale{
   -webkit-filter: grayscale(100%); 
