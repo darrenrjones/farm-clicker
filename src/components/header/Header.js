@@ -22,11 +22,11 @@ export class Header extends React.Component {
       <div className='header-container'>
         <div className='logo'></div>
 
-        <div className='cash-display'>
+        {/* <div className='cash-display'> */}
           {/* {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : ''}<br></br> */}
           {/* {this.props.currentUser ? <span>{this.props.currentUser.farmname}</span> : ''}<br></br> */}
-          ${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : ''}
-        </div>
+          {/* ${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : ''} */}
+        {/* </div> */}
 
         <button onClick={this.logout}>logout</button>
 

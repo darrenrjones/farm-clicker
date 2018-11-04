@@ -1,12 +1,11 @@
 import React from 'react';
 import CardContainer from '../card/CardContainer';
-import FarmImage from './FarmImage';
 
 
-export const CropRender = props => {
+export const CropRender9 = props => {
 	return (
-		<div className={'cards-container-main ' + (props.screenDisplay === 'animalsView' ? 'display-none' : '')}>
-			<div className='cards9-container'>
+		// <div className={'cards-container-main ' + (props.screenDisplay === 'animalsView' ? 'display-none' : '')}>
+			<div className={'cards9-container ' + (props.screenDisplay === 'animalsView' ? 'display-none' : '')}>
 
 				<CardContainer
 					type='wheat'
@@ -81,42 +80,7 @@ export const CropRender = props => {
 					managerDisplay={props.managerDisplay}
 				/>
 			</div>
-			<div className={
-				'cards4-container ' + (props.screenDisplay === 'animalsView' ? 'display-none' : '')
-			}>
-				<CardContainer
-					type='clover'
-					field='clover1'
-					screen='crops'
-					feed='null'
-					screenDisplay={props.screenDisplay}
-					managerDisplay={props.managerDisplay}
-				/>
-				<CardContainer
-					type='clover'
-					field='clover2'
-					screen='crops'
-					feed='null'
-					screenDisplay={props.screenDisplay}
-					managerDisplay={props.managerDisplay}
-				/>
-				<CardContainer
-					type='clover'
-					field='clover3'
-					screen='crops'
-					feed='null'
-					screenDisplay={props.screenDisplay}
-					managerDisplay={props.managerDisplay}
-				/>
-				<CardContainer
-					type='fishfood'
-					field='fishfood1'
-					screen='crops'
-					feed='null'
-					screenDisplay={props.screenDisplay}
-					managerDisplay={props.managerDisplay}
-				/>
-			</div>
-		</div>
+
+		//</div>
 	)
 }
