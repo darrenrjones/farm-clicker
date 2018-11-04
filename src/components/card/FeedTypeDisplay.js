@@ -16,6 +16,7 @@ export const FeedTypeDisplay = props => {
           screen={'crops'}
           source={feedArr[i]}
           imgClass={'tiny-crop-icon'}
+          key={`crop-index-${i}`}
 
         />
       );

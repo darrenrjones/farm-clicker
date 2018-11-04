@@ -124,7 +124,7 @@ export default (state = initialState, action) => {
         product = 'milk'
         break;
       case 'goat':
-        product = 'goatmilk'
+        product = 'goatcheese'
         break;
       case 'fish':
         product = 'fishfillet'

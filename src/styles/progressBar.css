@@ -1,7 +1,7 @@
 .progress-bar {
   /* position: relative; */
   margin: 0 auto;
-  height: 20px;
+  height: .5em;
   width: 90%;
   border-radius: 50px;
   border: 1px solid rgb(0, 0, 0);
@@ -14,13 +14,14 @@
 }
 .progress-bar-btn-text{
   position: absolute;
-  text-align: center;
-  width: 27%;
+  /* text-align: center; */
+  /* width: 27%; */
   -webkit-user-select: none; /* Chrome/Safari */        
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
   -o-user-select: none;
   user-select: none; /* prevent highlight clicking */
+  font-size: .2em;
 }
 .disabled-pointer-events{
   pointer-events:none;

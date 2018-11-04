@@ -4,6 +4,10 @@ import { registerUser } from '../../actions/user';
 import { login } from '../../actions/auth';
 import Input from './input';
 import { required, nonEmpty, matches, length, isTrimmed } from './validators';
+
+import { Link } from 'react-router-dom';
+
+
 const passwordLength = length({ min: 8, max: 72 });
 const matchesPassword = matches('password');
 
@@ -25,39 +29,47 @@ export class RegistrationForm extends React.Component {
 					this.onSubmit(values)
 				)}>
 
-				<label htmlFor="username">username :</label>
+				{/* <label htmlFor="username">username :</label> */}
 				<Field
 					component={Input}
 					type="text"
 					name="username"
 					validate={[required, nonEmpty, isTrimmed]}
+					placeholder="Username"
 				/>
-				<label htmlFor="farmname">farm name :</label>
+				{/* <label htmlFor="farmname">farm name :</label> */}
 				<Field
 					component={Input}
 					type="text"
 					name="farmname"
 					validate={[required, nonEmpty, isTrimmed]}
+					placeholder="Farm Name"
 				/>
-				<label htmlFor="password">password :</label>
+				{/* <label htmlFor="password">password :</label> */}
 				<Field
 					component={Input}
 					type="password"
 					name="password"
 					validate={[required, passwordLength, isTrimmed]}
+					placeholder="Password"
 				/>
-				<label htmlFor="passwordConfirm">confirm password :</label>
+				{/* <label htmlFor="passwordConfirm">confirm password :</label> */}
 				<Field
 					component={Input}
 					type="password"
 					name="passwordConfirm"
 					validate={[required, nonEmpty, matchesPassword]}
+					placeholder="Password"
 				/>
 				<button
 					type="submit"
 					disabled={this.props.pristine || this.props.submitting}>
 					Register
-                </button>
+				</button>
+
+				<p>or</p>
+
+				<Link to="/">Login</Link>
 			</form>
 		);
 	}

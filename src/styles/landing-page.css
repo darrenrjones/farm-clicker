@@ -1,16 +1,92 @@
-.home, .login-form{
+.home {
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
+  /* margin-top: 10px; */
+  /* transform: translateY(5vh);
+  -ms-transform: translateY(5vh);
+  -moz-transform: translateY(5vh);
+  -webkit-transform: translateY(5vh);
+  -o-transform: translateY(5vh); */
+}
+.home label {
+  margin: 5px auto; 
 }
 
-.login-form button, .home a {
-  margin-top: 5px;
+.home-content{
+  display: flex;
+  flex-direction: column;
+}
+.home-content a{
+  /* font-family: 'Indie Flower', cursive; */
+  font-size: 1.1em;
+  /* font-weight: bold; */
+  text-align: center;
+  background: whitesmoke;
+  margin: 10px auto;
+  width: 100%;
+  border-radius: 5px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
+}
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  padding: 1.5em;
+  background: whitesmoke;
+  text-align: center;
+  -webkit-box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
+  box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
+  border-radius: 5px;
+  width: 50vw;
+  max-width: 550px;
+}
+
+.login-form input{
+  width: 80%;
+  margin: 5px auto;
+  height: 2.2em;
+  padding-left: 5px;
+}
+
+
+.login-form button {
+  background-color: var(--blue);
+  margin: 10px auto 0 auto;
+  color: whitesmoke;
+  padding: 0;
+  height: 2.5em;
+  width: 86%;
+  max-width: 300px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-form p {
+  margin: 0 auto;
+  font-size: .8em;
 }
 
 .form-error{
   background: var(--yellow);
   width: -moz-fit-content;
+  border-radius: 5px;
+  padding: 0px 4px;
+  position: absolute;
+  margin: 1.2em 12em;
+}
+
+.landing-logo{
+  background-image: url('../images/logoBlue.png');
+
+  height: 9vw;
+  width: 47vw;
+
+  background-repeat:no-repeat;
+  background-size:contain;
 }

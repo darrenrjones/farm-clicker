@@ -2,7 +2,9 @@ import React from 'react';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
 import { login } from '../../actions/auth';
-import { required, nonEmpty } from './validators';
+// import { required, nonEmpty } from './validators';
+
+// import CardImg from '../card/CardImg';
 
 export class LoginForm extends React.Component {
 	onSubmit(values) {
@@ -26,21 +28,28 @@ export class LoginForm extends React.Component {
 					this.onSubmit(values)
 				)}>
 				{error}
-				<label htmlFor="username">username :</label>
+				{/* <CardImg
+          screen={'animals'}
+          source={'chicken'}
+          imgClass={'tiny-crop-icon'}
+        /> */}
+				{/* <label htmlFor="username">username :</label> */}
 				<Field
 					component={Input}
 					type="text"
 					name="username"
 					id="username"
-					validate={[required, nonEmpty]}
+					placeholder="Username"
+					// validate={[required, nonEmpty]}
 				/>
-				<label htmlFor="password">password :</label>
+				{/* <label htmlFor="password">password :</label> */}
 				<Field
 					component={Input}
 					type="password"
 					name="password"
 					id="password"
-					validate={[required, nonEmpty]}
+					placeholder="Password"
+				// validate={[required, nonEmpty]}
 				/>
 				<button disabled={this.props.pristine || this.props.submitting}>
 					Log in

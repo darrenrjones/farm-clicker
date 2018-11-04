@@ -13,14 +13,20 @@
   --red: rgb(189, 44, 44);
 }
 body {
-  margin: .5em;
+  /* margin: .5em; */
   padding: 0;
   font-family: sans-serif;
   background-color: var(--background-brown);
-  font-family: 'Indie Flower', cursive;
-  font-weight: bold;
+  /* display: flex; */
+  /* font-family: 'Indie Flower', cursive; */
+  /* font-weight: bold; */
 }
-body button{
+/* body button{
   font-family: 'Indie Flower', cursive;
   font-weight: bolder;
+} */
+
+.app {
+  /* background-color: var(--background-brown); */
+
 }
