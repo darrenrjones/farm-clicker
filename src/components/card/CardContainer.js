@@ -178,7 +178,12 @@ export class CardContainer extends React.Component {
 
       <div
         onClick={this.props.managerDisplay || this.currentCard.count < 1 || this.currentCard.manager ? this.dontSetIntervalLog : this.progressTickIntervalSet}
-        className={'card-container' + (this.state.ticking ? ' disabled-pointer-events' : '') + (this.currentCard.count < 1 || this.props.managerDisplay || this.currentCard.manager ? ' no-cursor' : '')}
+        className={
+          'card-container' + 
+          (this.state.ticking ? ' disabled-pointer-events' : '') + 
+          (this.currentCard.count < 1 || this.props.managerDisplay || this.currentCard.manager /*|| !enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)  */
+          ? ' no-cursor' : '')
+        }
       >
 
         <div className={'card-icons-box ' + (this.props.managerDisplay ? 'gray-scale reduce-opacity' : '')}>

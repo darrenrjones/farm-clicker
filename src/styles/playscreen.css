@@ -7,6 +7,7 @@
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   height: 88vh;
+  padding: 0px 10px 0px 5px;
 }
 .cards9-container{
   display: grid;
