@@ -11,6 +11,7 @@
   --purple: #3b1f2b;
   --blue: #387d7a;
   --red: rgb(189, 44, 44);
+  font-size: calc(1vw + 1vh + .5vmin);
 }
 body {
   /* margin: .5em; */

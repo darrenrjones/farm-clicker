@@ -19,7 +19,7 @@
 }
 .home-content a{
   /* font-family: 'Indie Flower', cursive; */
-  font-size: 1.1em;
+  /* font-size: 1.1em; */
   /* font-weight: bold; */
   text-align: center;
   background: whitesmoke;
@@ -69,7 +69,7 @@
 
 .login-form p {
   margin: 0 auto;
-  font-size: .8em;
+  /* font-size: .8em; */
 }
 
 .form-error{

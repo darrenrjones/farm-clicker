@@ -37,11 +37,14 @@
   background-size:contain;
 
 }
-/* .barn-image img{
+.playscreen-inventory{
+  /* font-size: .6em; */
+  grid-column: 6 / span 2;
+  grid-row: 1 / span 3;
+}
 
-} */
 .barn-image p{
-  font-size: 1.8vw;
+  font-size: 1.6vw;
   margin: 3%;
   height: 28%;
   /* left: 48%; */
@@ -60,11 +63,7 @@
   font-family: fantasy;
 }
 
-.playscreen-inventory{
-  font-size: .6em;
-  grid-column: 6 / span 2;
-  grid-row: 1 / span 3;
-}
+
 
 
 .gray-scale{
@@ -73,11 +72,4 @@
 }
 .display-none{
   display: none;
-}
-.screenDisplay-button{
-  padding-top: 0;
-}
-.screenDisplay-button span{
-  margin: 0 auto;
-  padding: 0;
 }
