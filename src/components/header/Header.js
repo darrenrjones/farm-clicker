@@ -20,14 +20,10 @@ export class Header extends React.Component {
   render() {
     return (
       <div className='header-container'>
-        <div className='logo'></div>
-
-        {/* <div className='cash-display'> */}
-          {/* {this.props.currentUser ? <span>{this.props.currentUser.username}</span> : ''}<br></br> */}
-          {/* {this.props.currentUser ? <span>{this.props.currentUser.farmname}</span> : ''}<br></br> */}
-          {/* ${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : ''} */}
-        {/* </div> */}
-
+        <div className='logo'></div> 
+        <div>
+          <button>inventory</button>
+        </div>
         <button onClick={this.logout}>logout</button>
 
 

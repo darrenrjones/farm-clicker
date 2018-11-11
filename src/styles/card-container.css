@@ -41,7 +41,7 @@
 
 .card-container button {
   margin: 2px auto;
-  width: fit-content;
+  /* width: fit-content; */
   padding: 2px; 
   /* font-size: 12px; */
   /* background: var(--purple); */
@@ -57,7 +57,7 @@
 }
 
 .card-container p {
-  font-size: .5em;
+  /* font-size: .5em; */
 }
 
 

@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   /* margin: 0 0 3em 0; */
   padding: 0;
-  font-size: 1.3em;
+  /* font-size: 1.3em; */
   user-select: none;
 }
 .inventory-table-row{
@@ -41,5 +41,14 @@
   width: auto;
   user-select: none;
 }
+
+.screenDisplay-button{
+  padding-top: 0;
+}
+.screenDisplay-button span{
+  margin: 0 auto;
+  padding: 0;
+}
+
 
 
