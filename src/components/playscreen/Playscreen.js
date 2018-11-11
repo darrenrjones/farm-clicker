@@ -75,10 +75,10 @@ export class Playscreen extends React.Component {
 					/>
 
 					<div className='barn-image'>
-						<img
+						{/* <img
 							src={require('../../images/barn.png')}
 							alt='barn'
-						/>
+						/> */}
 						<p>{this.props.currentUser.farmname}<br></br>${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : ''}</p>
 						
 

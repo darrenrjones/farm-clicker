@@ -6,73 +6,58 @@
 .playscreen-content{
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(3,1fr);
   height: 88vh;
   padding: 0px 10px 0px 5px;
 }
 .cards9-container{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* grid-gap: .3em; */
-  /* padding: .3em; */
-  /* height: 76vh; */
-  /* border: 1px solid orange;   */
-
   grid-column: 1 / span 3;
   grid-row: 1 / span 3;
 }
 .cards4-container{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  /* grid-gap: .3em; */
-  /* row-gap: .3em; */
-  /* padding: .3em; */
-  /* height: 48vh; */
-  /* border: 1px solid greenyellow;   */
-
   grid-column: 4 /  span 2;
   grid-row: 2 / span 2;
 }
-/* .barn-image{
-  font-size: .8em;
-  grid-column: 4 / span 2;
-  grid-row: 1;
-  text-align: center;
-  user-select: none;
-  font-family: fantasy;
-} */
 
 .barn-image{
-  /* font-size: .8em; */
   grid-column: 4 / span 2;
   grid-row: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: end;
+  align-items: center;
+  user-select: none;  
+  background: url(../images//barn.png);
+  background-position: center;
+  background-repeat:no-repeat;
+  background-size:contain;
 
-  /* justify-content: space-around; */
-  text-align: center;
-  /* user-select: none; */
-  /* font-family: fantasy; */
 }
-.barn-image img{
-  /* height: 23vh; */
-  height: 18vh;
-  width: 20vh;
-  margin: 0 auto;
-}
+/* .barn-image img{
+
+} */
 .barn-image p{
-  position: absolute;
-  /* margin: -4.5% 4%; */
-  left: 52.5%;
-
-top: 20%;
+  font-size: 1.8vw;
+  margin: 3%;
+  height: 28%;
+  /* left: 48%; */
+  /* top: 18.8%; */
+  /* position: fixed; */
+  /* bottom: 0; */
+  text-align: center;
+  width: 52%;
   background: #E7F3FA;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
   
 }
 .barn-image span{
-  font-size: 1.2em;
+  /* font-size: 1.2em; */
+  font-family: fantasy;
 }
 
 .playscreen-inventory{

@@ -178,7 +178,7 @@ export class CardContainer extends React.Component {
       <div
         onClick={this.props.managerDisplay || this.currentCard.count < 1 || this.currentCard.manager ? this.dontSetIntervalLog : this.progressTickIntervalSet}
         className={
-          'card-container' + 
+          'card-container ' + this.props.field +
           (this.state.ticking ? ' disabled-pointer-events' : '') + 
           (this.currentCard.count < 1 || this.props.managerDisplay || this.currentCard.manager /*|| !enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)  */
           ? ' no-cursor' : '')
