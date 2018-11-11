@@ -45,6 +45,7 @@
   border-radius: 5px;
   width: 50vw;
   max-width: 550px;
+  margin-top: -1.5em;
 }
 
 .login-form input{
@@ -84,9 +85,10 @@
 .landing-logo{
   background-image: url('../images/logoBlue.png');
 
-  height: 9vw;
-  width: 47vw;
+  height: 10em;
+  width: 36em;
 
   background-repeat:no-repeat;
   background-size:contain;
+  margin-top: 1em;
 }

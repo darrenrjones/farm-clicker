@@ -40,6 +40,8 @@ export class CardContainer extends React.Component {
     this.props.crops.find(crop => crop.type === this.props.field) : this.props.screen === 'animals' ?
       this.props.animals.find(animal => animal.type === this.props.field) : null
 
+
+
   feed1 = this.props.screen === 'animals' ? this.currentCard.feed.split(' ')[0].replace(/,/g, '') : 'crop';
   feed2 = this.props.screen === 'animals' ? this.currentCard.feed.split(' ')[1] : 'crop';
 
@@ -114,7 +116,7 @@ export class CardContainer extends React.Component {
         this.props.dispatch(buyAnimal(field));
       }
 
-      if(this.currentCard.manager){
+      if (this.currentCard.manager) {
         clearInterval(this.managerInterval);
         this.setManagerInterval();
       }
@@ -124,7 +126,7 @@ export class CardContainer extends React.Component {
 
   hireManager = (field, screen) => {
     console.log(this.currentCard);
-    
+
     if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price && this.currentCard.count > 0) {
       this.props.dispatch(hireManager(field, screen));
       // this.setState({ ticking: true });
@@ -155,10 +157,6 @@ export class CardContainer extends React.Component {
     this.setManagerInterval();
   }
 
-  feedImages = () => {
-
-  }
-
   render() {
 
     let cardImages = [];
@@ -173,15 +171,27 @@ export class CardContainer extends React.Component {
       );
     }
 
+    let feedDisplay;
+    if (this.currentCard.feed) {
+      feedDisplay = (
+        <FeedTypeDisplay
+          feed={this.props.screen === 'animals' ? this.currentCard.feed : 'crops'}
+          screen={this.props.screen}
+        />
+      )
+    } else {
+      feedDisplay = (<p></p>)
+    }
+
     return (
 
       <div
         onClick={this.props.managerDisplay || this.currentCard.count < 1 || this.currentCard.manager ? this.dontSetIntervalLog : this.progressTickIntervalSet}
         className={
           'card-container ' + this.props.field +
-          (this.state.ticking ? ' disabled-pointer-events' : '') + 
+          (this.state.ticking ? ' disabled-pointer-events' : '') +
           (this.currentCard.count < 1 || this.props.managerDisplay || this.currentCard.manager /*|| !enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)  */
-          ? ' no-cursor' : '')
+            ? ' no-cursor' : '')
         }
       >
 
@@ -190,7 +200,7 @@ export class CardContainer extends React.Component {
         </div>
 
         <div className={'card-buttons-container' + (this.displayManagerItems())}>
-          <p>{this.currentCard.count < 9 ? `Next ${this.props.type}: $${this.currentCard.price}` : `Max Capacity`}</p>
+          <p className='next-cost'>{this.currentCard.count < 9 ? `Next ${this.props.type}: $${this.currentCard.price}` : `Max Capacity`}</p>
           <button
             onClick={() => this.incrementFieldCount(this.props.field)}
             disabled={this.props.userCash < this.currentCard.price}
@@ -198,15 +208,7 @@ export class CardContainer extends React.Component {
           >
             {this.generateIncrementButtonText()}
           </button>
-
-          <button
-            onClick={() => { this.hireManager(this.props.field, this.props.screen) }}
-            className={(this.currentCard.manager || this.currentCard.count < 1 || this.props.userCash < this.currentCard.price * 5 ? 'gray-scale disabled-pointer-events' : '')}
-            disabled={this.currentCard.manager || this.currentCard.count < 1}
-          >
-            {!this.currentCard.manager ? `hire manager($${this.currentCard.price * 5})` : `Producing ${rateMap[this.currentCard.count]} ${this.props.type} /sec`}
-          </button>
-
+          
           <button
             className={this.feedBrokenButtonDisplay()}
             onClick={() => { this.fixFeedBroken() }}
@@ -215,11 +217,15 @@ export class CardContainer extends React.Component {
             Fix Feed
           </button>
 
-          <FeedTypeDisplay 
-            feed={this.props.screen === 'animals' ? this.currentCard.feed : 'crops'}
-            screen={this.props.screen}
-          />
+          {feedDisplay}
 
+          <button
+            onClick={() => { this.hireManager(this.props.field, this.props.screen) }}
+            className={(this.currentCard.manager || this.currentCard.count < 1 || this.props.userCash < this.currentCard.price * 5 ? 'gray-scale disabled-pointer-events' : '')}
+            disabled={this.currentCard.manager || this.currentCard.count < 1}
+          >
+            {!this.currentCard.manager ? `hire manager($${this.currentCard.price * 5})` : `Producing ${rateMap[this.currentCard.count]} ${this.props.type} /sec`}
+          </button>
         </div>
 
         <div className={this.props.managerDisplay ? 'display-none' : ''}>
