@@ -20,10 +20,19 @@ export class Header extends React.Component {
   render() {
     return (
       <div className='header-container'>
-        <div className='logo'></div> 
-        <div>
-          <button>inventory</button>
+        <div className='logo'></div>
+
+        <div className='screenDisplay-manager-buttons-container'>
+          <button className="screenDisplay-button" onClick={this.props.screenDisplay === 'cropsView' ? this.props.animalsRender : this.props.cropsRender}>
+            {this.props.screenDisplay === 'cropsView' ? <div>animals</div> : <div>crops</div>}
+          </button>
+
+          <button className="manager-view-toggle-button"
+            onClick={this.props.toggleManagerView}>manager
+          </button>
         </div>
+
+
         <button onClick={this.logout}>logout</button>
 
 

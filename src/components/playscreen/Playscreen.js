@@ -61,6 +61,9 @@ export class Playscreen extends React.Component {
 					currentUser={this.props.currentUser}
 					screenDisplay={this.state.screenDisplay}
 					managerDisplay={this.state.managerDisplay}
+					animalsRender={this.animalsRender}
+					cropsRender={this.cropsRender}
+					toggleManagerView={this.toggleManagerView}
 				/>
 
 				<div className='playscreen-content'>
@@ -96,14 +99,14 @@ export class Playscreen extends React.Component {
 
 
 					<div className='playscreen-inventory'>
-						<button className="screenDisplay-button" onClick={this.state.screenDisplay === 'cropsView' ? this.animalsRender : this.cropsRender}>
+						{/* <button className="screenDisplay-button" onClick={this.state.screenDisplay === 'cropsView' ? this.animalsRender : this.cropsRender}>
 							{this.state.screenDisplay === 'cropsView' ? <div>animals</div> : <div>crops</div>}
 						</button>
 
 						<button className="manager-view-toggle-button"
 							onClick={this.toggleManagerView}>
 							manager
-						</button>
+						</button> */}
 
 						<Inventory currentUser={this.props.currentUser} />
 					</div>
