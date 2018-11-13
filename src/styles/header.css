@@ -13,6 +13,10 @@
   background-size:contain;
 }
 
+.screenDisplay-manager-buttons-container{
+  margin-right: 10%;
+}
+/* 
 .cash-display{
   background: whitesmoke;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -20,4 +24,4 @@
   padding: 3px;
   margin-right: 15%;
   width: fit-content;
-}
+} */
