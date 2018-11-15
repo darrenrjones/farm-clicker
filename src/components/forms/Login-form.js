@@ -1,10 +1,9 @@
 import React from 'react';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
+import Spinner from './Spinner';
 import { login } from '../../actions/auth';
 // import { required, nonEmpty } from './validators';
-
-// import CardImg from '../card/CardImg';
 
 export class LoginForm extends React.Component {
 	onSubmit(values) {
@@ -13,13 +12,18 @@ export class LoginForm extends React.Component {
 	}
 
 	render() {
-		let error;
+		let error, spinner
 		if (this.props.error) {
 			error = (
 				<div className="form-error" aria-live="polite">
 					{this.props.error}
 				</div>
 			);
+		}
+		if(this.props.loading){
+			spinner = <Spinner />
+		} else {
+			spinner = null
 		}
 		return (
 			<form
@@ -28,11 +32,6 @@ export class LoginForm extends React.Component {
 					this.onSubmit(values)
 				)}>
 				{error}
-				{/* <CardImg
-          screen={'animals'}
-          source={'chicken'}
-          imgClass={'tiny-crop-icon'}
-        /> */}
 				{/* <label htmlFor="username">username :</label> */}
 				<Field
 					component={Input}
@@ -53,7 +52,8 @@ export class LoginForm extends React.Component {
 				/>
 				<button disabled={this.props.pristine || this.props.submitting}>
 					Log in
-                </button>
+				</button>
+				{spinner}
 			</form>
 		);
 	}

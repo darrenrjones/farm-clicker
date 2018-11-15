@@ -16,6 +16,11 @@ export const clearAuth = () => ({
 	type: CLEAR_AUTH
 });
 
+export const CLEAR_LOADING = 'CLEAR_LOADING';
+export const clearLoading = () => ({
+	type: CLEAR_LOADING
+});
+
 export const AUTH_REQUEST = 'AUTH_REQUEST';
 export const authRequest = () => ({
 	type: AUTH_REQUEST

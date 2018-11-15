@@ -3,6 +3,8 @@ import { Field, reduxForm, focus } from 'redux-form';
 import { registerUser } from '../../actions/user';
 import { login } from '../../actions/auth';
 import Input from './input';
+import Spinner from './Spinner';
+
 import { required, nonEmpty, matches, length, isTrimmed } from './validators';
 
 import { Link } from 'react-router-dom';
@@ -22,6 +24,15 @@ export class RegistrationForm extends React.Component {
 	}
 
 	render() {
+		let spinner;
+
+		if(this.props.loading){
+			spinner = <Spinner />
+		} else {
+			spinner = null
+		}
+		console.log(this.props);
+		
 		return (
 			<form
 				className="login-form"
@@ -61,6 +72,7 @@ export class RegistrationForm extends React.Component {
 					validate={[required, nonEmpty, matchesPassword]}
 					placeholder="Password"
 				/>
+				{spinner}
 				<button
 					type="submit"
 					disabled={this.props.pristine || this.props.submitting}>

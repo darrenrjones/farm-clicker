@@ -15,32 +15,22 @@ export const LandingPage = (props) => {
 
 	return (
 		<div className="home">
+
 			<div className='landing-logo'></div>
 
-			{/* <div className={'login-text'}> */}
-			{/* <CardImg
-          screen={'animals'}
-          source={'chicken'}
-          imgClass={'tiny-crop-icon'}
-        /> */}
-			{/* Log in or Register below */}
-			{/* <CardImg
-          screen={'animals'}
-          source={'chicken'}
-          imgClass={'tiny-crop-icon'}
-        /> */}
-
-			{/* </div> */}
 			<div className='home-content'>
-				<LoginForm />
+				<LoginForm loading={props.loading}/>
 				<Link to="/register">Register</Link>
+				{/* <Link to={{ pathname: '/register', state: { loading: props.loading} }}>Register</Link> */}
 			</div>
+
 		</div>
 	);
 }
 
 const mapStateToProps = state => ({
-	loggedIn: state.user.currentUser !== null
+	loggedIn: state.user.currentUser !== null,
+	loading: state.auth.loading
 });
 
 export default connect(mapStateToProps)(LandingPage);

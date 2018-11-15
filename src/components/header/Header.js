@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { clearAuth } from '../../actions/auth';
+import { clearAuth, clearLoading } from '../../actions/auth';
 import { save, setLastLogout } from '../../actions/user';
 import { clearAuthToken } from '../../local-storage'
 
@@ -12,8 +12,10 @@ export class Header extends React.Component {
   logout = () => {
     let timeStamp = Math.floor(Date.now() / 1000); //seconds
     this.props.dispatch(setLastLogout(timeStamp));
-    this.props.dispatch(save()) //autosave when logout
-    this.props.dispatch(clearAuth())
+    this.props.dispatch(save()); //autosave when logout
+    this.props.dispatch(clearAuth());
+    this.props.dispatch(clearLoading());
+
     clearAuthToken()
   }
 
@@ -28,7 +30,7 @@ export class Header extends React.Component {
           </button>
 
           <button className="manager-view-toggle-button"
-            onClick={this.props.toggleManagerView}>manager
+            onClick={this.props.toggleManagerView}> Store
           </button>
         </div>
 

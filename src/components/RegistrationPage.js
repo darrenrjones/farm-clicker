@@ -13,19 +13,23 @@ export const RegistrationPage = (props) => {
 	if (props.loggedIn) {
 		return <Redirect to="/playscreen" />;
 	}
+	console.log(props);
+	
 	return (
 		<div className="home">
 			<div className='landing-logo'></div>
 			<div className={'login-text'}>
 		
 			</div>
-			<RegistrationForm />
+			<RegistrationForm loading={props.loading}/>
 		</div>
 	);
 }
 
 const mapStateToProps = state => ({
-	loggedIn: state.user.currentUser !== null
+	loggedIn: state.user.currentUser !== null,
+	loading: state.auth.loading
+
 });
 
 export default connect(mapStateToProps)(RegistrationPage);
