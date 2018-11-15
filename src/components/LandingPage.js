@@ -21,6 +21,7 @@ export const LandingPage = (props) => {
 			<div className='home-content'>
 				<LoginForm loading={props.loading}/>
 				<Link to="/register">Register</Link>
+				{/* <Link to={{ pathname: '/register', state: { loading: props.loading} }}>Register</Link> */}
 			</div>
 
 		</div>

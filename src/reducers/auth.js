@@ -3,6 +3,7 @@ import {
 	CLEAR_AUTH,
 	AUTH_REQUEST,
 	AUTH_ERROR,
+	CLEAR_LOADING,
 } from '../actions/auth';
 
 
@@ -22,6 +23,12 @@ export default (state = initialState, action) => {
 		return {
 			...state,
 			authToken: null
+		};
+	} else if (action.type === CLEAR_LOADING) {
+		return {
+			...state,
+			loading: false,
+			error: null
 		};
 	} else if (action.type === AUTH_REQUEST) {
 		return {

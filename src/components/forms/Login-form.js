@@ -5,8 +5,6 @@ import Spinner from './Spinner';
 import { login } from '../../actions/auth';
 // import { required, nonEmpty } from './validators';
 
-// import CardImg from '../card/CardImg';
-
 export class LoginForm extends React.Component {
 	onSubmit(values) {
 		return this.props.dispatch(login(values.username, values.password));
@@ -34,11 +32,6 @@ export class LoginForm extends React.Component {
 					this.onSubmit(values)
 				)}>
 				{error}
-				{/* <CardImg
-          screen={'animals'}
-          source={'chicken'}
-          imgClass={'tiny-crop-icon'}
-        /> */}
 				{/* <label htmlFor="username">username :</label> */}
 				<Field
 					component={Input}
@@ -60,7 +53,6 @@ export class LoginForm extends React.Component {
 				<button disabled={this.props.pristine || this.props.submitting}>
 					Log in
 				</button>
-				{/* <Spinner /> */}
 				{spinner}
 			</form>
 		);
