@@ -28,7 +28,7 @@ export class Header extends React.Component {
           </button>
 
           <button className="manager-view-toggle-button"
-            onClick={this.props.toggleManagerView}>manager
+            onClick={this.props.toggleManagerView}> Store
           </button>
         </div>
 

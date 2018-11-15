@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
+import Spinner from './Spinner';
 import { login } from '../../actions/auth';
 // import { required, nonEmpty } from './validators';
 
@@ -13,13 +14,18 @@ export class LoginForm extends React.Component {
 	}
 
 	render() {
-		let error;
+		let error, spinner
 		if (this.props.error) {
 			error = (
 				<div className="form-error" aria-live="polite">
 					{this.props.error}
 				</div>
 			);
+		}
+		if(this.props.loading){
+			spinner = <Spinner />
+		} else {
+			spinner = null
 		}
 		return (
 			<form
@@ -53,7 +59,9 @@ export class LoginForm extends React.Component {
 				/>
 				<button disabled={this.props.pristine || this.props.submitting}>
 					Log in
-                </button>
+				</button>
+				{/* <Spinner /> */}
+				{spinner}
 			</form>
 		);
 	}
