@@ -20,19 +20,26 @@ export class RegistrationForm extends React.Component {
 		return this.props
 			.dispatch(registerUser(user))
 			.then(() => this.props.dispatch(login(username, password)));
-
 	}
 
 	render() {
-		let spinner;
+		let spinner, error;
 
 		if(this.props.loading){
 			spinner = <Spinner />
 		} else {
 			spinner = null
 		}
-		console.log(this.props);
+		console.log(this.props.error);
 		
+
+		if (this.props.error) {
+			error = (
+				<div className="form-error form-auth-error" aria-live="polite">
+					{this.props.error}
+				</div>
+			);
+		}
 		return (
 			<form
 				className="login-form"
@@ -72,6 +79,7 @@ export class RegistrationForm extends React.Component {
 					validate={[required, nonEmpty, matchesPassword]}
 					placeholder="Password"
 				/>
+				{error}
 				{spinner}
 				<button
 					type="submit"
