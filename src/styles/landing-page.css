@@ -79,17 +79,29 @@
   /* font-size: .8em; */
 }
 
-.form-error{
+.form-error, .form-validate-error{
   background: var(--yellow);
   width: -moz-fit-content;
   border-radius: 5px;
-  padding: 0px 4px;
-  position: absolute;
-  margin: 1.3em 17%;
+  position: absolute;  
+  /* left: 50%;
+  top: 36%; */
 }
-.form-auth-error {
+.form-validate-error {
+  margin: 1.3em 24%;
+  padding: 2px 6px;
+}
+.form-error {
+  margin: -1.8em 12%;
+  padding: 6px;
+}
+.form-input label {
+  /* border: 5px solid green;
+  width: 55px; */
+}
+/* .form-auth-error {
   position: unset;
-}
+} */
 
 .landing-logo{
   background-image: url('../images/logoBlue.png');
