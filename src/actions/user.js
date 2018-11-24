@@ -65,20 +65,12 @@ export const registerUser = user => dispatch => {
 		.then(res => normalizeResponseErrors(res))
 		.then(res => res.json())
 		.catch(err => {
-			console.log('err from registerUser',err);
-			
-			const { reason, message, location, status } = err;
-			err.message =
-					status === 422 ? 'username taken ya'
-						: 'Unable to login, please try again';
-						console.log(err);
-
+			const { reason, message, location } = err.error;
 			dispatch(authError(err));
 			if (reason === 'ValidationError') {
 				// Convert ValidationErrors into SubmissionErrors for Redux Form
 				return Promise.reject(
 					new SubmissionError({
-						_error: err.message,
 						[location]: message
 					})
 				);
@@ -106,7 +98,6 @@ export const save = () => (dispatch, getState) => {
 			// .then(() => {
 			//   dispatch(saveSuccessDisplay(true));
 			//   // dispatch(refreshAuthToken());
-
 			// })
 			.catch(err => {
 				console.error('error from save',err);

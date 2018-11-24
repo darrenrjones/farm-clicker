@@ -24,6 +24,7 @@ export class RegistrationForm extends React.Component {
 			.dispatch(registerUser(user))
 			.then((res) => {
 				if (res) {
+					// there is a successful user response from register instead of error so redirect to login on line 38
 					this.setState(() => ({
 						registered: true
 					}))
@@ -37,21 +38,10 @@ export class RegistrationForm extends React.Component {
       return <Redirect to='/' />
     }
 		let spinner, error;
-
 		if (this.props.loading) {
 			spinner = <Spinner />
 		} else {
 			spinner = null
-		}
-		console.log(this.props.error);
-
-
-		if (this.props.error) {
-			error = (
-				<div className="form-error form-auth-error" aria-live="polite">
-					{this.props.error}
-				</div>
-			);
 		}
 		return (
 			<form
