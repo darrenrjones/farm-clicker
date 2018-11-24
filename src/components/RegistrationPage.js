@@ -6,6 +6,7 @@ import RegistrationForm from './forms/Registration-form';
 // import CardImg from '../components/card/CardImg';
 
 import '../styles/landing-page.css';
+import { stat } from 'fs';
 
 export const RegistrationPage = (props) => {
 	// If we are logged in (which happens automatically when registration
@@ -13,7 +14,7 @@ export const RegistrationPage = (props) => {
 	if (props.loggedIn) {
 		return <Redirect to="/playscreen" />;
 	}
-	console.log(props);
+	// console.log(props);
 	
 	return (
 		<div className="home">
@@ -21,14 +22,15 @@ export const RegistrationPage = (props) => {
 			<div className={'login-text'}>
 		
 			</div>
-			<RegistrationForm loading={props.loading}/>
+			<RegistrationForm loading={props.loading} error={props.error}/>
 		</div>
 	);
 }
 
 const mapStateToProps = state => ({
 	loggedIn: state.user.currentUser !== null,
-	loading: state.auth.loading
+	loading: state.auth.loading,
+	error: state.auth.error
 
 });
 

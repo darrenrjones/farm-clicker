@@ -3,7 +3,7 @@ import { Field, reduxForm, focus } from 'redux-form';
 import Input from './input';
 import Spinner from './Spinner';
 import { login } from '../../actions/auth';
-// import { required, nonEmpty } from './validators';
+import { required, nonEmpty } from './validators';
 
 export class LoginForm extends React.Component {
 	onSubmit(values) {
@@ -39,7 +39,7 @@ export class LoginForm extends React.Component {
 					name="username"
 					id="username"
 					placeholder="Username"
-					// validate={[required, nonEmpty]}
+					validate={[required, nonEmpty]}
 				/>
 				{/* <label htmlFor="password">password :</label> */}
 				<Field
@@ -48,7 +48,7 @@ export class LoginForm extends React.Component {
 					name="password"
 					id="password"
 					placeholder="Password"
-				// validate={[required, nonEmpty]}
+				validate={[required, nonEmpty]}
 				/>
 				<button disabled={this.props.pristine || this.props.submitting}>
 					Log in

@@ -85,7 +85,10 @@
   border-radius: 5px;
   padding: 0px 4px;
   position: absolute;
-  margin: -0.8em 13%;
+  margin: 1.2em 25%;
+}
+.form-auth-error {
+  position: unset;
 }
 
 .landing-logo{

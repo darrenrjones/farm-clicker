@@ -2,6 +2,7 @@ import { SubmissionError } from 'redux-form';
 
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
+import { authError } from '../actions/auth';
 
 export const SAVE_SUCCESS_DISPLAY = 'SAVE_SUCCESS_DISPLAY';
 export const saveSuccessDisplay = isSuccessful => ({
@@ -64,11 +65,20 @@ export const registerUser = user => dispatch => {
 		.then(res => normalizeResponseErrors(res))
 		.then(res => res.json())
 		.catch(err => {
-			const { reason, message, location } = err;
+			console.log('err from registerUser',err);
+			
+			const { reason, message, location, status } = err;
+			err.message =
+					status === 422 ? 'username taken ya'
+						: 'Unable to login, please try again';
+						console.log(err);
+
+			dispatch(authError(err));
 			if (reason === 'ValidationError') {
 				// Convert ValidationErrors into SubmissionErrors for Redux Form
 				return Promise.reject(
 					new SubmissionError({
+						_error: err.message,
 						[location]: message
 					})
 				);

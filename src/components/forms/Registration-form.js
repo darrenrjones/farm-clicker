@@ -7,32 +7,52 @@ import Spinner from './Spinner';
 
 import { required, nonEmpty, matches, length, isTrimmed } from './validators';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 
 const passwordLength = length({ min: 8, max: 72 });
 const matchesPassword = matches('password');
 
 export class RegistrationForm extends React.Component {
+	state = {
+		registered: false
+	}
 	onSubmit(values) {
 		const { username, farmname, password } = values;
 		const user = { username, farmname, password };
 		return this.props
 			.dispatch(registerUser(user))
-			.then(() => this.props.dispatch(login(username, password)));
+			.then((res) => {
+				if (res) {
+					this.setState(() => ({
+						registered: true
+					}))
+				}
+			})
 
 	}
 
 	render() {
-		let spinner;
+		if (this.state.registered === true) {
+      return <Redirect to='/' />
+    }
+		let spinner, error;
 
-		if(this.props.loading){
+		if (this.props.loading) {
 			spinner = <Spinner />
 		} else {
 			spinner = null
 		}
-		console.log(this.props);
-		
+		console.log(this.props.error);
+
+
+		if (this.props.error) {
+			error = (
+				<div className="form-error form-auth-error" aria-live="polite">
+					{this.props.error}
+				</div>
+			);
+		}
 		return (
 			<form
 				className="login-form"
@@ -72,6 +92,7 @@ export class RegistrationForm extends React.Component {
 					validate={[required, nonEmpty, matchesPassword]}
 					placeholder="Password"
 				/>
+				{error}
 				{spinner}
 				<button
 					type="submit"
