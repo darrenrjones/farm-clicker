@@ -161,7 +161,6 @@ export default (state = initialState, action) => {
       }
       return false;
     });
-    // console.log(fieldObj);
 
     fieldObj.manager = true;
     return {

@@ -53,8 +53,6 @@ export class CardContainer extends React.Component {
 
 
   callDispatchesCheck = () => {
-    // console.log(`call dispatch check : ${this.props.field}`);
-
     //if !enoughFeed clearInterval and set feedChainBroke Display and exit before callDispatches
     if (this.props.screen === 'animals') {
       if (this.currentCard.manager) {
@@ -125,8 +123,6 @@ export class CardContainer extends React.Component {
 
 
   hireManager = (field, screen) => {
-    console.log(this.currentCard);
-
     if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price && this.currentCard.count > 0) {
       this.props.dispatch(hireManager(field, screen));
       // this.setState({ ticking: true });
