@@ -7,15 +7,15 @@ import { required, nonEmpty } from './validators';
 
 export class LoginForm extends React.Component {
 	onSubmit(values) {
+		localStorage.setItem('username', values.username);	
 		return this.props.dispatch(login(values.username, values.password));
-
 	}
 
 	render() {
-		let error, spinner, username;
-		if(localStorage.getItem('username')){
-			// console.log('name found in storaretdw',localStorage.getItem('username') );
-			username = <div className='welcome-username'>Welcome, {localStorage.getItem('username')}!</div>;
+		let localUsername = localStorage.getItem('username');
+		let error, spinner;
+		if(localUsername){
+			localUsername = <div className='welcome-username'>Welcome, {localUsername}!</div>;
 		}
 		if (this.props.error) {
 			error = (
@@ -36,7 +36,7 @@ export class LoginForm extends React.Component {
 					this.onSubmit(values)
 				)}>
 				{error}
-				{username}
+				{localUsername}
 				{/* <label htmlFor="username">username :</label> */}
 				<Field
 					component={Input}
