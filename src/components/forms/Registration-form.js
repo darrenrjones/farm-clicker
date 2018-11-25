@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm, focus } from 'redux-form';
 import { registerUser } from '../../actions/user';
-import { login } from '../../actions/auth';
+// import { login } from '../../actions/auth';
 import Input from './input';
 import Spinner from './Spinner';
 
@@ -24,18 +24,18 @@ export class RegistrationForm extends React.Component {
 			.dispatch(registerUser(user))
 			.then((res) => {
 				if (res) {
+					this.props.setLocalName(res.username);
 					// there is a successful user response from register instead of error so redirect to login on line 38
 					this.setState(() => ({
 						registered: true
 					}))
 				}
 			})
-
 	}
 
 	render() {
-		if (this.state.registered === true) {
-      return <Redirect to='/' />
+		if (this.state.registered === true) {			
+			return <Redirect to='/' />
     }
 		let spinner, error;
 		if (this.props.loading) {

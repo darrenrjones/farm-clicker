@@ -26,6 +26,7 @@
 }
 .disabled-pointer-events{
   pointer-events:none;
+  touch-action: none;
 }
 .reduce-opacity{
   opacity: .4;

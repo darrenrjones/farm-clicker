@@ -7,12 +7,16 @@ import { required, nonEmpty } from './validators';
 
 export class LoginForm extends React.Component {
 	onSubmit(values) {
+		localStorage.setItem('username', values.username);	
 		return this.props.dispatch(login(values.username, values.password));
-
 	}
 
 	render() {
-		let error, spinner
+		let localUsername = localStorage.getItem('username');
+		let error, spinner;
+		if(localUsername){
+			localUsername = <div className='welcome-username'>Welcome, {localUsername}!</div>;
+		}
 		if (this.props.error) {
 			error = (
 				<div className="form-error" aria-live="polite">
@@ -32,6 +36,7 @@ export class LoginForm extends React.Component {
 					this.onSubmit(values)
 				)}>
 				{error}
+				{localUsername}
 				{/* <label htmlFor="username">username :</label> */}
 				<Field
 					component={Input}
