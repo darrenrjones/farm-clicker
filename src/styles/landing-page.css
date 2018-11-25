@@ -2,25 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin-top: 10px; */
-  /* transform: translateY(5vh);
-  -ms-transform: translateY(5vh);
-  -moz-transform: translateY(5vh);
-  -webkit-transform: translateY(5vh);
-  -o-transform: translateY(5vh); */
 }
-.home label {
-  margin: 5px auto; 
-}
-
 .home-content{
   display: flex;
   flex-direction: column;
 }
 .home-content a{
-  /* font-family: 'Indie Flower', cursive; */
-  /* font-size: 1.1em; */
-  /* font-weight: bold; */
+  font-size: 1.2em;
   text-align: center;
   background: whitesmoke;
   margin: 10px auto;
@@ -34,24 +22,24 @@
   box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
 }
 
+.landing-logo{
+  background-image: url('../images/logoBlue.png');
+  height: 7em;
+  width: 36em;
+  background-repeat:no-repeat;
+  background-size:contain;
+  margin-top: 1em;
+}
+
 .login-form{
-  display: flex;
-  flex-direction: column;
-  padding: 2em;
+  padding: 2em 2em 2em 2em;
   background: whitesmoke;
   text-align: center;
   -webkit-box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
   box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
   border-radius: 5px;
   width: 50vw;
-
-  /* height: 20vw; */
   max-width: 550px;
-  margin-top: -1.5em;
-}
-
-.registration-form{
-  height: inherit;
 }
 
 .login-form input{
@@ -61,10 +49,9 @@
   padding-left: 5px;
 }
 
-
 .login-form button {
   background-color: var(--blue);
-  margin: 10px auto 0 auto;
+  margin: 10px auto 2px auto;
   color: whitesmoke;
   padding: 0;
   height: 2.5em;
@@ -72,32 +59,36 @@
   max-width: 300px;
   border-radius: 5px;
   cursor: pointer;
+  border-style: none;
 }
 
 .login-form p {
-  margin: 0 auto;
-  /* font-size: .8em; */
+  margin: 2px auto;
 }
 
-.form-error{
-  background: var(--yellow);
-  width: -moz-fit-content;
-  border-radius: 5px;
-  padding: 0px 4px;
+.form-input label{
+  /* form-error/form-validate-error display inside of input box */
   position: absolute;
-  margin: 1.3em 17%;
-}
-.form-auth-error {
-  position: unset;
+  margin-right: 5%;
 }
 
-.landing-logo{
-  background-image: url('../images/logoBlue.png');
-
-  height: 10em;
-  width: 36em;
-
-  background-repeat:no-repeat;
-  background-size:contain;
-  margin-top: 1em;
+.form-error, .form-validate-error{
+  background: var(--yellow);
+  border-radius: 5px;
 }
+
+.form-validate-error {
+  padding: 4px 16px;
+}
+
+.form-error {
+  margin: -7% auto 0 auto;
+  padding: 6px;
+}
+
+.form-input{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
