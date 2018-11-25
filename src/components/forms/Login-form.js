@@ -12,7 +12,11 @@ export class LoginForm extends React.Component {
 	}
 
 	render() {
-		let error, spinner
+		let error, spinner, username;
+		if(localStorage.getItem('username')){
+			// console.log('name found in storaretdw',localStorage.getItem('username') );
+			username = <div className='welcome-username'>Welcome, {localStorage.getItem('username')}!</div>;
+		}
 		if (this.props.error) {
 			error = (
 				<div className="form-error" aria-live="polite">
@@ -32,6 +36,7 @@ export class LoginForm extends React.Component {
 					this.onSubmit(values)
 				)}>
 				{error}
+				{username}
 				{/* <label htmlFor="username">username :</label> */}
 				<Field
 					component={Input}
