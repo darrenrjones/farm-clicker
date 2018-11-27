@@ -8,6 +8,7 @@ export const CropImg = props => {
       src={require(`../../images/${props.screen}/${props.source}.png`)}
       alt={`icon of ${props.source}`}
       className={props.imgClass}
+      title={props.source}
     />
   )
 };

@@ -8,10 +8,9 @@ export const InventoryTableRow = props => {
     return (Math.round(num * 100) / 100);
   }
   return (
-    <div className='inventory-table inventory-table-row inventory-table--4cols'>
+    <div className='inventory-table inventory-table-row'>
 
       <div className="inventory-table-cell-icon">
-        {/* <h3>{props.name}</h3> */}
         <CardImg
           screen={props.screen}
           source={props.source}
