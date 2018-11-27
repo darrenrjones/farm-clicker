@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { buyCrop, buyAnimal, hireManager, sellAnimalProduct, incrementCrop } from '../../actions/user';
 
-import enoughFeed from '../../actions/helpers/enoughFeed';
+import enoughFeed from '../../actions/helpers/enoughFeed.js';
 
 
 import cardIntMap from '../../actions/helpers/cardIntMap';
@@ -45,14 +45,14 @@ export class CardContainer extends React.Component {
 
 
   ccFeed = this.props.screen === 'animals' ? this.currentCard.feed.split(' ').map(feed => feed.replace(/,/g, '')) : [];
-  feed1 = this.props.screen === 'animals' ? this.currentCard.feed.split(' ')[0].replace(/,/g, '') : 'crop';
-  feed2 = this.props.screen === 'animals' ? this.currentCard.feed.split(' ')[1] : 'crop';
 
   callDispatches = () => {
     if (this.props.screen === 'crops') {
       this.props.dispatch(incrementCrop(this.currentCard))
     } else if (this.props.screen === 'animals') {
       if (!enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
+        console.log('not enough feed cauhgt in callDispatches');
+
         clearInterval(this.intCall);
         this.setState({ percentage: -3, ticking: false });
       }
@@ -60,17 +60,12 @@ export class CardContainer extends React.Component {
     }
   }
 
-
-
   callDispatchesCheck = () => {
-    console.log('callDispatchesCheck called')
-    const enoughFood = enoughFeed(this.ccFeed, this.currentCard, this.props.inventory);
-    //if !enoughFeed clearInterval and set feedChainBroke Display and exit before callDispatches
     if (this.props.screen === 'animals') {
       if (this.currentCard.manager) {
-        if (!enoughFood) {
-          console.log('notenough food caught in manager if statement in callDispatchesCheck');
-          
+        //if being called from managerInterval check enoughFeed to clear managerInterval and set feedChainBroken Display and exit before callDispatches
+        if (!enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
+          console.log('callDispatchesCheck: not enoughFeed from if currentCard.manager caught');
           this.setState({ feedChainBroken: true });
           clearInterval(this.managerInterval);
           return;
@@ -81,43 +76,36 @@ export class CardContainer extends React.Component {
   }
 
   progressTickIntervalSet = () => {
-    if (!this.currentCard.manager) {
+    if (enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
       this.setState({ ticking: true }) // disabled button while progress bar filling    
       this.intCall = setInterval(this.progressTick, (20 + ((this.currentCard.count - 1) * 10)));//1 count -> 1 second --- 9 count -> 5 seconds
     }
-    if (this.props.screen === 'animals') {
-      if (!enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
-        console.log('not enough foooood');
-      }
-    }
   }
-  dontSetIntervalLog = () => {
-    console.log(`dont set tick due to manager or count < 1: ${this.props.field}`)
-  }
+
 
   //progressTick increments percentage of progress bar to fill
   //when it fills to 99 then incrementCrop/sellAnimalProduct is called
+  // else if for animals checks if enoughFeed to stop progress if food ran out
   progressTick = () => {
     if (this.state.percentage >= 99) {
       clearInterval(this.intCall);
       this.setState({ percentage: -3, ticking: false });
       this.callDispatchesCheck();
+    } else if (this.props.screen === 'animals') {
+      if (!enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
+        clearInterval(this.intCall);
+        this.setState({ percentage: -3, ticking: false });
+      }
     }
-    // while bar is not full check for enoughFeed to reset progress bar if food runs out mid progress
-    // else if (this.props.screen === 'animals') {
-    //   if (!enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
-    //     clearInterval(this.intCall);
-    //     this.setState({ percentage: -3, ticking: false });
-    //   }
-    // }
     this.setState({ percentage: this.state.percentage + 3 });
   }
 
   //increment count by 1
   incrementFieldCount = (field) => {
+
     if (this.currentCard.count < 9 && this.props.userCash >= this.currentCard.price) {
-      let currentIntervalName = `${this.props.type}Interval`;
-      console.log('currentIntervalName: ', currentIntervalName);
+      // let currentIntervalName = `${this.props.type}Interval`;
+      // console.log('currentIntervalName: ', currentIntervalName);
 
       if (this.props.screen === 'crops') {
         this.props.dispatch(buyCrop(field));
@@ -165,6 +153,7 @@ export class CardContainer extends React.Component {
   }
 
   render() {
+    // console.log(this.currentCard.type + '---' + enoughFeed(this.ccFeed, this.currentCard, this.props.inventory));
 
     let cardImages = [];
     for (let i = 1; i <= this.currentCard.count; i++) {
@@ -193,12 +182,11 @@ export class CardContainer extends React.Component {
     return (
 
       <div
-        onClick={this.props.managerDisplay || this.currentCard.count < 1 || this.currentCard.manager ? this.dontSetIntervalLog : this.progressTickIntervalSet}
+        onClick={this.props.managerDisplay || this.currentCard.count < 1 || this.currentCard.manager ? '' : this.progressTickIntervalSet}
         className={
           'card-container ' + this.props.field +
           (this.state.ticking ? ' disabled-pointer-events' : '') +
-          (this.currentCard.count < 1 || this.props.managerDisplay || this.currentCard.manager /*|| !enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)  */
-            ? ' no-cursor' : '')
+          (this.currentCard.count < 1 || this.props.managerDisplay || this.currentCard.manager ? ' no-cursor' : '')
         }
       >
 
@@ -242,13 +230,8 @@ export class CardContainer extends React.Component {
             screen={this.props.screen}
             type={this.props.type}
             count={this.currentCard.count}
-            enoughFeed={
-              // if current card is an animals card call enoughFeed helperFunction,
-              // else calling enoughFeed on crops is null so return true to pass into 
-              // ProgressBar component to set className ternary properly
-              this.props.screen === 'animals' ? enoughFeed(this.ccFeed, this.currentCard, this.props.inventory) :
-                this.props.screen === 'crops' ? true : false
-            }
+            //enoughFeed will be true for all crops and animals without a .count and will be disabled elsewhere to limit enoughFeed calls
+            enoughFeed={this.props.screen === 'animals' && this.currentCard.count > 0 ? enoughFeed(this.ccFeed, this.currentCard, this.props.inventory) : true}
             manager={this.currentCard.manager}
             feedChainBroken={this.state.feedChainBroken}
           />

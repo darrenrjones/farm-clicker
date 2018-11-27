@@ -49,7 +49,7 @@ export const ProgressBar = props => {
       className={'progress-bar ' + managerDisplay()}
     >
       <div className={!props.enoughFeed || props.count < 1 ? 'progress-bar-btn-text reduce-opacity' : 'progress-bar-btn-text'} >
-
+        {props.enoughFeed}
         {displayText}
 
       </div>

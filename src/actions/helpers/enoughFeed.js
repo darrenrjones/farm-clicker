@@ -1,27 +1,3 @@
-// module.exports = function (card, inventory) {
-//   console.log(card);  
-//   console.log(inventory); 
-
-//   const consumptionRates = {
-//     // how many crops of each feed type consumed per count
-//     chicken : 1,
-//     pig: 2,
-//     sheep: 2,
-//     cow: 3,
-//     goat: 2,
-//     fish: 5   
-//   }
-//   const type = card.type.slice(0,-1);
-
-
-//   console.log(consumptionRates[type]);
-//   console.log(inventory[type]);
-
-
-
-// };
-
-
 module.exports = function (feed, cCard, inventory) {
   const consumptionRates = {
     chicken: 1,
@@ -29,19 +5,28 @@ module.exports = function (feed, cCard, inventory) {
     sheep: 2,
     cow: 3,
     goat: 2,
-    fish: 5
+    fish: 5,
   }
-  const type = cCard.type.slice(0,-1);
+  const type = cCard.type.slice(0, -1);
   const rate = consumptionRates[type];
-  let timesCalled = 0
+  if (feed.length) {
+    for (let i = 0; i < feed.length; i++) {
+      // console.log(`loop: ${cCard.type} `);
+      // console.log(`inventory: ${feed[i]} ${inventory[feed[i]]} `);
+      // console.log(`count * rate: ${cCard.count * rate} `);
 
-  for (const food of feed) {
-    timesCalled++
-    if(inventory[food] <= cCard.count * rate){
-      return false;
+
+      // console.log(`${cCard.type}'s ${feed[i]}:::::::${inventory[feed][i]} < ${cCard.count * rate}:::: ${inventory[feed][i] < cCard.count * rate}`);
+      // console.log(`${cCard.type}'s ${feed[i]} --- ${inventory[feed[i]]} < ${cCard.count * rate} >>> ${inventory[feed[i]] < cCard.count * rate}`);
+      
+      if (inventory[feed[i]] < cCard.count * rate) {
+        // console.log(`${cCard.type}`);
+        
+        //if inventory doesnt have feedtype > count*rate than not enough food
+        return false;
+      }
     }
   }
-  console.log('TIMESCALLED:',timesCalled);
-  
+
   return true;
 };
