@@ -109,31 +109,41 @@ export default (state = initialState, action) => {
 
 
   else if (action.type === SELL_ANIMAL_PRODUCT) {
-    let product;
-    switch (action.cardObj.type.slice(0, -1)) {
+    let product, animalConsumption;
+    // console.log(action.cardObj);
+
+    switch (action.cardObj.type.slice(0, -1)) { //slice to remove field number
       case 'chicken':
         product = 'eggs'
+        animalConsumption = 1 * action.cardObj.count
         break;
       case 'pig':
         product = 'bacon'
+        animalConsumption = 2 * action.cardObj.count
         break;
       case 'sheep':
         product = 'wool'
+        animalConsumption = 2 * action.cardObj.count
         break;
       case 'cow':
         product = 'milk'
+        animalConsumption = 3 * action.cardObj.count
         break;
       case 'goat':
         product = 'goatcheese'
+        animalConsumption = 2 * action.cardObj.count
         break;
       case 'fish':
         product = 'fishfillet'
+        animalConsumption = 5 * action.cardObj.count
         break;
       default:
+        product = null
         break;
     }
     let feed1 = action.cardObj.feed.split(' ')[0].replace(",", "");
-    let feed2 = action.cardObj.feed.split(' ')[1];
+    let feed2 = action.cardObj.feed.length > 1 ? action.cardObj.feed.split(' ')[1] : null;
+    //goat feed3 and feed4
     return {
       ...state,
       currentUser: {
@@ -141,8 +151,8 @@ export default (state = initialState, action) => {
         cash: state.currentUser.cash += action.cardObj.count, // subtract pre-incremented price
         inventory: {
           ...state.currentUser.inventory,
-          [feed1]: state.currentUser.inventory[feed1] -= action.cardObj.count,
-          [feed2]: state.currentUser.inventory[feed2] -= action.cardObj.count,
+          [feed1]: state.currentUser.inventory[feed1] -= animalConsumption,
+          [feed2]: state.currentUser.inventory[feed2] -= animalConsumption,
           [product]: state.currentUser.inventory[product] += action.cardObj.count
         }
 

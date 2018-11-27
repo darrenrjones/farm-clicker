@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 import { buyCrop, buyAnimal, hireManager, sellAnimalProduct, incrementCrop } from '../../actions/user';
 import enoughFeed from '../../actions/helpers/enoughFeed';
+
+import enoughFeed2 from '../../actions/helpers/enoughFeed2';
+
+
 import cardIntMap from '../../actions/helpers/cardIntMap';
 import rateMap from '../../actions/helpers/rateMap';
 
@@ -65,6 +69,7 @@ export class CardContainer extends React.Component {
         }
       }
     }
+    enoughFeed2(this.currentCard, this.props.inventory);
     this.callDispatches();
   }
 
@@ -85,7 +90,7 @@ export class CardContainer extends React.Component {
   }
 
   //progressTick increments percentage of progress bar to fill
-  //when it fills to 99 then increment Crop/sell Animal Product is called
+  //when it fills to 99 then incrementCrop/sellAnimalProduct is called
   progressTick = () => {
     if (this.state.percentage >= 99) {
       clearInterval(this.intCall);
