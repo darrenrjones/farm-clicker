@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { buyCrop, buyAnimal, hireManager, sellAnimalProduct, incrementCrop } from '../../actions/user';
-import enoughFeed from '../../actions/helpers/enoughFeed';
 
-import enoughFeed2 from '../../actions/helpers/enoughFeed2';
+import enoughFeed from '../../actions/helpers/enoughFeed';
 
 
 import cardIntMap from '../../actions/helpers/cardIntMap';
@@ -45,31 +44,39 @@ export class CardContainer extends React.Component {
       this.props.animals.find(animal => animal.type === this.props.field) : null
 
 
-
+  ccFeed = this.props.screen === 'animals' ? this.currentCard.feed.split(' ').map(feed => feed.replace(/,/g, '')) : [];
   feed1 = this.props.screen === 'animals' ? this.currentCard.feed.split(' ')[0].replace(/,/g, '') : 'crop';
   feed2 = this.props.screen === 'animals' ? this.currentCard.feed.split(' ')[1] : 'crop';
 
   callDispatches = () => {
-    this.props.screen === 'crops' ? this.props.dispatch(incrementCrop(this.currentCard))
-      : this.props.dispatch(sellAnimalProduct(this.currentCard));
+    if (this.props.screen === 'crops') {
+      this.props.dispatch(incrementCrop(this.currentCard))
+    } else if (this.props.screen === 'animals') {
+      if (!enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
+        clearInterval(this.intCall);
+        this.setState({ percentage: -3, ticking: false });
+      }
+      this.props.dispatch(sellAnimalProduct(this.currentCard));
+    }
   }
 
 
 
   callDispatchesCheck = () => {
+    console.log('callDispatchesCheck called')
+    const enoughFood = enoughFeed(this.ccFeed, this.currentCard, this.props.inventory);
     //if !enoughFeed clearInterval and set feedChainBroke Display and exit before callDispatches
     if (this.props.screen === 'animals') {
       if (this.currentCard.manager) {
-        if (!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
-          console.log('managerInterval check stopped interval');
-
+        if (!enoughFood) {
+          console.log('notenough food caught in manager if statement in callDispatchesCheck');
+          
           this.setState({ feedChainBroken: true });
           clearInterval(this.managerInterval);
           return;
         }
       }
     }
-    enoughFeed2(this.currentCard, this.props.inventory);
     this.callDispatches();
   }
 
@@ -79,12 +86,11 @@ export class CardContainer extends React.Component {
       this.intCall = setInterval(this.progressTick, (20 + ((this.currentCard.count - 1) * 10)));//1 count -> 1 second --- 9 count -> 5 seconds
     }
     if (this.props.screen === 'animals') {
-      if (!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
+      if (!enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
         console.log('not enough foooood');
       }
     }
   }
-
   dontSetIntervalLog = () => {
     console.log(`dont set tick due to manager or count < 1: ${this.props.field}`)
   }
@@ -98,12 +104,12 @@ export class CardContainer extends React.Component {
       this.callDispatchesCheck();
     }
     // while bar is not full check for enoughFeed to reset progress bar if food runs out mid progress
-    else if (this.props.screen === 'animals') {
-      if (!enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count)) {
-        clearInterval(this.intCall);
-        this.setState({ percentage: -3, ticking: false });
-      }
-    }
+    // else if (this.props.screen === 'animals') {
+    //   if (!enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
+    //     clearInterval(this.intCall);
+    //     this.setState({ percentage: -3, ticking: false });
+    //   }
+    // }
     this.setState({ percentage: this.state.percentage + 3 });
   }
 
@@ -209,7 +215,7 @@ export class CardContainer extends React.Component {
           >
             {this.generateIncrementButtonText()}
           </button>
-          
+
           <button
             className={this.feedBrokenButtonDisplay()}
             onClick={() => { this.fixFeedBroken() }}
@@ -240,7 +246,7 @@ export class CardContainer extends React.Component {
               // if current card is an animals card call enoughFeed helperFunction,
               // else calling enoughFeed on crops is null so return true to pass into 
               // ProgressBar component to set className ternary properly
-              this.props.screen === 'animals' ? enoughFeed(this.props.inventory[this.feed1], this.props.inventory[this.feed2], this.currentCard.count) :
+              this.props.screen === 'animals' ? enoughFeed(this.ccFeed, this.currentCard, this.props.inventory) :
                 this.props.screen === 'crops' ? true : false
             }
             manager={this.currentCard.manager}
