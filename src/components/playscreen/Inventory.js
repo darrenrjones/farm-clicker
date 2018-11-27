@@ -36,7 +36,7 @@ export const Inventory = (props) => {
 	// }
 
 	return (
-		<div className="inventory-table inventory-table--4cols">
+		<div className="inventory-table-container">
 
 			<div className="inventory-table-cell-icon"><p></p></div>
 			<div className="inventory-table-cell"><p>In Stock</p></div>
@@ -151,59 +151,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps)(Inventory);
-
-
-// <div class="inventory-table-cell"><h3>Wheat</h3></div>
-// <div class="inventory-table-cell">{props.currentUser.inventory.wheat}</div>
-// <div class="inventory-table-cell">+{roundToTwo(wheatProduction)}/sec</div>
-// <div class="inventory-table-cell"><strong>-{roundToTwo(wheatConsumption)} /sec</strong></div>
-
-// <div class="inventory-table-cell"><h3>corn</h3></div>
-// <div class="inventory-table-cell">{props.currentUser.inventory.corn}</div>
-// <div class="inventory-table-cell">+{roundToTwo(cornProduction)}/sec</div>
-// <div class="inventory-table-cell"><strong>-{roundToTwo(cornConsumption)} /sec</strong></div>
-
-// <div class="inventory-table-cell"><h3>soy</h3></div>
-// <div class="inventory-table-cell">{props.currentUser.inventory.soy}</div>
-// <div class="inventory-table-cell">+{roundToTwo(soyProduction)}/sec</div>
-// <div class="inventory-table-cell"><strong>-{roundToTwo(soyConsumption)} /sec</strong></div>
-
-// <div class="inventory-table-cell"><h3>clover</h3></div>
-// <div class="inventory-table-cell">{props.currentUser.inventory.clover}</div>
-// <div class="inventory-table-cell">+{roundToTwo(cloverProduction)}/sec</div>
-// <div class="inventory-table-cell"><strong>-{roundToTwo(cloverConsumption)} /sec</strong></div>
-
-// <div class="inventory-table-cell"><h3>fishfood</h3></div>
-// <div class="inventory-table-cell">{props.currentUser.inventory.fishfood}</div>
-// <div class="inventory-table-cell">+{roundToTwo(fishfoodProduction)}/sec</div>
-// <div class="inventory-table-cell"><strong>-{roundToTwo(fishfoodConsumption)} /sec</strong></div>
-
-//<div class="inventory-table-cell"><h3>eggs</h3></div>
-//	<div class="inventory-table-cell">{props.currentUser.inventory.eggs}</div>
-//	<div class="inventory-table-cell">+{roundToTwo(eggProduction)}/sec</div>
-//	<div class="inventory-table-cell"><strong>-0 /sec</strong></div>
-//
-//	<div class="inventory-table-cell"><h3>bacon</h3></div>
-//	<div class="inventory-table-cell">{props.currentUser.inventory.bacon}</div>
-//	<div class="inventory-table-cell">+{roundToTwo(baconProduction)}/sec</div>
-//	<div class="inventory-table-cell"><strong>-0 /sec</strong></div>
-//
-//	<div class="inventory-table-cell"><h3>wool</h3></div>
-//	<div class="inventory-table-cell">{props.currentUser.inventory.wool}</div>
-//	<div class="inventory-table-cell">+{roundToTwo(woolProduction)}/sec</div>
-//	<div class="inventory-table-cell"><strong>-0 /sec</strong></div>
-//
-//	<div class="inventory-table-cell"><h3>milk</h3></div>
-//	<div class="inventory-table-cell">{props.currentUser.inventory.milk}</div>
-//	<div class="inventory-table-cell">+{roundToTwo(milkProduction)}/sec</div>
-//	<div class="inventory-table-cell"><strong>-0 /sec</strong></div>
-//
-//	<div class="inventory-table-cell"><h3>goatcheese</h3></div>
-//	<div class="inventory-table-cell">{props.currentUser.inventory.goatcheese}</div>
-//	<div class="inventory-table-cell">+{roundToTwo(goatcheeseProduction)}/sec</div>
-//	<div class="inventory-table-cell"><strong>-0 /sec</strong></div>
-//
-//	<div class="inventory-table-cell"><h3>fishfillet</h3></div>
-//	<div class="inventory-table-cell">{props.currentUser.inventory.fishfillet}</div>
-//	<div class="inventory-table-cell">+{roundToTwo(fishfilletProduction)}/sec</div>
-//	<div class="inventory-table-cell"><strong>-0 /sec</strong></div>  

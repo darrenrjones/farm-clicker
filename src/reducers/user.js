@@ -111,48 +111,60 @@ export default (state = initialState, action) => {
   else if (action.type === SELL_ANIMAL_PRODUCT) {
     let product, animalConsumption;
     // console.log(action.cardObj);
+    const feedArr = action.cardObj.feed.split(', ');
+    console.log(feedArr);
+
+    // const individualFeeds = feedArr.
+        
 
     switch (action.cardObj.type.slice(0, -1)) { //slice to remove field number
       case 'chicken':
         product = 'eggs'
-        animalConsumption = 1 * action.cardObj.count
+        animalConsumption = 1 
         break;
       case 'pig':
         product = 'bacon'
-        animalConsumption = 2 * action.cardObj.count
+        animalConsumption = 2 
         break;
       case 'sheep':
         product = 'wool'
-        animalConsumption = 2 * action.cardObj.count
+        animalConsumption = 2 
         break;
       case 'cow':
         product = 'milk'
-        animalConsumption = 3 * action.cardObj.count
+        animalConsumption = 3 
         break;
       case 'goat':
         product = 'goatcheese'
-        animalConsumption = 2 * action.cardObj.count
+        animalConsumption = 2 
         break;
       case 'fish':
         product = 'fishfillet'
-        animalConsumption = 5 * action.cardObj.count
+        animalConsumption = 5 
         break;
       default:
         product = null
         break;
     }
-    let feed1 = action.cardObj.feed.split(' ')[0].replace(",", "");
-    let feed2 = action.cardObj.feed.length > 1 ? action.cardObj.feed.split(' ')[1] : null;
+    // let feed1 = action.cardObj.feed.split(' ')[0].replace(",", "");
+    // let feed2 = action.cardObj.feed.length > 1 ? action.cardObj.feed.split(' ')[1] : null;
+
+    let feed1 = feedArr[0]
+    let feed2 = feedArr[1]
+    let feed3 = feedArr[2]
+    let feed4 = feedArr[3]
     //goat feed3 and feed4
     return {
       ...state,
       currentUser: {
         ...state.currentUser,
-        cash: state.currentUser.cash += action.cardObj.count, // subtract pre-incremented price
+        cash: state.currentUser.cash += action.cardObj.count * (animalConsumption), // subtract pre-incremented price
         inventory: {
           ...state.currentUser.inventory,
-          [feed1]: state.currentUser.inventory[feed1] -= animalConsumption,
-          [feed2]: state.currentUser.inventory[feed2] -= animalConsumption,
+          [feed1]: state.currentUser.inventory[feed1] -= animalConsumption * action.cardObj.count,
+          [feed2]: state.currentUser.inventory[feed2] -= animalConsumption * action.cardObj.count,
+          [feed3]: state.currentUser.inventory[feed3] -= animalConsumption * action.cardObj.count,
+          [feed4]: state.currentUser.inventory[feed4] -= animalConsumption * action.cardObj.count,
           [product]: state.currentUser.inventory[product] += action.cardObj.count
         }
 

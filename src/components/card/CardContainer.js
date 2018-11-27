@@ -84,7 +84,7 @@ export class CardContainer extends React.Component {
 
 
   //progressTick increments percentage of progress bar to fill
-  //when it fills to 99 then incrementCrop/sellAnimalProduct is called
+  //when it fills to 99 then callDispatchesCheck is called
   // else if for animals checks if enoughFeed to stop progress if food ran out
   progressTick = () => {
     if (this.state.percentage >= 99) {
@@ -142,6 +142,9 @@ export class CardContainer extends React.Component {
 
   generateIncrementButtonText = () => {
     // nested ternary to check card's 'this.props.screen' prop to render proper button text 
+    if(this.currentCard.count >= 9) {
+      return 'Field Full'
+    }
     return this.props.screen === 'crops' && this.props.userCash >= this.currentCard.price ?
       `PLANT ${this.props.type.toUpperCase()}` : this.props.screen === 'animals' && this.props.userCash >= this.currentCard.price ?
         `BUY ${this.props.type.toUpperCase()}` : 'insufficient funds'
@@ -182,7 +185,7 @@ export class CardContainer extends React.Component {
     return (
 
       <div
-        onClick={this.props.managerDisplay || this.currentCard.count < 1 || this.currentCard.manager ? '' : this.progressTickIntervalSet}
+        onClick={this.props.managerDisplay || this.currentCard.count < 1 || this.currentCard.manager ? null : this.progressTickIntervalSet}
         className={
           'card-container ' + this.props.field +
           (this.state.ticking ? ' disabled-pointer-events' : '') +
