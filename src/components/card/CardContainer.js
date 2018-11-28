@@ -137,7 +137,7 @@ export class CardContainer extends React.Component {
 
   feedBrokenButtonDisplay = () => {
     //display fix feed button if feedChainBroken and enough Feed
-    return (!this.state.feedChainBroken || this.props.screen === 'crops') ? 'display-none' : undefined;
+    return (!this.state.feedChainBroken || this.props.screen === 'crops') ? 'display-none' : 'fix-feed-button';
   }
 
   generateIncrementButtonText = () => {
@@ -210,7 +210,7 @@ export class CardContainer extends React.Component {
           <button
             className={this.feedBrokenButtonDisplay()}
             onClick={() => { this.fixFeedBroken() }}
-            disabled={this.state.feedChainBroken === false}
+            // disabled={this.state.feedChainBroken === false}
           >
             Fix Feed
           </button>

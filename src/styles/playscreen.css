@@ -48,26 +48,17 @@
 .barn-image p{
   font-size: 1.6vw;
   margin: 3%;
-  height: 28%;
-  /* left: 48%; */
-  /* top: 18.8%; */
-  /* position: fixed; */
-  /* bottom: 0; */
+  height: 28%; 
   text-align: center;
   width: 52%;
   background: #E7F3FA;
   border-bottom-left-radius: 50px;
-  border-bottom-right-radius: 50px;
-  
+  border-bottom-right-radius: 50px;  
 }
 .barn-image span{
   /* font-size: 1.2em; */
   font-family: fantasy;
 }
-
-
-
-
 .gray-scale{
   -webkit-filter: grayscale(100%); 
   filter: grayscale(100%);
@@ -75,3 +66,26 @@
 .display-none{
   display: none;
 }
+
+
+@media screen and (orientation: portrait){
+  .playscreen-content{
+    display: flex;
+    flex-direction: column;
+  }
+  .barn-image{
+    order: -1;
+    background: none; 
+    display: initial; 
+  }
+  .barn-image p{
+    font-size: 1.6vh;
+    margin: 0 auto;
+    background: none;
+  }
+  .card-container{
+    height: 15vh;
+    width: 13vh;
+  }
+}
+
