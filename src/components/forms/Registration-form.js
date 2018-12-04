@@ -1,6 +1,8 @@
 import React from 'react';
 import { Field, reduxForm, focus } from 'redux-form';
 import { registerUser } from '../../actions/user';
+import { clearLoading } from '../../actions/auth';
+
 // import { login } from '../../actions/auth';
 import Input from './input';
 import Spinner from './Spinner';
@@ -33,9 +35,10 @@ export class RegistrationForm extends React.Component {
 	}
 
 	render() {
-		if (this.state.registered === true) {			
+		if (this.state.registered === true) {
+			this.props.dispatch(clearLoading());
 			return <Redirect to='/' />
-    }
+		}
 		let spinner, error;
 		if (this.props.loading) {
 			spinner = <Spinner />

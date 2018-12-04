@@ -2,7 +2,7 @@ import { SubmissionError } from 'redux-form';
 
 import { API_BASE_URL } from '../config';
 import { normalizeResponseErrors } from './utils';
-import { authError } from '../actions/auth';
+import { authError, authRequest } from '../actions/auth';
 
 export const SAVE_SUCCESS_DISPLAY = 'SAVE_SUCCESS_DISPLAY';
 export const saveSuccessDisplay = isSuccessful => ({
@@ -18,12 +18,12 @@ export const incrementCrop = (cropObj) => ({
 
 export const SELL_ANIMAL_PRODUCT = 'SELL_ANIMAL_PRODUCT';
 export const sellAnimalProduct = (cardObj) => ({
-    type: SELL_ANIMAL_PRODUCT, 
-    cardObj
+	type: SELL_ANIMAL_PRODUCT,
+	cardObj
 });
 
 export const DECREMENT_CROP = 'DECREMENT_CROP';
-export const decrementCrop = (count, feed1, feed2 ) => ({
+export const decrementCrop = (count, feed1, feed2) => ({
 	type: DECREMENT_CROP,
 	count,
 	feed1,
@@ -37,24 +37,26 @@ export const buyCrop = (field) => ({
 });
 export const BUY_ANIMAL = 'BUY_ANIMAL';
 export const buyAnimal = (field) => ({
-    type: BUY_ANIMAL,
-    field
+	type: BUY_ANIMAL,
+	field
 });
 
 export const HIRE_MANAGER = 'HIRE_MANAGER';
 export const hireManager = (field, screen) => ({
-    type: HIRE_MANAGER, 
-		field,
-		screen
+	type: HIRE_MANAGER,
+	field,
+	screen
 });
 
 export const SET_LAST_LOGOUT = 'SET_LAST_LOGOUT';
 export const setLastLogout = (timestamp) => ({
-    type: SET_LAST_LOGOUT, 
-		timestamp
+	type: SET_LAST_LOGOUT,
+	timestamp
 });
 
 export const registerUser = user => dispatch => {
+	dispatch(authRequest());
+
 	return fetch(`${API_BASE_URL}/api/user/register`, {
 		method: 'POST',
 		headers: {
@@ -83,8 +85,8 @@ export const save = () => (dispatch, getState) => {
 
 	const currentState = getState();
 	const authToken = getState().auth.authToken;
-	
-	if(currentState.user.currentUser){
+
+	if (currentState.user.currentUser) {
 		return fetch(`${API_BASE_URL}/api/user/save/${currentState.user.currentUser._id}`, {
 			method: 'PUT',
 			headers: {
@@ -100,10 +102,10 @@ export const save = () => (dispatch, getState) => {
 			//   // dispatch(refreshAuthToken());
 			// })
 			.catch(err => {
-				console.error('error from save',err);
+				console.error('error from save', err);
 
 				dispatch(saveSuccessDisplay(false));
-			})		
+			})
 	}
 
 
