@@ -18,9 +18,9 @@ export const InventoryTableRow = props => {
         />    
       </div>
 
-      <div className="inventory-table-cell">{props.inventoryName}</div>
-      <div className="inventory-table-cell">+{roundToTwo(props.productionCall)}</div>
-      <div className="inventory-table-cell">-{roundToTwo(props.consumptionCall)}</div>
+      <div className="inventory-table-cell">{props.inventoryCount}</div>
+      <div className="inventory-table-cell">+{roundToTwo(props.productionAmount)}</div>
+      <div className="inventory-table-cell">-{roundToTwo(props.consumptionAmount)}</div>
 
     </div>
   )

@@ -38,7 +38,7 @@ export class Playscreen extends React.Component {
 		event.preventDefault();
 		let timeStamp = Math.floor(Date.now() / 1000); //seconds
 		this.props.dispatch(setLastLogout(timeStamp));
-		this.props.dispatch(save()) //autosave when logout
+		this.props.dispatch(save()) //autosave when refresh
 	}
 	animalsRender = () => {
 		this.setState({ screenDisplay: 'animalsView' })

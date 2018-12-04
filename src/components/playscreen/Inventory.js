@@ -45,99 +45,99 @@ export const Inventory = (props) => {
 
 			<InventoryTableRow
 				name='wheat'
-				inventoryName={props.currentUser.inventory.wheat}
-				productionCall={wheatProduction}
-				consumptionCall={wheatConsumption}
+				inventoryCount={props.currentUser.inventory.wheat}
+				productionAmount={wheatProduction}
+				consumptionAmount={wheatConsumption}
 				screen='crops'
 				source='wheat'
 			/>
 
 			<InventoryTableRow
 				name='corn'
-				inventoryName={props.currentUser.inventory.corn}
-				productionCall={cornProduction}
-				consumptionCall={cornConsumption}
+				inventoryCount={props.currentUser.inventory.corn}
+				productionAmount={cornProduction}
+				consumptionAmount={cornConsumption}
 				screen='crops'
 				source='corn'
 			/>
 
 			<InventoryTableRow
 				name='soy'
-				inventoryName={props.currentUser.inventory.soy}
-				productionCall={soyProduction}
-				consumptionCall={soyConsumption}
+				inventoryCount={props.currentUser.inventory.soy}
+				productionAmount={soyProduction}
+				consumptionAmount={soyConsumption}
 				screen='crops'
 				source='soy'
 			/>
 
 			<InventoryTableRow
 				name='clover'
-				inventoryName={props.currentUser.inventory.clover}
-				productionCall={cloverProduction}
-				consumptionCall={cloverConsumption}
+				inventoryCount={props.currentUser.inventory.clover}
+				productionAmount={cloverProduction}
+				consumptionAmount={cloverConsumption}
 				screen='crops'
 				source='clover'
 			/>
 
 			<InventoryTableRow
 				name='fishfood'
-				inventoryName={props.currentUser.inventory.fishfood}
-				productionCall={fishfoodProduction}
-				consumptionCall={fishfoodConsumption}
+				inventoryCount={props.currentUser.inventory.fishfood}
+				productionAmount={fishfoodProduction}
+				consumptionAmount={fishfoodConsumption}
 				screen='crops'
 				source='fishfood'
 			/>
 
 			<InventoryTableRow
 				name='eggs'
-				inventoryName={props.currentUser.inventory.eggs}
-				productionCall={eggsProduction}
-				consumptionCall={null}
+				inventoryCount={props.currentUser.inventory.eggs}
+				productionAmount={eggsProduction}
+				consumptionAmount={null}
 				screen='products'
 				source='eggs'
 			/>
 
 			<InventoryTableRow
 				name='bacon'
-				inventoryName={props.currentUser.inventory.bacon}
-				productionCall={baconProduction}
-				consumptionCall={null}
+				inventoryCount={props.currentUser.inventory.bacon}
+				productionAmount={baconProduction}
+				consumptionAmount={null}
 				screen='products'
 				source='bacon'
 			/>
 
 			<InventoryTableRow
 				name='wool'
-				inventoryName={props.currentUser.inventory.wool}
-				productionCall={woolProduction}
-				consumptionCall={null}
+				inventoryCount={props.currentUser.inventory.wool}
+				productionAmount={woolProduction}
+				consumptionAmount={null}
 				screen='products'
 				source='wool'
 			/>
 
 			<InventoryTableRow
 				name='milk'
-				inventoryName={props.currentUser.inventory.milk}
-				productionCall={milkProduction}
-				consumptionCall={null}
+				inventoryCount={props.currentUser.inventory.milk}
+				productionAmount={milkProduction}
+				consumptionAmount={null}
 				screen='products'
 				source='milk'
 			/>
 
 			<InventoryTableRow
 				name='goat'
-				inventoryName={props.currentUser.inventory.goatcheese}
-				productionCall={goatcheeseProduction}
-				consumptionCall={null}
+				inventoryCount={props.currentUser.inventory.goatcheese}
+				productionAmount={goatcheeseProduction}
+				consumptionAmount={null}
 				screen='products'
 				source='goatcheese'
 			/>
 
 			<InventoryTableRow
 				name='fish'
-				inventoryName={props.currentUser.inventory.fishfillet}
-				productionCall={fishfilletProduction}
-				consumptionCall={null}
+				inventoryCount={props.currentUser.inventory.fishfillet}
+				productionAmount={fishfilletProduction}
+				consumptionAmount={null}
 				screen='products'
 				source='fishfillet'
 			/>
