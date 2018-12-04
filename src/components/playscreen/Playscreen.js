@@ -55,7 +55,7 @@ export class Playscreen extends React.Component {
 			return <Redirect to='/' />
 		}
 		return (
-			<div className='playscreen-main'>
+			<div className='playscreen-main' data-test='comp-playscreen'>
 
 				<Header
 					currentUser={this.props.currentUser}
