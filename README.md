@@ -41,7 +41,7 @@ You can now log in or register to play.
 
 ## Adding to the game
 
-## Adding a CardContainer animal or crop
+### Adding a CardContainer animal or crop
 
 You can easily add more animals or crops if you want to swap stuff out to make this game your own.
 
@@ -83,7 +83,7 @@ or
 
 /src/images/crops
 
-##Getting your new card to persist to the database
+### Getting your new card to persist to the database
 
 This is done in the [Server Side code](https://github.com/darrenrjones/farm-clicker-server) but I'll put the instructions here:
 
@@ -142,7 +142,7 @@ Now when a new user registers that crop/animal item will be put onto the crop/an
 note: the default accounts use these .json files for testing purposes so if you add a new crop/animal in the animals1 or crops1 file the user 'farmDummy' will be the only one to receive these items as the other defualt accounts use the number 2 and 3 files. To add your new item to all default account you would also add your new item object to the animals2.json, crops2.json, animals3.json, crops3.json files respecitvely. 
 
 
-### Back-End Tech:
+## Back-End Tech:
 - create-react-app
 - redux
 - redux-form

@@ -13,16 +13,14 @@ export const RegistrationPage = (props) => {
 	if (props.loggedIn) {
 		return <Redirect to="/playscreen" />;
 	}
-	const setName = (username) => {
-		localStorage.setItem('username', username);		
-	}
+
 	return (
 		<div className="home">
 			<div className='landing-logo'></div>
 			<div className={'login-text'}>
 		
 			</div>
-			<RegistrationForm loading={props.loading} setLocalName={(username) => setName(username)}/>
+			<RegistrationForm loading={props.loading} />
 		</div>
 	);
 }

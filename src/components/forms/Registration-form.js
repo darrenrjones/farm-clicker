@@ -24,7 +24,6 @@ export class RegistrationForm extends React.Component {
 			.dispatch(registerUser(user))
 			.then((res) => {
 				if (res) {
-					this.props.setLocalName(res.username);
 					// there is a successful user response from register instead of error so redirect to login on line 38
 					this.setState(() => ({
 						registered: true
