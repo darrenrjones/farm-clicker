@@ -153,12 +153,12 @@ export default (state = initialState, action) => {
     let feed2 = feedArr[1]
     let feed3 = feedArr[2]
     let feed4 = feedArr[3]
-    //goat feed3 and feed4
     return {
       ...state,
       currentUser: {
         ...state.currentUser,
-        cash: state.currentUser.cash += action.cardObj.count * (animalConsumption), // subtract pre-incremented price
+        cash: state.currentUser.cash += action.cardObj.count * (animalConsumption),
+        careerCash: state.currentUser.careerCash += action.cardObj.count * (animalConsumption),
         inventory: {
           ...state.currentUser.inventory,
           [feed1]: state.currentUser.inventory[feed1] -= animalConsumption * action.cardObj.count,
