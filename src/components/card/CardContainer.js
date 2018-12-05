@@ -78,7 +78,8 @@ export class CardContainer extends React.Component {
   progressTickIntervalSet = () => {
     if (enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
       this.setState({ ticking: true }) // disabled button while progress bar filling    
-      this.intCall = setInterval(this.progressTick, (20 + ((this.currentCard.count - 1) * 10)));//1 count -> 1 second --- 9 count -> 5 seconds
+      this.intCall = setInterval(this.progressTick, cardIntMap[this.currentCard.count]/33);
+      //1 count -> 1000ms --- 9 count -> ~5000 ms --- so /33 for 33 ticks to 99% in progressTick
     }
   }
 

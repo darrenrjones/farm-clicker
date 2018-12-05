@@ -1,0 +1,28 @@
+.tutorial-modal {
+  z-index: 5;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 3em 0 1em 0;
+  visibility: hidden;
+}
+
+.tutorial-modal.visible {
+  transform: translateX(0);
+  box-shadow: 0 0 1.5em 0 rgba(0, 0, 0, 0.2);
+  visibility: visible;
+}
+
+.tutorial-modal-content {
+  border: 4px solid var(--background-brown);
+  width: 50vw;
+  /* height: fit-content; */
+  background: var(--blue);
+  
+}

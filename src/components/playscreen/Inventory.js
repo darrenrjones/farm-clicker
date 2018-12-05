@@ -7,8 +7,8 @@ import InventoryTableRow from "./InventoryTableRow";
 
 
 export const Inventory = (props) => {
-
-	const cropRates = props.currentUser.crops.map(crop => crop.manager ? rateMap[crop.count] : 0); // if no manager dont add to total.
+	// cropRates and animalRates checks for manager to only add to rate total if manager present
+	const cropRates = props.currentUser.crops.map(crop => crop.manager ? rateMap[crop.count] : 0); 
 
 	const animalRates = props.currentUser.animals.map(animal => animal.manager ? rateMap[animal.count] : 0);
 
@@ -30,10 +30,6 @@ export const Inventory = (props) => {
 	const soyConsumption = milkProduction + goatcheeseProduction;
 	const cloverConsumption = woolProduction + goatcheeseProduction;
 	const fishfoodConsumption = fishfilletProduction;
-
-	// const roundToTwo = num => {
-	// 	return (Math.round(num * 100) / 100);
-	// }
 
 	return (
 		<div className="inventory-table-container">

@@ -1,5 +1,5 @@
 module.exports = {
-  // field.count: production per second
+  // field.count: miliseconds to progress bar completion
   0: 0,
   1: 1000,
   2: 1500,
