@@ -6,7 +6,8 @@ import { RegistrationPage } from '../../components/RegistrationPage';
 describe('<RegistrationPage />', () => {
 
   it('renders', () => {
-    shallow(<RegistrationPage />);
+    const wrapper = shallow(<RegistrationPage />);
+    expect(wrapper.length).toBe(1);
   })
 
 });

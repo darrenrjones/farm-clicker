@@ -7,6 +7,8 @@
 }
 .inventory-table-container{
   height: 97%;
+  grid-column: 6 / span 2;
+  grid-row: 1 / span 3;
 }
 .inventory-table-row{
   width: 100%;

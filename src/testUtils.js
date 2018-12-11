@@ -1,14 +1,16 @@
 // import checkPropTypes from 'check-prop-types';
 
 import userReducer from './reducers/user';
-import { createStore } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 
 export const findByTestAttr = (wrapper, val) => { //val data-test attr
   return wrapper.find(`[data-test="${val}"]`);
 }
 
 export const storeFactory = (initialState) => {
-  return createStore(userReducer, initialState);
+  const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
+  return createStoreWithMiddleware(userReducer, initialState);
 }
 
 // export const checkProps = (component, conformingProps) => {

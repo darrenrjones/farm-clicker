@@ -63,7 +63,6 @@ export class Playscreen extends React.Component {
 					cropsRender={() => this.toggleScreenDisplay('cropsView')}
 					toggleManagerView={this.toggleManagerView}
 				/>
-				{this.state.screenDisplay}
 
 				<div className='playscreen-content'>
 
@@ -82,7 +81,7 @@ export class Playscreen extends React.Component {
 							alt='barn'
 						/> */}
 						<p>{this.props.currentUser.farmname}<br></br>${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : ''}</p>
-						
+
 					</div>
 
 					<CropRender4
@@ -94,18 +93,7 @@ export class Playscreen extends React.Component {
 						managerDisplay={this.state.managerDisplay}
 					/>
 
-					<div className='playscreen-inventory'>
-						{/* <button className="screenDisplay-button" onClick={this.state.screenDisplay === 'cropsView' ? this.animalsRender : this.cropsRender}>
-							{this.state.screenDisplay === 'cropsView' ? <div>animals</div> : <div>crops</div>}
-						</button>
-
-						<button className="manager-view-toggle-button"
-							onClick={this.toggleManagerView}>
-							manager
-						</button> */}
-
-						<Inventory currentUser={this.props.currentUser} />
-					</div>
+					<Inventory currentUser={this.props.currentUser} />
 
 				</div>
 

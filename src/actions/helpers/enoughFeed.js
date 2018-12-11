@@ -1,4 +1,4 @@
-module.exports = function (feed, cCard, inventory) {
+module.exports = function enoughFeed(feed, cCard, inventory) {
   const consumptionRates = {
     chicken: 1,
     pig: 2,
@@ -20,3 +20,4 @@ module.exports = function (feed, cCard, inventory) {
 
   return true;
 };
+
