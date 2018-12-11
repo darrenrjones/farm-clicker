@@ -11,10 +11,7 @@ export const ProgressBar = props => {
 
   if (props.feedChainBroken) {
     displayText = (`Feed Chain Broken`)
-  } else if (props.screen === 'crops') {
-    if (props.type === 'fishfood') {
-      displayText = `MAKE ${props.type.toUpperCase()}`
-    }
+  } else if (props.screen === 'crops') { 
     displayText = `HARVEST ${props.type.toUpperCase()}`
   } else if (props.screen === 'animals') {
     if (!props.enoughFeed) {
@@ -48,7 +45,12 @@ export const ProgressBar = props => {
     <div
       className={'progress-bar ' + managerDisplay()}
     >
-      <div className={!props.enoughFeed || props.count < 1 ? 'progress-bar-btn-text reduce-opacity' : 'progress-bar-btn-text'} >
+      <div
+        data-test='progress-bar-display-text'
+        className={!props.enoughFeed || props.count < 1
+          ? 'progress-bar-btn-text reduce-opacity'
+          : 'progress-bar-btn-text'}
+      >
         {props.enoughFeed}
         {displayText}
 

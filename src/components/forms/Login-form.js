@@ -28,6 +28,7 @@ export class LoginForm extends React.Component {
 		return (
 			<form
 				className="login-form"
+				data-test='form-comp'
 				onSubmit={this.props.handleSubmit(values =>
 					this.onSubmit(values)
 				)}>
@@ -50,7 +51,7 @@ export class LoginForm extends React.Component {
 					placeholder="Password"
 				validate={[required, nonEmpty]}
 				/>
-				<button disabled={this.props.pristine || this.props.submitting}>
+				<button data-test='login-button' disabled={this.props.pristine || this.props.submitting}>
 					Log in
 				</button>
 				{spinner}
