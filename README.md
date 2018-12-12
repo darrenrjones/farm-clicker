@@ -139,7 +139,7 @@ note: remember to put a 1 at the end of the type as other logic in the code base
 
 Now when a new user registers that crop/animal item will be put onto the crop/animal collection will be added to the databse referring to the userID that was just created.
 
-note: the default accounts use these .json files for testing purposes so if you add a new crop/animal in the animals1 or crops1 file the user 'farmDummy' will be the only one to receive these items as the other defualt accounts use the number 2 and 3 files. To add your new item to all default account you would also add your new item object to the animals2.json, crops2.json, animals3.json, crops3.json files respecitvely. 
+note: the default accounts use these .json files for testing purposes so if you add a new crop/animal in the animals1 or crops1 file the user 'farmDummy' will be the only one to receive these items (and only after reseeding the database as described in the server readme) as the other defualt accounts use the number 2 and 3 (ex. seed/animals2.json and seed/crops2.json files). To add your new item to all default account you would also add your new item object to the animals2.json, crops2.json, animals3.json, crops3.json files respecitvely, and then reseed to reset the database. 
 
 
 ## Back-End Tech:
