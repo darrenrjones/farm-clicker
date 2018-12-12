@@ -125,7 +125,7 @@ export class CardContainer extends React.Component {
 
 
   hireManager = (field, screen) => {
-    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price && this.currentCard.count > 0) {
+    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price * 3 && this.currentCard.count > 0) {
       this.props.dispatch(hireManager(field, screen));
       // this.setState({ ticking: true });
       //auto incrementation due to manager 
@@ -230,7 +230,7 @@ export class CardContainer extends React.Component {
 
           <button
             onClick={() => { this.hireManager(this.props.field, this.props.screen) }}
-            className={(this.currentCard.manager || this.currentCard.count < 1 || this.props.userCash < this.currentCard.price * 5 ? 'gray-scale disabled-pointer-events' : '')}
+            className={(this.currentCard.manager || this.currentCard.count < 1 || this.props.userCash < this.currentCard.price * 3 ? 'gray-scale disabled-pointer-events' : '')}
             disabled={this.currentCard.manager || this.currentCard.count < 1}
           >
             {/* {!this.currentCard.manager ? `hire manager($${this.currentCard.price * 5})` : `Producing ${rateMap[this.currentCard.count]} ${this.props.type} /sec`} */}

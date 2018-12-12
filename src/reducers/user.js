@@ -1,5 +1,5 @@
 import {
-  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, HIRE_MANAGER, SET_LAST_LOGOUT
+  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, HIRE_MANAGER, SET_LAST_LOGOUT, TOGGLE_TUTORIAL
 } from '../actions/user';
 
 import {
@@ -8,10 +8,75 @@ import {
 } from '../actions/auth';
 import { SELL_ANIMAL_PRODUCT, BUY_CROP, BUY_ANIMAL } from '../actions/user';
 
+import { messages } from '../actions/helpers/tutorialMessages';
+import { messageSetter } from '../actions/helpers/messageSetter';
+
 const initialState = {
   currentUser: null,
-  saveSuccess: null
+  saveSuccess: null,
+  message: messages[0],
+  tutorialOn: true,
 };
+
+// const messageSetter = state => {
+//   if (state.currentUser.inventory.wheat >= 5 && state.currentUser.seenMessage < 1) {
+//     return {
+//       tutorialOn: true,
+//       message: messages[1],
+//       currentUser: {
+//         ...state.currentUser,
+//         seenMessage: 1,
+//       }
+//     }
+//   }
+//   else if (state.currentUser.inventory.eggs >= 5 && state.currentUser.seenMessage < 2) {
+//     return {
+//       tutorialOn: true,
+//       message: messages[2],
+//       currentUser: {
+//         ...state.currentUser,
+//         seenMessage: 2,
+//       }
+//     }
+//   } else if (state.currentUser.crops[0].count > 1 && state.currentUser.seenMessage < 3) {
+//     return {
+//       tutorialOn: true,
+//       message: messages[3],
+//       currentUser: {
+//         ...state.currentUser,
+//         seenMessage: 3,
+//       }
+//     }
+//   } else if (state.currentUser.cash >= 25 && state.currentUser.seenMessage < 4) {
+//     return {
+//       tutorialOn: true,
+//       message: messages[4],
+//       currentUser: {
+//         ...state.currentUser,
+//         seenMessage: 4,
+//       }
+//     }
+//   } else if (state.currentUser.crops[0].manager && state.currentUser.seenMessage < 5) {
+//     return {
+//       tutorialOn: true,
+//       message: messages[5],
+//       currentUser: {
+//         ...state.currentUser,
+//         seenMessage: 5,
+//       }
+//     }
+//   } else if (state.currentUser.seenMessage === 5) {
+//     return {
+//       currentUser: {
+//         ...state.currentUser,
+//         seenMessage: 6,
+//       }
+//     }
+//   } else if (state.currentUser.seenMessage > 5) {
+//     return;
+//   }
+
+// }
 
 export default (state = initialState, action) => {
 
@@ -47,7 +112,8 @@ export default (state = initialState, action) => {
           ...state.currentUser.inventory,
           [card]: state.currentUser.inventory[card] += action.cropObj.count
         }
-      }
+      },
+      ...messageSetter(state)
     }
   }
 
@@ -74,7 +140,8 @@ export default (state = initialState, action) => {
           ...copy.slice(index + 1, copy.length + 1)
         ],
         cash: state.currentUser.cash -= cropObj.price / 2 // subtract pre-incremented price
-      }
+      },
+      ...messageSetter(state)
     }
   }
 
@@ -115,32 +182,32 @@ export default (state = initialState, action) => {
     console.log(feedArr);
 
     // const individualFeeds = feedArr.
-        
+
 
     switch (action.cardObj.type.slice(0, -1)) { //slice to remove field number
       case 'chicken':
         product = 'eggs'
-        animalConsumption = 1 
+        animalConsumption = 1
         break;
       case 'pig':
         product = 'bacon'
-        animalConsumption = 2 
+        animalConsumption = 2
         break;
       case 'sheep':
         product = 'wool'
-        animalConsumption = 2 
+        animalConsumption = 2
         break;
       case 'cow':
         product = 'milk'
-        animalConsumption = 3 
+        animalConsumption = 3
         break;
       case 'goat':
         product = 'goatcheese'
-        animalConsumption = 2 
+        animalConsumption = 2
         break;
       case 'fish':
         product = 'fishfillet'
-        animalConsumption = 5 
+        animalConsumption = 5
         break;
       default:
         product = null
@@ -168,7 +235,9 @@ export default (state = initialState, action) => {
           [product]: state.currentUser.inventory[product] += action.cardObj.count
         }
 
-      }
+      },
+      ...messageSetter(state)
+
     }
   }
 
@@ -194,7 +263,7 @@ export default (state = initialState, action) => {
           fieldObj,
           ...cardCopy.slice(index + 1, cardCopy.length + 1)
         ],
-        cash: state.currentUser.cash -= fieldObj.price * 5
+        cash: state.currentUser.cash -= fieldObj.price * 3
       }
     }
   }
@@ -206,6 +275,12 @@ export default (state = initialState, action) => {
         ...state.currentUser,
         lastLogout: action.timestamp
       }
+    }
+  }
+  else if (action.type === TOGGLE_TUTORIAL) {
+    return {
+      ...state,
+      tutorialOn: !state.tutorialOn
     }
   }
 

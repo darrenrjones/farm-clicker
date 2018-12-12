@@ -4,9 +4,10 @@ import '../../styles/modal.css';
 
 export const Welcome = props => {
   return (
-    <div className={'tutorial-modal '}>
+    <div className={`tutorial-modal ${props.tutorialOn ? 'visible' : ''}`}>
       <div className='tutorial-modal-content'>
-        this is a modal div from totoiral/Welcome
+        <p>message: {props.message}</p>
+        <button onClick={props.closeTutorial}>OK</button>
       </div>
     </div>
   )

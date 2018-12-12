@@ -15,7 +15,7 @@ import { Inventory } from './Inventory';
 
 //actions
 // import { clearAuth } from '../../actions/auth';
-import { save, setLastLogout } from '../../actions/user';
+import { save, setLastLogout, toggleTutorial } from '../../actions/user';
 // import { clearAuthToken } from '../../local-storage'
 
 //styles
@@ -46,6 +46,9 @@ export class Playscreen extends React.Component {
 	}
 	toggleScreenDisplay = viewStr => {
 		this.setState({ screenDisplay: viewStr });
+	}
+	toggleTutorialOn = () => {
+		this.props.dispatch(toggleTutorial());
 	}
 
 	render() {
@@ -97,7 +100,11 @@ export class Playscreen extends React.Component {
 
 				</div>
 
-				<Welcome />
+				<Welcome 
+					message={this.props.tutorialMessage}
+					tutorialOn={this.props.tutorialOn}
+					closeTutorial={() => this.toggleTutorialOn()}
+				/>
 
 			</div>
 		);
@@ -106,6 +113,8 @@ export class Playscreen extends React.Component {
 
 const mapStateToProps = state => ({
 	currentUser: state.user.currentUser,
+	tutorialMessage: state.user.message,
+	tutorialOn: state.user.tutorialOn
 });
 
 export default connect(mapStateToProps)(Playscreen);

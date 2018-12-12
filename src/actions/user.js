@@ -48,6 +48,11 @@ export const hireManager = (field, screen) => ({
 	screen
 });
 
+export const TOGGLE_TUTORIAL = 'TOGGLE_TUTORIAL';
+export const toggleTutorial = () => ({
+	type: TOGGLE_TUTORIAL	
+});
+
 
 export const SET_LAST_LOGOUT = 'SET_LAST_LOGOUT';
 export const setLastLogout = (timestamp) => ({
