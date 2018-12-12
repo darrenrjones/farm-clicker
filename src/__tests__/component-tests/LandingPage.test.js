@@ -5,8 +5,9 @@ import { LandingPage } from '../../components/LandingPage';
 
 describe('<LandingPage />', () => {
 
-  it('renders', () => {
-    shallow(<LandingPage />);
+  it('renders without error', () => {
+    const wrapper = shallow(<LandingPage />);
+    expect(wrapper.length).toBe(1);
   })
 
 });

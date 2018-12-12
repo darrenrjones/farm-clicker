@@ -1,5 +1,5 @@
 module.exports = {
-  // field.count: production per second
+  // field.count: production per second due to interval speed per count
   0: 0,
   1: 1,
   2: 1.33,

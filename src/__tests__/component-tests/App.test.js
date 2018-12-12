@@ -6,7 +6,8 @@ import App from '../../components/App';
 describe('<App />', () => {
 
   it('renders', () => {
-    shallow(<App />);
+    const wrapper = shallow(<App />);
+    expect(wrapper.length).toBe(1);
   })
 
 });

@@ -48,6 +48,7 @@ export const hireManager = (field, screen) => ({
 	screen
 });
 
+
 export const SET_LAST_LOGOUT = 'SET_LAST_LOGOUT';
 export const setLastLogout = (timestamp) => ({
 	type: SET_LAST_LOGOUT,

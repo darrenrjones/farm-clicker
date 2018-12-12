@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 //components
 import Header from '../header/Header';
+import Welcome from '../tutorial/Welcome';
 import { CropRender9 } from '../playscreen/CropRender9';
 import { CropRender4 } from '../playscreen/CropRender4';
 
@@ -40,14 +41,11 @@ export class Playscreen extends React.Component {
 		this.props.dispatch(setLastLogout(timeStamp));
 		this.props.dispatch(save()) //autosave when refresh
 	}
-	animalsRender = () => {
-		this.setState({ screenDisplay: 'animalsView' })
-	}
-	cropsRender = () => {
-		this.setState({ screenDisplay: 'cropsView' })
-	}
 	toggleManagerView = () => {
 		this.setState({ managerDisplay: !this.state.managerDisplay })
+	}
+	toggleScreenDisplay = viewStr => {
+		this.setState({ screenDisplay: viewStr });
 	}
 
 	render() {
@@ -61,8 +59,8 @@ export class Playscreen extends React.Component {
 					currentUser={this.props.currentUser}
 					screenDisplay={this.state.screenDisplay}
 					managerDisplay={this.state.managerDisplay}
-					animalsRender={this.animalsRender}
-					cropsRender={this.cropsRender}
+					animalsRender={() => this.toggleScreenDisplay('animalsView')}
+					cropsRender={() => this.toggleScreenDisplay('cropsView')}
 					toggleManagerView={this.toggleManagerView}
 				/>
 
@@ -83,7 +81,6 @@ export class Playscreen extends React.Component {
 							alt='barn'
 						/> */}
 						<p>{this.props.currentUser.farmname}<br></br>${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : ''}</p>
-						
 
 					</div>
 
@@ -96,21 +93,11 @@ export class Playscreen extends React.Component {
 						managerDisplay={this.state.managerDisplay}
 					/>
 
+					<Inventory currentUser={this.props.currentUser} />
 
-
-					<div className='playscreen-inventory'>
-						{/* <button className="screenDisplay-button" onClick={this.state.screenDisplay === 'cropsView' ? this.animalsRender : this.cropsRender}>
-							{this.state.screenDisplay === 'cropsView' ? <div>animals</div> : <div>crops</div>}
-						</button>
-
-						<button className="manager-view-toggle-button"
-							onClick={this.toggleManagerView}>
-							manager
-						</button> */}
-
-						<Inventory currentUser={this.props.currentUser} />
-					</div>
 				</div>
+
+				<Welcome />
 
 			</div>
 		);

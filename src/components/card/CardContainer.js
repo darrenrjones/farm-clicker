@@ -39,9 +39,11 @@ export class CardContainer extends React.Component {
   intCall;
 
   //return currentCard based on whether its animal or crop card
-  currentCard = this.props.screen === 'crops' ?
-    this.props.crops.find(crop => crop.type === this.props.field) : this.props.screen === 'animals' ?
-      this.props.animals.find(animal => animal.type === this.props.field) : null
+  currentCard = this.props.screen === 'crops'
+    ? this.props.crops.find(crop => crop.type === this.props.field)
+    : this.props.screen === 'animals'
+      ? this.props.animals.find(animal => animal.type === this.props.field)
+      : null
 
 
   ccFeed = this.props.screen === 'animals' ? this.currentCard.feed.split(' ').map(feed => feed.replace(/,/g, '')) : [];
@@ -78,7 +80,8 @@ export class CardContainer extends React.Component {
   progressTickIntervalSet = () => {
     if (enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
       this.setState({ ticking: true }) // disabled button while progress bar filling    
-      this.intCall = setInterval(this.progressTick, (20 + ((this.currentCard.count - 1) * 10)));//1 count -> 1 second --- 9 count -> 5 seconds
+      this.intCall = setInterval(this.progressTick, cardIntMap[this.currentCard.count] / 48);
+      //1 count -> 1000ms --- 9 count -> ~5000 ms --- so /33 for 33 ticks to 99% in progressTick
     }
   }
 
@@ -142,13 +145,21 @@ export class CardContainer extends React.Component {
 
   generateIncrementButtonText = () => {
     // nested ternary to check card's 'this.props.screen' prop to render proper button text 
-    if(this.currentCard.count >= 9) {
+    if (this.currentCard.count >= 9) {
       return 'Field Full'
     }
     return this.props.screen === 'crops' && this.props.userCash >= this.currentCard.price ?
       `PLANT ${this.props.type.toUpperCase()}` : this.props.screen === 'animals' && this.props.userCash >= this.currentCard.price ?
         `BUY ${this.props.type.toUpperCase()}` : 'insufficient funds'
   }
+
+  generateHireManagerButtonText = () => {
+    if (this.currentCard.count === 0) {
+      return `no ${this.props.type} found`
+    }
+    return `hire manager($${this.currentCard.price * 5}`
+  }
+
 
   fixFeedBroken = () => {
     this.setState({ feedChainBroken: false })
@@ -210,7 +221,7 @@ export class CardContainer extends React.Component {
           <button
             className={this.feedBrokenButtonDisplay()}
             onClick={() => { this.fixFeedBroken() }}
-            // disabled={this.state.feedChainBroken === false}
+          // disabled={this.state.feedChainBroken === false}
           >
             Fix Feed
           </button>
@@ -222,7 +233,9 @@ export class CardContainer extends React.Component {
             className={(this.currentCard.manager || this.currentCard.count < 1 || this.props.userCash < this.currentCard.price * 5 ? 'gray-scale disabled-pointer-events' : '')}
             disabled={this.currentCard.manager || this.currentCard.count < 1}
           >
-            {!this.currentCard.manager ? `hire manager($${this.currentCard.price * 5})` : `Producing ${rateMap[this.currentCard.count]} ${this.props.type} /sec`}
+            {/* {!this.currentCard.manager ? `hire manager($${this.currentCard.price * 5})` : `Producing ${rateMap[this.currentCard.count]} ${this.props.type} /sec`} */}
+            {!this.currentCard.manager ? this.generateHireManagerButtonText() : `Producing ${rateMap[this.currentCard.count]} ${this.props.type} /sec`}
+
           </button>
         </div>
 
