@@ -11,7 +11,9 @@ export const ProgressBar = props => {
 
   if (props.feedChainBroken) {
     displayText = (`Feed Chain Broken`)
-  } else if (props.screen === 'crops') { 
+  } else if (props.screen === 'crops' && props.type === 'fishfood') {
+    displayText = `MAKE ${props.type.toUpperCase()}`
+  } else if (props.screen === 'crops') {
     displayText = `HARVEST ${props.type.toUpperCase()}`
   } else if (props.screen === 'animals') {
     if (!props.enoughFeed) {
