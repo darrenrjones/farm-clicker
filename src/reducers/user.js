@@ -10,6 +10,7 @@ import { SELL_ANIMAL_PRODUCT, BUY_CROP, BUY_ANIMAL } from '../actions/user';
 
 import { messages } from '../actions/helpers/tutorialMessages';
 import { messageSetter } from '../actions/helpers/messageSetter';
+import  consumptionMap from '../actions/helpers/consumptionMap';
 
 const initialState = {
   currentUser: null,
@@ -123,31 +124,32 @@ export default (state = initialState, action) => {
 
     switch (action.cardObj.type.slice(0, -1)) { //slice to remove field number
       case 'chicken':
-        product = 'eggs'
-        animalConsumption = 1
+        product = consumptionMap.chicken.product
+        animalConsumption = consumptionMap.chicken.consumption
         break;
       case 'pig':
-        product = 'bacon'
-        animalConsumption = 2
+        product = consumptionMap.pig.product
+        animalConsumption = consumptionMap.pig.consumption
         break;
       case 'sheep':
-        product = 'wool'
-        animalConsumption = 2
+        product = consumptionMap.sheep.product
+        animalConsumption = consumptionMap.sheep.consumption
         break;
       case 'cow':
-        product = 'milk'
-        animalConsumption = 3
+        product = consumptionMap.cow.product
+        animalConsumption = consumptionMap.cow.consumption
         break;
       case 'goat':
-        product = 'goatcheese'
-        animalConsumption = 2
+        product = consumptionMap.goat.product
+        animalConsumption = consumptionMap.goat.consumption
         break;
       case 'fish':
-        product = 'fishfillet'
-        animalConsumption = 5
+        product = consumptionMap.fish.product
+        animalConsumption = consumptionMap.fish.consumption
         break;
       default:
-        product = null
+        product = '???'
+        animalConsumption = '?!?'
         break;
     }
     // let feed1 = action.cardObj.feed.split(' ')[0].replace(",", "");
@@ -171,7 +173,6 @@ export default (state = initialState, action) => {
           [feed4]: state.currentUser.inventory[feed4] -= animalConsumption * action.cardObj.count,
           [product]: state.currentUser.inventory[product] += action.cardObj.count
         }
-
       },
       ...messageSetter(state)
 

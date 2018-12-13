@@ -40,15 +40,20 @@
   user-select: none;
 }
 .feed-type-card-display{
-  /* background: rgba(255,255,255,0.8); */
-  display: flex;
-  align-items: center;
+  background: rgba(255,255,255,0.3);
+  /* display: flex; */
+  /* align-items: center; */
   /* justify-content: space-around; */
   font-size: .8em;
 } 
+.feed-type-card-display-icons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .card-container button {
-  margin: 2px auto;
+  margin: 0 auto;
   /* width: fit-content; */
   /* font-size: 12px; */
   /* background: var(--purple); */

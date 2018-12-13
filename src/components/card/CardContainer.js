@@ -133,14 +133,14 @@ export class CardContainer extends React.Component {
     }
   }
 
-  //if managerDisplay, make buttons show up, else they are display-none
+  //if managerDisplay, make buttons show up, else they are display-invisible
   displayManagerItems = () => {
-    return this.props.managerDisplay ? '' : ' display-none';
+    return this.props.managerDisplay ? '' : ' display-invisible';
   }
 
   feedBrokenButtonDisplay = () => {
     //display fix feed button if feedChainBroken and enough Feed
-    return (!this.state.feedChainBroken || this.props.screen === 'crops') ? 'display-none' : 'fix-feed-button';
+    return (!this.state.feedChainBroken || this.props.screen === 'crops') ? 'display-invisible display-none' : 'fix-feed-button';
   }
 
   generateIncrementButtonText = () => {
@@ -187,6 +187,7 @@ export class CardContainer extends React.Component {
         <FeedTypeDisplay
           feed={this.props.screen === 'animals' ? this.currentCard.feed : 'crops'}
           screen={this.props.screen}
+          type={this.props.type}
         />
       )
     } else {
@@ -239,7 +240,7 @@ export class CardContainer extends React.Component {
           </button>
         </div>
 
-        <div className={this.props.managerDisplay ? 'display-none' : ''}>
+        <div className={this.props.managerDisplay ? 'display-invisible' : ''}>
 
           <ProgressBar
             percentage={this.state.percentage}
