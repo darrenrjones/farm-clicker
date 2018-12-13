@@ -30,6 +30,9 @@ export class Playscreen extends React.Component {
 		}
 	}
 	componentDidMount() {
+		// if(this.props.currentUser.carreerCash === 0) {
+		// 	this.props.dispatch(toggleTutorial());
+		// }
 		window.addEventListener("beforeunload", this.onPageUnload);
 	}
 	componentWillUnmount() {

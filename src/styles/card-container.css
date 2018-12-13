@@ -77,4 +77,8 @@
 .no-cursor{
   cursor: default;
 }
+.disabled-pointer-events{
+  pointer-events:none;
+  touch-action: none;
+}
 

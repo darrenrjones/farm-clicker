@@ -157,7 +157,7 @@ export class CardContainer extends React.Component {
     if (this.currentCard.count === 0) {
       return `no ${this.props.type} found`
     }
-    return `hire manager($${this.currentCard.price * 5}`
+    return `hire manager($${this.currentCard.price * 3}`
   }
 
 

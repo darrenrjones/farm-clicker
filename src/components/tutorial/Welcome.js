@@ -1,12 +1,12 @@
 import React from 'react'
 
-import '../../styles/modal.css';
+import '../../styles/tutorial.css';
 
 export const Welcome = props => {
   return (
     <div className={`tutorial-modal ${props.tutorialOn ? 'visible' : ''}`}>
       <div className='tutorial-modal-content'>
-        <p>message: {props.message}</p>
+        <p>{props.message}</p>
         <button onClick={props.closeTutorial}>OK</button>
       </div>
     </div>
