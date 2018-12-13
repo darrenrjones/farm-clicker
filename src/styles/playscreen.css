@@ -61,7 +61,10 @@
   filter: grayscale(100%);
 }
 .display-none{
-  display: none;
+  /* display: none; */
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .2s, opacity .2s linear;
 }
 
 

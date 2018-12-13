@@ -60,6 +60,24 @@ export const setLastLogout = (timestamp) => ({
 	timestamp
 });
 
+export const SET_MESSAGE = 'SET_MESSAGE';
+export const setMessage = (seenMessage) => ({
+	type: SET_MESSAGE,
+	seenMessage
+});
+// export function setMessage(seenMessageLevel) {
+// 	return (dispatch, getState) => {
+// 		const { currentUser } = getState();
+
+// 		dispatch({
+// 			type: SET_MESSAGE,
+// 			seenMessage: currentUser.seenMessage,
+// 			seenMessageLevel
+
+// 		});
+// 	};
+// }
+
 export const registerUser = user => dispatch => {
 	dispatch(authRequest());
 

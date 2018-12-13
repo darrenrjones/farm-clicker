@@ -1,5 +1,5 @@
 import {
-  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, HIRE_MANAGER, SET_LAST_LOGOUT, TOGGLE_TUTORIAL
+  SAVE_SUCCESS_DISPLAY, INCREMENT_CROP, HIRE_MANAGER, SET_LAST_LOGOUT, TOGGLE_TUTORIAL, SET_MESSAGE
 } from '../actions/user';
 
 import {
@@ -14,8 +14,8 @@ import { messageSetter } from '../actions/helpers/messageSetter';
 const initialState = {
   currentUser: null,
   saveSuccess: null,
-  message: messages[0],
-  tutorialOn: true,
+  message: null,
+  tutorialOn: false,
 };
 
 export default (state = initialState, action) => {
@@ -119,10 +119,7 @@ export default (state = initialState, action) => {
     let product, animalConsumption;
     // console.log(action.cardObj);
     const feedArr = action.cardObj.feed.split(', ');
-    console.log(feedArr);
-
-    // const individualFeeds = feedArr.
-
+    // console.log(feedArr);
 
     switch (action.cardObj.type.slice(0, -1)) { //slice to remove field number
       case 'chicken':
@@ -204,7 +201,8 @@ export default (state = initialState, action) => {
           ...cardCopy.slice(index + 1, cardCopy.length + 1)
         ],
         cash: state.currentUser.cash -= fieldObj.price * 3
-      }
+      },
+      ...messageSetter(state)
     }
   }
 
@@ -220,6 +218,13 @@ export default (state = initialState, action) => {
   else if (action.type === TOGGLE_TUTORIAL) {
     return {
       ...state,
+      tutorialOn: !state.tutorialOn
+    }
+  }
+  else if (action.type === SET_MESSAGE) {
+    return {
+      ...state,
+      message: messages[action.seenMessage],
       tutorialOn: !state.tutorialOn
     }
   }

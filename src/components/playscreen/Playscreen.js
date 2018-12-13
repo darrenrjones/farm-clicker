@@ -29,10 +29,9 @@ export class Playscreen extends React.Component {
 			managerDisplay: false,
 		}
 	}
+
+
 	componentDidMount() {
-		// if(this.props.currentUser.carreerCash === 0) {
-		// 	this.props.dispatch(toggleTutorial());
-		// }
 		window.addEventListener("beforeunload", this.onPageUnload);
 	}
 	componentWillUnmount() {
@@ -103,7 +102,7 @@ export class Playscreen extends React.Component {
 
 				</div>
 
-				<Welcome 
+				<Welcome
 					message={this.props.tutorialMessage}
 					tutorialOn={this.props.tutorialOn}
 					closeTutorial={() => this.toggleTutorialOn()}

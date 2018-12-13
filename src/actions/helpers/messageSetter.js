@@ -1,6 +1,7 @@
 import { messages } from './tutorialMessages';
 export const messageSetter = (state) => {
-
+  console.log('messagesetter ran');
+  
   if (state.currentUser.inventory.wheat >= 5 && state.currentUser.seenMessage < 1) {
     return {
       tutorialOn: true,
@@ -27,9 +28,11 @@ export const messageSetter = (state) => {
       currentUser: {
         ...state.currentUser,
         seenMessage: 3,
+        cash: state.currentUser.cash + 20,
+        careerCash: state.currentUser.careerCash + 20,
       }
     }
-  } else if (state.currentUser.cash >= 25 && state.currentUser.seenMessage < 4) {
+  } else if (state.currentUser.cash >= 30 && state.currentUser.seenMessage < 4) {
     return {
       tutorialOn: true,
       message: messages[4],
@@ -38,7 +41,7 @@ export const messageSetter = (state) => {
         seenMessage: 4,
       }
     }
-  } else if (state.currentUser.crops[0].manager && state.currentUser.seenMessage < 5) {
+  } else if ((state.currentUser.crops[0].manager || state.currentUser.animals[0].manager) && state.currentUser.seenMessage < 5) {
     return {
       tutorialOn: true,
       message: messages[5],

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { clearAuth, clearLoading } from '../../actions/auth';
-import { save, setLastLogout } from '../../actions/user';
+import { save, setLastLogout, toggleTutorial, setMessage } from '../../actions/user';
 import { clearAuthToken } from '../../local-storage'
 
 import '../../styles/header.css';
@@ -18,6 +18,10 @@ export class Header extends React.Component {
 
     clearAuthToken()
   }
+  componentDidMount() {
+    this.props.dispatch(setMessage(this.props.currentUser.seenMessage));
+
+  }
 
   render() {
     return (
@@ -26,11 +30,18 @@ export class Header extends React.Component {
 
         <div className='screenDisplay-manager-buttons-container'>
           <button className="screenDisplay-button" onClick={this.props.screenDisplay === 'cropsView' ? this.props.animalsRender : this.props.cropsRender}>
-            {this.props.screenDisplay === 'cropsView' ? <div>animals</div> : <div>crops</div>}
+            {this.props.screenDisplay === 'cropsView' ? <div>Animals</div> : <div>Crops</div>}
           </button>
 
           <button className="manager-view-toggle-button"
             onClick={this.props.toggleManagerView}> Store
+          </button>
+
+          <button
+            className={this.props.currentUser.seenMessage > 5 ? 'display-none' : ''}
+            onClick={() => this.props.dispatch(toggleTutorial())}
+          >
+            help
           </button>
         </div>
 
