@@ -125,7 +125,7 @@ export class CardContainer extends React.Component {
 
 
   hireManager = (field, screen) => {
-    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price && this.currentCard.count > 0) {
+    if (!this.currentCard.manager && this.props.userCash >= this.currentCard.price * 3 && this.currentCard.count > 0) {
       this.props.dispatch(hireManager(field, screen));
       // this.setState({ ticking: true });
       //auto incrementation due to manager 
@@ -133,14 +133,14 @@ export class CardContainer extends React.Component {
     }
   }
 
-  //if managerDisplay, make buttons show up, else they are display-none
+  //if managerDisplay, make buttons show up, else they are display-invisible
   displayManagerItems = () => {
-    return this.props.managerDisplay ? '' : ' display-none';
+    return this.props.managerDisplay ? '' : ' display-invisible';
   }
 
   feedBrokenButtonDisplay = () => {
     //display fix feed button if feedChainBroken and enough Feed
-    return (!this.state.feedChainBroken || this.props.screen === 'crops') ? 'display-none' : 'fix-feed-button';
+    return (!this.state.feedChainBroken || this.props.screen === 'crops') ? 'display-invisible display-none' : 'fix-feed-button';
   }
 
   generateIncrementButtonText = () => {
@@ -157,7 +157,7 @@ export class CardContainer extends React.Component {
     if (this.currentCard.count === 0) {
       return `no ${this.props.type} found`
     }
-    return `hire manager($${this.currentCard.price * 5}`
+    return `hire manager($${this.currentCard.price * 3}`
   }
 
 
@@ -187,6 +187,7 @@ export class CardContainer extends React.Component {
         <FeedTypeDisplay
           feed={this.props.screen === 'animals' ? this.currentCard.feed : 'crops'}
           screen={this.props.screen}
+          type={this.props.type}
         />
       )
     } else {
@@ -230,7 +231,7 @@ export class CardContainer extends React.Component {
 
           <button
             onClick={() => { this.hireManager(this.props.field, this.props.screen) }}
-            className={(this.currentCard.manager || this.currentCard.count < 1 || this.props.userCash < this.currentCard.price * 5 ? 'gray-scale disabled-pointer-events' : '')}
+            className={(this.currentCard.manager || this.currentCard.count < 1 || this.props.userCash < this.currentCard.price * 3 ? 'gray-scale disabled-pointer-events' : '')}
             disabled={this.currentCard.manager || this.currentCard.count < 1}
           >
             {/* {!this.currentCard.manager ? `hire manager($${this.currentCard.price * 5})` : `Producing ${rateMap[this.currentCard.count]} ${this.props.type} /sec`} */}
@@ -239,7 +240,7 @@ export class CardContainer extends React.Component {
           </button>
         </div>
 
-        <div className={this.props.managerDisplay ? 'display-none' : ''}>
+        <div className={this.props.managerDisplay ? 'display-invisible' : ''}>
 
           <ProgressBar
             percentage={this.state.percentage}

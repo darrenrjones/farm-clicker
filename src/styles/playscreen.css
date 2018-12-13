@@ -60,6 +60,12 @@
   -webkit-filter: grayscale(100%); 
   filter: grayscale(100%);
 }
+.display-invisible{
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .2s, opacity .2s linear;
+}
+
 .display-none{
   display: none;
 }

@@ -3,8 +3,6 @@ import enoughFeed from './enoughFeed';
 const inventory = {
   wheat: 5
 }
-const rate = 1;
-
 const feed = ['wheat'];
 
 
