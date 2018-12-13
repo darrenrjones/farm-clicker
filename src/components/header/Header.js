@@ -38,7 +38,7 @@ export class Header extends React.Component {
           </button>
 
           <button
-            className={this.props.currentUser.seenMessage > 5 ? 'display-none' : ''}
+            className={this.props.currentUser.seenMessage > 5 ? 'display-invisible' : ''}
             onClick={() => this.props.dispatch(toggleTutorial())}
           >
             help
