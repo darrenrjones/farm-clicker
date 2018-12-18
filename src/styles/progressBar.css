@@ -13,13 +13,14 @@
 }
 .progress-bar-btn-text{
   position: absolute;
-  width: 10.5%;
+  width: 11.5%;
   -webkit-user-select: none; /* Chrome/Safari */        
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+ */
   -o-user-select: none;
   user-select: none; /* prevent highlight clicking */
   font-size: .65em;
+  margin-top: 1px;
 }
 .reduce-opacity{
   opacity: .4;

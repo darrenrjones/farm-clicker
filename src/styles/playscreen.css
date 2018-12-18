@@ -1,6 +1,6 @@
 .playscreen-main{
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  padding: 0px 10px 0px 5px;
+  padding: 0 1.5em;
 }
 
 .playscreen-content{
@@ -14,12 +14,14 @@
   grid-template-columns: repeat(3, 1fr);
   grid-column: 1 / span 3;
   grid-row: 1 / span 3;
+  padding-top: 1em;
 }
 .cards4-container{
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-column: 4 /  span 2;
   grid-row: 2 / span 2;
+  padding-top: .67em;
 }
 
 .barn-image{
@@ -34,7 +36,6 @@
   background-position: center;
   background-repeat:no-repeat;
   background-size:contain;
-
 }
 
 
@@ -65,25 +66,4 @@
   display: none;
 }
 
-
-@media screen and (orientation: portrait){
-  .playscreen-content{
-    display: flex;
-    flex-direction: column;
-  }
-  .barn-image{
-    order: -1;
-    background: none; 
-    display: initial; 
-  }
-  .barn-image p{
-    font-size: 1.6vh;
-    margin: 0 auto;
-    background: none;
-  }
-  .card-container{
-    height: 15vh;
-    width: 13vh;
-  }
-}
 

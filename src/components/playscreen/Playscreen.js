@@ -18,6 +18,7 @@ import { save, setLastLogout, toggleTutorial } from '../../actions/user';
 
 //styles
 import '../../styles/playscreen.css';
+import '../../styles/responsive.css'
 
 export class Playscreen extends React.Component {
 	constructor(props) {
