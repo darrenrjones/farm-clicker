@@ -1,0 +1,50 @@
+@media screen and (orientation: portrait){
+  .playscreen-main{
+    padding: 0;
+  }
+  .card-container{
+    height: 12vh;
+    width: 10vh;
+  }
+
+  .playscreen-content{
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(9,1fr);
+    margin-top: 10px;
+  }
+  .cards9-container{
+    grid-column: 1 / span 3;
+    grid-row: 1 / span 5;
+  }
+  .cards4-container{
+    grid-column: 4 /  span 2;
+    grid-row: 2 / span 3;
+  }
+  .inventory-table-container{
+    height: 96.4%;
+    grid-column: 1 / span 5;
+    grid-row: 6 / span 3;
+  }
+  .barn-image{
+    grid-column: 4 / span 2;
+    grid-row: 1;  
+  }
+  .screenDisplay-manager-buttons-container{
+    margin-right: 0;
+  }
+  .barn-image p{
+    font-size: 2.6vw;
+  }
+  .progress-bar-btn-text{
+    width: auto;
+    margin-top: -1px;
+  }
+  .tutorial-modal-content {
+    width: 28vh;
+    font-size: 1.2em;
+  }
+  .inventory-table-cell-icon{
+    flex-grow: 0;   
+  }
+}
+
