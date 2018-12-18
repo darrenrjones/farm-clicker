@@ -41,9 +41,6 @@
 }
 .feed-type-card-display{
   background: rgba(255,255,255,0.3);
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: space-around; */
   font-size: .8em;
 } 
 .feed-type-card-display-icons{
@@ -54,13 +51,9 @@
 
 .card-container button {
   margin: 0 auto;
-  /* width: fit-content; */
-  /* font-size: 12px; */
-  /* background: var(--purple); */
   background: whitesmoke;
   color: var(--black);
   cursor: pointer;
-  /* outline: 0; */
   font-size: .7em;
 
   padding: 4px;
@@ -75,7 +68,6 @@
 }
 
 .next-cost {
-  /* font-size: .5em; */
   margin: 5px auto;
 }
 

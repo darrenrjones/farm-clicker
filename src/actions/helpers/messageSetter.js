@@ -1,7 +1,5 @@
 import { messages } from './tutorialMessages';
 export const messageSetter = (state) => {
-  console.log('messagesetter ran');
-  
   if (state.currentUser.inventory.wheat >= 5 && state.currentUser.seenMessage < 1) {
     return {
       tutorialOn: true,

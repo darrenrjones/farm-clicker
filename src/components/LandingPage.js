@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-// import CardImg from '../components/card/CardImg';
 import LoginForm from './forms/Login-form';
 
 import '../styles/landing-page.css';
@@ -21,7 +20,6 @@ export const LandingPage = (props) => {
 			<div className='home-content'>
 				<LoginForm loading={props.loading}/>
 				<Link to="/register">Register New Farm</Link>
-				{/* <Link to={{ pathname: '/register', state: { loading: props.loading} }}>Register</Link> */}
 			</div>
 
 		</div>

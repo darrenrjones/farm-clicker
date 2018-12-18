@@ -53,8 +53,6 @@ export class CardContainer extends React.Component {
       this.props.dispatch(incrementCrop(this.currentCard))
     } else if (this.props.screen === 'animals') {
       if (!enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
-        console.log('not enough feed cauhgt in callDispatches');
-
         clearInterval(this.intCall);
         this.setState({ percentage: -3, ticking: false });
       }
@@ -67,7 +65,6 @@ export class CardContainer extends React.Component {
       if (this.currentCard.manager) {
         //if being called from managerInterval check enoughFeed to clear managerInterval and set feedChainBroken Display and exit before callDispatches
         if (!enoughFeed(this.ccFeed, this.currentCard, this.props.inventory)) {
-          console.log('callDispatchesCheck: not enoughFeed from if currentCard.manager caught');
           this.setState({ feedChainBroken: true });
           clearInterval(this.managerInterval);
           return;
@@ -108,7 +105,6 @@ export class CardContainer extends React.Component {
 
     if (this.currentCard.count < 9 && this.props.userCash >= this.currentCard.price) {
       // let currentIntervalName = `${this.props.type}Interval`;
-      // console.log('currentIntervalName: ', currentIntervalName);
 
       if (this.props.screen === 'crops') {
         this.props.dispatch(buyCrop(field));
@@ -167,8 +163,6 @@ export class CardContainer extends React.Component {
   }
 
   render() {
-    // console.log(this.currentCard.type + '---' + enoughFeed(this.ccFeed, this.currentCard, this.props.inventory));
-
     let cardImages = [];
     for (let i = 1; i <= this.currentCard.count; i++) {
       cardImages.push(

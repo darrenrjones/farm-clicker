@@ -60,7 +60,6 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  // hasAuthToken: state.auth.authToken !== null,
   loggedIn: state.user.currentUser !== null,
   currentUser: state.user.currentUser
 });

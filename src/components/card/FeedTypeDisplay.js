@@ -9,8 +9,6 @@ export const FeedTypeDisplay = props => {
 
   let feedDisplay = [];
 
-  // if (props.screen === 'animals') {
-
   for (let i = 0; i < feedArr.length; i++) {
     feedDisplay.push(
       <CardImg
@@ -22,8 +20,6 @@ export const FeedTypeDisplay = props => {
       />
     );
   }
-
-  // }
 
   return (
     // feedDisplay

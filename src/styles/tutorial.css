@@ -22,7 +22,6 @@
 .tutorial-modal-content {
   border: 4px solid var(--background-brown);
   margin: 8vh auto;
-  /* height: fit-content; */
   background: var(--blue);
   padding: 1em;
   width: 28vw;

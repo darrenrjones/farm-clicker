@@ -65,18 +65,6 @@ export const setMessage = (seenMessage) => ({
 	type: SET_MESSAGE,
 	seenMessage
 });
-// export function setMessage(seenMessageLevel) {
-// 	return (dispatch, getState) => {
-// 		const { currentUser } = getState();
-
-// 		dispatch({
-// 			type: SET_MESSAGE,
-// 			seenMessage: currentUser.seenMessage,
-// 			seenMessageLevel
-
-// 		});
-// 	};
-// }
 
 export const registerUser = user => dispatch => {
 	dispatch(authRequest());
@@ -121,10 +109,6 @@ export const save = () => (dispatch, getState) => {
 		})
 			.then(res => normalizeResponseErrors(res))
 			.then(res => res.json())
-			// .then(() => {
-			//   dispatch(saveSuccessDisplay(true));
-			//   // dispatch(refreshAuthToken());
-			// })
 			.catch(err => {
 				console.error('error from save', err);
 

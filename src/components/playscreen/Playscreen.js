@@ -14,9 +14,7 @@ import { AnimalRender4 } from '../playscreen/AnimalRender4';
 import { Inventory } from './Inventory';
 
 //actions
-// import { clearAuth } from '../../actions/auth';
 import { save, setLastLogout, toggleTutorial } from '../../actions/user';
-// import { clearAuthToken } from '../../local-storage'
 
 //styles
 import '../../styles/playscreen.css';
@@ -80,13 +78,8 @@ export class Playscreen extends React.Component {
 						managerDisplay={this.state.managerDisplay}
 					/>
 
-					<div className='barn-image'>
-						{/* <img
-							src={require('../../images/barn.png')}
-							alt='barn'
-						/> */}
-						<p>{this.props.currentUser.farmname}<br></br>${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : ''}</p>
-
+					<div className='barn-image'>	
+						<p>{this.props.currentUser.farmname}<br></br>${this.props.currentUser ? <span>{this.props.currentUser.cash}</span> : ''}</p>						
 					</div>
 
 					<CropRender4

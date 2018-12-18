@@ -4,7 +4,6 @@ import CardContainer from '../card/CardContainer';
 
 export const CropRender4 = props => {
 	return (
-		// <div className={'cards-container-main ' + (props.screenDisplay === 'animalsView' ? 'display-invisible' : '')}>
 		<div className={
 			'cards4-container ' + (props.screenDisplay === 'animalsView' ? 'display-invisible' : '')
 		}>
@@ -41,6 +40,5 @@ export const CropRender4 = props => {
 				managerDisplay={props.managerDisplay}
 			/>
 		</div>
-		// </div>
 	)
 }

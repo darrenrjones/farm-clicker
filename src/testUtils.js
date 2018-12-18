@@ -12,15 +12,3 @@ export const storeFactory = (initialState) => {
   const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
   return createStoreWithMiddleware(userReducer, initialState);
 }
-
-// export const checkProps = (component, conformingProps) => {
-//   // checkPropTypes will return error warning instead of loggin it so we don't have to mock console.error
-
-//   const propError = checkPropTypes(
-//     component.propTypes,
-//     conformingProps,
-//     'prop',
-//     component.name
-//   );
-//   expect(propError).toBeUndefined();
-// }

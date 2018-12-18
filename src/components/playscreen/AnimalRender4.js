@@ -4,7 +4,6 @@ import CardContainer from '../card/CardContainer';
 
 export const AnimalRender4 = props => {
   return (
-    // <div className={'cards-container-main ' + (props.screenDisplay === 'cropsView' ? 'display-invisible' : '')}>
       <div className={
         'cards4-container ' + (props.screenDisplay === 'cropsView' ? 'display-invisible' : '')
       }>
@@ -46,6 +45,5 @@ export const AnimalRender4 = props => {
 
 
       </div>
-    // </div>
   )
 }

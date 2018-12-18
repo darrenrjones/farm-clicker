@@ -1,12 +1,10 @@
 .progress-bar {
-  /* position: relative; */
   margin: 0 auto;
   height: 1.5vw;
   width: 90%;
   border-radius: 50px;
   border: 1px solid rgb(0, 0, 0);
   background: rgba(255,255,255,0.2);
-  /* display: inline-block; */
 }
 .filler {
   background: rgb(0, 79, 168);
@@ -15,7 +13,6 @@
 }
 .progress-bar-btn-text{
   position: absolute;
-  /* text-align: center; */
   width: 10.5%;
   -webkit-user-select: none; /* Chrome/Safari */        
   -moz-user-select: none; /* Firefox */

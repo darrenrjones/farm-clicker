@@ -152,8 +152,6 @@ export default (state = initialState, action) => {
         animalConsumption = '?!?'
         break;
     }
-    // let feed1 = action.cardObj.feed.split(' ')[0].replace(",", "");
-    // let feed2 = action.cardObj.feed.length > 1 ? action.cardObj.feed.split(' ')[1] : null;
 
     let feed1 = feedArr[0]
     let feed2 = feedArr[1]
