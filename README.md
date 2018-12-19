@@ -5,8 +5,11 @@ Manage your crop resources so you can feed your animals so you can produce produ
 * [Play Live](https://farmclickertycoon.netlify.com/)
 
 Demo accounts:
+
 username - password
+
 farmDummy - password
+
 farmSmartie - password
 
 * [Server Repo](https://github.com/darrenrjones/farm-clicker-server)
