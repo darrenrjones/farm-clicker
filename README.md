@@ -2,7 +2,7 @@
 
 Manage your crop resources so you can feed your animals so you can produce products so you can make money so you can get rich all so you can have fun! 
 
-* [Play Live](https://farmclickertycoon.herokuapp.com/)
+* [Play Live](https://farmclickertycoon.netlify.com/)
 
 * [Server Repo](https://github.com/darrenrjones/farm-clicker-server)
 
