@@ -6,7 +6,7 @@ Manage your crop resources so you can feed your animals so you can produce produ
 
 Demo accounts:
 
-username - password
+__**username - password**__
 
 farmDummy - password
 
