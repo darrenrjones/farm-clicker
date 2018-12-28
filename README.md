@@ -14,12 +14,22 @@ farmSmartie - password
 
 * [Server Repo](https://github.com/darrenrjones/farm-clicker-server)
 
+## Contents
+
+1. [Getting Started](#getting-started)
+2. [Installing](#installing)
+3. [Screenshots](#screenshots)
+4. [Adding to the game](#adding-to-the-game)
+5. [Built With](#built-with)
+6. [License](#license)
+7. [Acknowledgments](#acknowledgments)
+8. [Author](#author)
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Installing
+## Installing
 
 First get your server up and running by following "Installing" instructions at:[Server](https://github.com/darrenrjones/farm-clicker-server)
 
@@ -46,6 +56,10 @@ npm start
 this should open default browser at http://localhost:3000/
 
 You can now log in or register to play. 
+
+## Screenshots
+
+![landing playscreen]https://i.ibb.co/gmjZF4r/Landing-Fresh.png[/landing playscreen]
 
 ## Adding to the game
 
@@ -149,14 +163,16 @@ Now when a new user registers that crop/animal item will be put onto the crop/an
 
 note: the default accounts use these .json files for testing purposes so if you add a new crop/animal in the animals1 or crops1 file the user 'farmDummy' will be the only one to receive these items (and only after reseeding the database as described in the server readme) as the other defualt accounts use the number 2 and 3 (ex. seed/animals2.json and seed/crops2.json files). To add your new item to all default account you would also add your new item object to the animals2.json, crops2.json, animals3.json, crops3.json files respecitvely, and then reseed to reset the database. 
 
+## Built With
 
-## Back-End Tech:
-- create-react-app
-- redux
-- redux-form
-- redux-thunk
-- jwt-decode
-- enzyme
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [Redux Thunk](https://www.npmjs.com/package/redux-thunk)
+- [React Router](https://www.npmjs.com/package/react-router)
+- [Redux Form](https://www.npmjs.com/package/redux-form)
+- [Jest](https://facebook.github.io/jest/)
+- [Enzyme](http://airbnb.io/enzyme/)
+- [jwt-decode](https://www.npmjs.com/package/jwt-decode)
 
 ## License
 
@@ -169,6 +185,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * Card background : [pngtree](https://pngtree.com/free-grass-png?)
 
 
-## Created by: 
+## Author: 
 
-* **Darren Jones** - [Portfolio](https://DarrenRaymondJones.com)
+* **Darren Jones**(https://github.com/darrenrjones) - [Portfolio](https://DarrenRaymondJones.com)
