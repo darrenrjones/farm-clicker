@@ -31,7 +31,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Installing
 
-First get your server up and running by following "Installing" instructions at:[Server](https://github.com/darrenrjones/farm-clicker-server)
+First get your server up and running by following "Installing" instructions at [Server](https://github.com/darrenrjones/farm-clicker-server)
 
 after the server is up, and you run 'npm start' on the server side code, you should be able to log in with the default account after these client side installation instructions are followed:
 
@@ -60,6 +60,13 @@ You can now log in or register to play.
 ## Screenshots
 
 ![landing playscreen](https://i.ibb.co/gmjZF4r/Landing-Fresh.png)
+
+![playscreen crops](https://i.ibb.co/p4Py2xb/2048x1536.png)
+
+![manager feed chain broken](https://i.ibb.co/H4wRvVj/1334x750.png)
+
+![store fix feed](https://i.ibb.co/HHYHZhJ/fixFeed.png)
+
 
 ## Adding to the game
 
