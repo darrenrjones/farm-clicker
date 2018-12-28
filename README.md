@@ -59,7 +59,7 @@ You can now log in or register to play.
 
 ## Screenshots
 
-![landing playscreen]https://i.ibb.co/gmjZF4r/Landing-Fresh.png[/landing playscreen]
+![landing playscreen](https://i.ibb.co/gmjZF4r/Landing-Fresh.png)
 
 ## Adding to the game
 
