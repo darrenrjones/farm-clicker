@@ -4,7 +4,7 @@ Manage your crop resources so you can feed your animals so you can produce produ
 
 * [Play Live](https://farmclickertycoon.netlify.com/)
 
-Demo accounts:
+### Demo accounts:
 
 __**username - password**__
 
@@ -53,7 +53,7 @@ npm install
 npm start
 ```
 
-this should open default browser at http://localhost:3000/
+this should open default browser at localhost:3000
 
 You can now log in or register to play. 
 
@@ -91,7 +91,7 @@ Add an animal in AnimalRender9.js or AnimalRender4.js
 />
 ```
 
-Add a crop in CropRender9.js or CropRender4.js
+Add a crop in CropRender9.js or CropRender4.js or swap one out so you don't have to restyle the grid
 
 ```
 <CardContainer
