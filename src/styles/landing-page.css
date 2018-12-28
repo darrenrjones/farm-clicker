@@ -69,7 +69,7 @@
 .form-input label{
   /* form-error/form-validate-error display inside of input box */
   position: absolute;
-  right: 35%;
+  right: 38%;
 }
 
 .form-error, .form-validate-error{

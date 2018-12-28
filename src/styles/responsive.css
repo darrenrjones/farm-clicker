@@ -1,4 +1,7 @@
 @media screen and (orientation: portrait){
+  .form-input label {
+    right: 32%;
+  }
   .playscreen-main{
     padding: 0;
   }
