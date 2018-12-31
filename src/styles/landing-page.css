@@ -66,6 +66,10 @@
   margin: 2px auto;
 }
 
+.demo-info {
+  font-size: .6em;
+}
+
 .form-input label{
   /* form-error/form-validate-error display inside of input box */
   position: absolute;

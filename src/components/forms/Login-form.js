@@ -32,7 +32,7 @@ export class LoginForm extends React.Component {
 				onSubmit={this.props.handleSubmit(values =>
 					this.onSubmit(values)
 				)}>
-				<div>Demo Account: <strong>farmDummy</strong>	pwd: <strong> password</strong></div>
+				<div class='demo-info'>Demo Account: <strong>farmDummy</strong>	pwd: <strong> password</strong></div>
 				{error}
 				{/* <label htmlFor="username">username :</label> */}
 				<Field
