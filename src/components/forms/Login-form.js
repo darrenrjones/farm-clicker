@@ -10,6 +10,10 @@ export class LoginForm extends React.Component {
 		return this.props.dispatch(login(values.username, values.password));
 	}
 
+	demoInfo = (
+		<div class='demo-info'>Demo Account: <strong>farmDummy</strong>	pwd: <strong> password</strong></div>
+	)
+
 	render() {
 		let error, spinner;
 
@@ -19,6 +23,8 @@ export class LoginForm extends React.Component {
 					{this.props.error}
 				</div>
 			);
+		} else {
+			error = this.demoInfo;
 		}
 		if(this.props.loading){
 			spinner = <Spinner />
@@ -32,7 +38,6 @@ export class LoginForm extends React.Component {
 				onSubmit={this.props.handleSubmit(values =>
 					this.onSubmit(values)
 				)}>
-				<div class='demo-info'>Demo Account: <strong>farmDummy</strong>	pwd: <strong> password</strong></div>
 				{error}
 				{/* <label htmlFor="username">username :</label> */}
 				<Field
