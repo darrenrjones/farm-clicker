@@ -1,5 +1,5 @@
 export const messages = {
-  0: 'Welcome to Farm Click Tycoon! Let\'s get farming! You can harvest crops by clicking on a plot of land. Start by harvesting 5 wheat!',
+  0: 'Welcome to Farm Clicker Tycoon! Let\'s get farming! You can harvest crops by clicking on a plot of land. Start by harvesting 5 wheat!',
   1: 'Great, now you can feed your crops to the animals! Click on the "animals" button on the top of the screen to switch to the animal plots. Then sell 5 eggs by clicking the chicken plot 5 times.',
   2: 'When you feed the animals you also instantly sell the products they produce. You can use money to improve your plots. Go to the crops screen, click the "store" button to switch views and click the "PLANT WHEAT" button.',
   3: 'Now each click will produce 2 wheat! You can also do this with animals to make more money per click! Be careful though, as each animal in the plot of land consumes their share of food so you need enough for each animal in the plot. The farming Gods have given you $20 to aid you in your journey. Now get to $30 so you can hire some help!',
