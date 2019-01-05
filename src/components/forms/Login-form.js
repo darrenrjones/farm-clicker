@@ -11,7 +11,7 @@ export class LoginForm extends React.Component {
 	}
 
 	demoInfo = (
-		<div class='demo-info'>Demo Account: <strong>farmDummy</strong>	pwd: <strong> password</strong></div>
+		<div class='demo-info'>Demo Account: <strong>farmSmartie</strong>	pwd: <strong> password</strong></div>
 	)
 
 	render() {
